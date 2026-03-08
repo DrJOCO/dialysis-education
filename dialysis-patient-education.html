@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Cheng Dialysis Handouts</title>
+<style>
+  :root{
+    --blue:#166C71;
+    --blue-soft:#e4f3f0;
+    --teal:#188F56;
+    --teal-soft:#e6f5ed;
+    --amber:#b66a16;
+    --amber-soft:#fff4e5;
+    --text:#243142;
+    --muted:#5d6b7b;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#d9e2ef;
+    --shadow:0 14px 36px rgba(22,108,113,.10);
+    --radius:18px;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background:linear-gradient(180deg,#edf3fb 0%,#f8fafd 260px,var(--bg) 260px);
+    color:var(--text);
+    line-height:1.5;
+  }
+
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+
+  .hero{
+    background:linear-gradient(135deg,#166C71 0%,#188F56 100%);
+    color:#fff;
+    border-radius:24px;
+    padding:24px 22px;
+    box-shadow:var(--shadow);
+  }
+
+  .hero-kicker{
+    margin:0 0 8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.82);
+  }
+
+  h1{
+    margin:0;
+    font-size:30px;
+    line-height:1.15;
+  }
+
+  .hero p{
+    margin:12px 0 0;
+    max-width:56ch;
+    font-size:17px;
+    color:rgba(255,255,255,.92);
+  }
+
+  .hero-meta{
+    margin-top:16px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .hero-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.22);
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+  }
+
+  .section{
+    margin-top:18px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:20px;
+  }
+
+  .section h2{
+    margin:0 0 8px;
+    font-size:23px;
+    line-height:1.2;
+    color:var(--blue);
+  }
+
+  .section p{
+    margin:0;
+    color:var(--muted);
+  }
+
+  .team-grid{
+    display:grid;
+    gap:14px;
+    margin-top:18px;
+  }
+
+  .team-link{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px;
+    background:#fff;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+
+  .team-link:hover,
+  .team-link:focus-visible{
+    transform:translateY(-2px);
+    border-color:#a9bfdb;
+    box-shadow:0 16px 30px rgba(22,108,113,.12);
+    outline:none;
+  }
+
+  .team-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .avatar-stack{
+    display:flex;
+    align-items:center;
+  }
+
+  .avatar{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-weight:700;
+    font-size:19px;
+    border:3px solid #fff;
+    box-shadow:0 6px 16px rgba(22,108,113,.12);
+  }
+
+  .avatar + .avatar{
+    margin-left:-12px;
+  }
+
+  .avatar.doctor{background:linear-gradient(135deg,#166C71 0%,#188F56 100%)}
+  .avatar.app{background:var(--teal)}
+
+  .team-title{
+    margin:0;
+    font-size:20px;
+    line-height:1.25;
+  }
+
+  .team-subtitle{
+    margin:4px 0 0;
+    font-size:15px;
+    color:var(--muted);
+  }
+
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+  }
+
+  .tag{
+    padding:7px 10px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .tag.blue{background:var(--blue-soft);color:var(--blue)}
+  .tag.teal{background:var(--teal-soft);color:var(--teal)}
+  .tag.amber{background:var(--amber-soft);color:var(--amber)}
+
+  .note{
+    margin-top:18px;
+    padding:14px 16px;
+    border-radius:16px;
+    background:var(--amber-soft);
+    color:#68410d;
+    font-size:15px;
+  }
+
+  .file-list{
+    margin:14px 0 0;
+    padding-left:20px;
+    color:var(--muted);
+  }
+
+  .file-list li + li{
+    margin-top:8px;
+  }
+
+  @media (max-width:560px){
+    .page{padding:16px 14px 32px}
+    .hero{padding:20px 18px}
+    h1{font-size:26px}
+    .team-title{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="hero">
+    <p class="hero-kicker">Premier Nephrology Medical Group</p>
+    <h1>Dr. Jonathan Cheng Dialysis Handouts</h1>
+    <p>Each link below opens a patient handout with the correct dialysis unit, provider photos from Premier Nephrology, binder visuals, and dialysis diet information. Patients do not need to choose anything on the handout itself.</p>
+    <div class="hero-meta">
+      <a class="hero-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
+      <span class="hero-chip">1400 S Grand Ave #800, Los Angeles, CA 90015</span>
+      <span class="hero-chip">(213) 748-1414</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Choose the dialysis unit version</h2>
+    <p>These versions are better for low-tech patients because the dialysis unit and care team are already filled in, and each page is a standalone file with education plus provider recognition.</p>
+
+    <div class="team-grid">
+      <a class="team-link" href="davita-hollywood.html">
+        <div class="team-head">
+          <div class="avatar-stack" aria-hidden="true">
+            <div class="avatar doctor">JC</div>
+            <div class="avatar app">YC</div>
+          </div>
+          <div>
+            <h3 class="team-title">DaVita Hollywood</h3>
+            <p class="team-subtitle">Jonathan Cheng, MD + Yecenia Cueva, FNP-BC</p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag blue">Unit prefilled</span>
+          <span class="tag teal">Team prefilled</span>
+          <span class="tag amber">No patient setup</span>
+        </div>
+      </a>
+
+      <a class="team-link" href="davita-wilshire-yecenia.html">
+        <div class="team-head">
+          <div class="avatar-stack" aria-hidden="true">
+            <div class="avatar doctor">JC</div>
+            <div class="avatar app">YC</div>
+          </div>
+          <div>
+            <h3 class="team-title">DaVita Wilshire</h3>
+            <p class="team-subtitle">Jonathan Cheng, MD + Yecenia Cueva, FNP-BC</p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag blue">Unit prefilled</span>
+          <span class="tag teal">Team prefilled</span>
+          <span class="tag amber">No patient setup</span>
+        </div>
+      </a>
+
+      <a class="team-link" href="davita-wilshire-benjamin.html">
+        <div class="team-head">
+          <div class="avatar-stack" aria-hidden="true">
+            <div class="avatar doctor">JC</div>
+            <div class="avatar app">BC</div>
+          </div>
+          <div>
+            <h3 class="team-title">DaVita Wilshire</h3>
+            <p class="team-subtitle">Jonathan Cheng, MD + Benjamin Chow, PA-C</p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag blue">Unit prefilled</span>
+          <span class="tag teal">Team prefilled</span>
+          <span class="tag amber">No patient setup</span>
+        </div>
+      </a>
+
+      <a class="team-link" href="davita-avalon-sonya.html">
+        <div class="team-head">
+          <div class="avatar-stack" aria-hidden="true">
+            <div class="avatar doctor">JC</div>
+            <div class="avatar app">SA</div>
+          </div>
+          <div>
+            <h3 class="team-title">DaVita Avalon</h3>
+            <p class="team-subtitle">Jonathan Cheng, MD + Sonya Ambriz, FNP</p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag blue">Unit prefilled</span>
+          <span class="tag teal">Team prefilled</span>
+          <span class="tag amber">No patient setup</span>
+        </div>
+      </a>
+
+      <a class="team-link" href="davita-avalon-gloria.html">
+        <div class="team-head">
+          <div class="avatar-stack" aria-hidden="true">
+            <div class="avatar doctor">JC</div>
+            <div class="avatar app">GP</div>
+          </div>
+          <div>
+            <h3 class="team-title">DaVita Avalon</h3>
+            <p class="team-subtitle">Jonathan Cheng, MD + Gloria Parra, FNP</p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag blue">Unit prefilled</span>
+          <span class="tag teal">Team prefilled</span>
+          <span class="tag amber">No patient setup</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="note">
+      Each unit page is now a standalone handout with Premier provider photos, binder visuals, Mexican-style dialysis diet tips, and a tap-to-call unit number.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Files in this project</h2>
+    <p>The launcher page above links to these patient-facing files.</p>
+    <ul class="file-list">
+      <li><code>davita-hollywood.html</code></li>
+      <li><code>davita-wilshire-yecenia.html</code></li>
+      <li><code>davita-wilshire-benjamin.html</code></li>
+      <li><code>davita-avalon-sonya.html</code></li>
+      <li><code>davita-avalon-gloria.html</code></li>
+      <li>Each of the files above now opens as its own standalone HTML handout.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

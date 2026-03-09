@@ -93,6 +93,12 @@
   .binder-card h3{margin:0;font-size:18px;line-height:1.2;color:var(--blue)}
   .binder-sub{margin:4px 0 0;font-size:13px;color:var(--muted)}
   .binder-note{margin:8px 0 0;font-size:14px;color:var(--text)}
+  .binder-card{cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .binder-card.selected{border:2px solid var(--teal);box-shadow:0 0 0 3px rgba(24,143,86,.15)}
+  .binder-yours{display:none;font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
+  .binder-card.selected .binder-yours{display:block}
+  .binder-card:not(.selected){opacity:.55}
+  .binder-card.no-selection{opacity:1}
   .diet-grid,.alert-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .info-box{border-radius:18px;padding:14px 15px}
   .info-box.teal{background:var(--teal-soft)}
@@ -110,6 +116,7 @@
   .contact-note{margin:10px 0 0;color:var(--muted);font-size:15px}
   .footer{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
   .footer a{color:var(--blue);font-weight:700}
+  .back-top{display:block;text-align:center;margin:18px 0 6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
   [data-lang]:not(body){display:none}
   body[data-lang="en"] [data-lang="en"]{display:block}
   body[data-lang="es"] [data-lang="es"]{display:block}
@@ -126,7 +133,7 @@
 </head>
 <body data-lang="en">
 <main class="page">
-  <section class="hero">
+  <section class="hero" id="top">
     <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
     <h1 class="hero-title" data-lang="en">Your Dialysis Team, Binders, and Food Guide</h1>
     <h1 class="hero-title" data-lang="es">Su Guía de Equipo, Quelantes y Comida</h1>
@@ -181,56 +188,56 @@
       <p class="section-copy" data-lang="en">Most binders work only if you take them with food. These pictures can help you recognize your pills.</p>
       <p class="section-copy" data-lang="es">La mayoría de los quelantes funcionan solo si los toma con comida. Estas ilustraciones ayudan a reconocer quelantes comunes.</p>
       <div class="binder-grid">
-        <article class="binder-card">
+        <article class="binder-card no-selection" onclick="toggleBinder(this)">
           <div class="binder-pill pill-blue">PhosLo</div>
           <h3>Calcium Acetate</h3>
           <p class="binder-sub">PhosLo</p>
           <p class="binder-note" data-lang="en">Binder with meals.</p>
           <p class="binder-note" data-lang="es">Quelante con las comidas.</p>
-        </article>
-        <article class="binder-card">
+        <p class="binder-yours">✓ Yours</p></article>
+        <article class="binder-card no-selection" onclick="toggleBinder(this)">
           <div class="binder-pill pill-white">RV800</div>
           <h3>Sevelamer</h3>
           <p class="binder-sub">Renvela</p>
           <p class="binder-note" data-lang="en">Swallow whole with meals.</p>
           <p class="binder-note" data-lang="es">Se traga entero con las comidas.</p>
-        </article>
-        <article class="binder-card">
+        <p class="binder-yours">✓ Yours</p></article>
+        <article class="binder-card no-selection" onclick="toggleBinder(this)">
           <div class="binder-pill pill-beige">Fosrenol</div>
           <h3>Lanthanum</h3>
           <p class="binder-sub">Fosrenol</p>
           <p class="binder-note" data-lang="en">Chew well. Take with meals.</p>
           <p class="binder-note" data-lang="es">Mastíquelo bien. Tómelo con las comidas.</p>
-        </article>
-        <article class="binder-card">
+        <p class="binder-yours">✓ Yours</p></article>
+        <article class="binder-card no-selection" onclick="toggleBinder(this)">
           <div class="binder-pill pill-brown">Velphoro</div>
           <h3>Sucroferric</h3>
           <p class="binder-sub">Velphoro</p>
           <p class="binder-note" data-lang="en">Chewable iron-based binder.</p>
           <p class="binder-note" data-lang="es">Quelante masticable con hierro.</p>
-        </article>
-        <article class="binder-card">
+        <p class="binder-yours">✓ Yours</p></article>
+        <article class="binder-card no-selection" onclick="toggleBinder(this)">
           <div class="binder-pill pill-peach">KX52</div>
           <h3>Ferric Citrate</h3>
           <p class="binder-sub">Auryxia</p>
           <p class="binder-note" data-lang="en">May darken stools. Take with meals.</p>
           <p class="binder-note" data-lang="es">Puede oscurecer las heces. Tómelo con las comidas.</p>
-        </article>
-        <article class="binder-card">
+        <p class="binder-yours">✓ Yours</p></article>
+        <article class="binder-card no-selection" onclick="toggleBinder(this)">
           <div class="binder-pill pill-red">T30</div>
           <h3>Tenapanor</h3>
           <p class="binder-sub">Xphozah</p>
           <p class="binder-note" data-lang="en">Different type. Often taken before meals.</p>
           <p class="binder-note" data-lang="es">Tipo diferente. A menudo antes de comer.</p>
-        </article>
+        <p class="binder-yours">✓ Yours</p></article>
       </div>
     </section>
 
     <section class="card">
-      <h2 class="section-title" data-lang="en">Lean Mexican-style food ideas</h2>
-      <h2 class="section-title" data-lang="es">Ideas de comida mexicana más ligera</h2>
-      <p class="section-copy" data-lang="en">These ideas are adapted from general hemodialysis nutrition guidance. Your renal dietitian may adjust them based on your potassium, phosphorus, and fluid goals.</p>
-      <p class="section-copy" data-lang="es">Estas ideas están adaptadas de la guía general de nutrición para hemodiálisis. Su dietista renal puede ajustarlas según su potasio, fósforo y líquidos.</p>
+      <h2 class="section-title" data-lang="en">Kidney-friendly food ideas</h2>
+      <h2 class="section-title" data-lang="es">Ideas de comida para los riñones</h2>
+      <p class="section-copy" data-lang="en">Talk to your dietitian about what is best for you. These tips focus on potassium, phosphorus, sodium, and fluids.</p>
+      <p class="section-copy" data-lang="es">Hable con su dietista sobre lo mejor para usted. Estos consejos se enfocan en potasio, fósforo, sodio y líquidos.</p>
       <div class="diet-grid">
         <div class="info-box teal">
           <h3 data-lang="en">Choose more often</h3>
@@ -269,7 +276,7 @@
           <h3 data-lang="es">Use porciones más pequeñas si sus laboratorios están altos</h3>
           <ul data-lang="en">
             <li>Beans, avocado, tomatoes, potatoes, oranges, bananas</li>
-            <li>Cheese, crema, milk, and big portions of nuts</li>
+            <li>Cheese, sour cream, milk, and large portions of nuts</li>
           </ul>
           <ul data-lang="es">
             <li>Frijoles, aguacate, jitomate, papas, naranjas, plátanos</li>
@@ -337,6 +344,8 @@
     </section>
   </div>
 
+  <a class="back-top" href="#top" data-lang="en">↑ Back to top</a>
+  <a class="back-top" href="#top" data-lang="es">↑ Volver arriba</a>
   <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your dialysis team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
   <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de diálisis. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
 </main>
@@ -351,6 +360,34 @@
   }
   btnEn.addEventListener('click', function () { setLanguage('en'); });
   btnEs.addEventListener('click', function () { setLanguage('es'); });
+  // Binder selection
+  function toggleBinder(card) {
+    card.classList.toggle("selected");
+    var cards = document.querySelectorAll(".binder-card");
+    var anySelected = document.querySelector(".binder-card.selected");
+    cards.forEach(function(c) {
+      c.classList.toggle("no-selection", !anySelected);
+    });
+    saveBinders();
+  }
+  function saveBinders() {
+    var sel = [];
+    var all = document.querySelectorAll(".binder-card"); all.forEach(function(c, i) { if (c.classList.contains("selected"))
+      sel.push(i);
+    });
+    try { localStorage.setItem("my-binders", JSON.stringify(sel)); } catch(e) {}
+  }
+  function loadBinders() {
+    try {
+      var sel = JSON.parse(localStorage.getItem("my-binders"));
+      if (sel && sel.length) {
+        var cards = document.querySelectorAll(".binder-card");
+        sel.forEach(function(i) { if (cards[i]) cards[i].classList.add("selected"); });
+        cards.forEach(function(c) { c.classList.remove("no-selection"); });
+      }
+    } catch(e) {}
+  }
+  loadBinders();
 </script>
 </body>
 </html>

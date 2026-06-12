@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Nephrology | Kidney Health Guide</title>
+<style>
+  :root{
+    --blue:#166C71;
+    --blue-soft:#e4f3f0;
+    --teal:#188F56;
+    --teal-soft:#e6f5ed;
+    --amber:#b66a16;
+    --amber-soft:#fff4e5;
+    --red:#b03f32;
+    --red-soft:#fce9e7;
+    --text:#243142;
+    --muted:#5d6b7b;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#d9e2ef;
+    --shadow:0 14px 36px rgba(22,108,113,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(24,143,86,.10), transparent 28%),
+      linear-gradient(180deg,#edf3fb 0%,#f8fafd 260px,var(--bg) 260px);
+    color:var(--text);
+    line-height:1.5;
+  }
+  .page{max-width:880px;margin:0 auto;padding:18px 14px 36px}
+  .hero{
+    background:linear-gradient(135deg,#166C71 0%,#1c6eb8 100%);
+    color:#fff;
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:12px 14px 14px;
+  }
+  .brand{margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .brand a{color:#fff;text-decoration:none}
+  .hero-title{margin:4px 0 0;font-size:19px;line-height:1.15}
+  .brand-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+  .brand-chip,.unit-badge{
+    display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);
+    color:#fff;text-decoration:none;font-size:11px;font-weight:600
+  }
+  .unit-badge{margin-top:6px}
+  .lang-toggle{display:flex;gap:8px;margin-top:8px}
+  .lang-btn{
+    border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.14);color:#fff;
+    font:inherit;font-weight:700;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:12px
+  }
+  .lang-btn.active{background:#fff;color:var(--blue)}
+  .stack{display:grid;gap:16px;margin-top:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .section-title{margin:0 0 6px;font-size:25px;line-height:1.15;color:var(--blue)}
+  .section-copy{margin:0;color:var(--muted);font-size:16px}
+  .team-grid,.info-grid,.alert-grid{display:grid;gap:12px;margin-top:16px}
+  .team-grid{grid-template-columns:1fr}
+  .team-member{display:flex;align-items:center;gap:14px;border-radius:18px;padding:14px}
+  .team-member.doctor{background:var(--blue-soft)}
+  .provider-photo-wrap{position:relative;flex-shrink:0}
+  .provider-photo,.provider-fallback{
+    width:78px;height:78px;border-radius:50%;border:3px solid #fff;box-shadow:0 8px 18px rgba(22,108,113,.12)
+  }
+  .provider-photo{object-fit:cover;display:block}
+  .provider-fallback{
+    display:none;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:24px
+  }
+  .team-member.doctor .provider-fallback{background:var(--blue)}
+  .member-role{margin:0;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .member-name{margin:4px 0 0;font-size:24px;line-height:1.15}
+  .info-grid,.alert-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .info-box{border-radius:18px;padding:14px 15px}
+  .info-box.teal{background:var(--teal-soft)}
+  .info-box.amber{background:var(--amber-soft)}
+  .info-box.blue{background:var(--blue-soft)}
+  .info-box.red{background:var(--red-soft)}
+  .info-box h3{margin:0 0 6px;font-size:18px;line-height:1.2}
+  .info-box p,.info-box ul{margin:0;font-size:15px}
+  .info-box ul{padding-left:18px}
+  .info-box li+li{margin-top:6px}
+  .info-box.wide{grid-column:1 / -1}
+  .ask-list{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+  .ask-list li{
+    background:var(--blue-soft);border-radius:14px;padding:12px 14px;
+    font-size:17px;font-weight:700;color:var(--blue)
+  }
+  .call-btn{
+    display:block;text-align:center;text-decoration:none;background:var(--blue);color:#fff;
+    padding:15px 16px;border-radius:18px;font-size:20px;font-weight:700;margin-top:14px
+  }
+  .contact-note{margin:10px 0 0;color:var(--muted);font-size:15px}
+  .footer{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+  .footer a{color:var(--blue);font-weight:700}
+  .back-top{display:block;text-align:center;margin:18px 0 6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+  .listen-btn{
+    display:inline-flex;align-items:center;margin:0 0 10px;border:1px solid var(--line);
+    background:var(--blue-soft);color:var(--blue);font:inherit;font-weight:700;font-size:14px;
+    border-radius:999px;padding:7px 14px;cursor:pointer
+  }
+  .listen-btn.playing{background:var(--blue);color:#fff}
+  [data-lang]:not(body){display:none}
+  body[data-lang="en"] [data-lang="en"]{display:block}
+  body[data-lang="es"] [data-lang="es"]{display:block}
+  @media (max-width:760px){
+    .info-grid,.alert-grid{grid-template-columns:1fr}
+    .info-box.wide{grid-column:auto}
+  }
+  @media (max-width:560px){
+    .hero-title{font-size:27px}
+    .member-name{font-size:22px}
+    .call-btn{font-size:18px}
+  }
+</style>
+</head>
+<body data-lang="en">
+<main class="page">
+  <section class="hero" id="top">
+    <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
+    <h1 class="hero-title" data-lang="en">Protect Your Kidneys: Your Care Guide</h1>
+    <h1 class="hero-title" data-lang="es">Proteja Sus Riñones: Su Guía de Cuidado</h1>
+    <div class="brand-meta">
+      <a class="brand-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
+      <span class="brand-chip">1400 S Grand Ave #800</span>
+      <a class="brand-chip" href="tel:+12137481414">(213) 748-1414</a>
+    </div>
+    <p class="unit-badge" data-lang="en">For Office Patients of Dr. Cheng</p>
+    <p class="unit-badge" data-lang="es">Para Pacientes de Oficina del Dr. Cheng</p>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="btn-en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" type="button">Español</button>
+    </div>
+  </section>
+
+  <div class="stack">
+    <section class="card">
+      <h2 class="section-title" data-lang="en">This is your kidney doctor</h2>
+      <h2 class="section-title" data-lang="es">Este es su médico de riñón</h2>
+      <p class="section-copy" data-lang="en">Dr. Cheng and the Premier Nephrology team take care of your kidneys.</p>
+      <p class="section-copy" data-lang="es">El Dr. Cheng y el equipo de Premier Nephrology cuidan sus riñones.</p>
+      <div class="team-grid">
+        <article class="team-member doctor">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/dr-cheng.jpg" alt="Jonathan Cheng, MD" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">JC</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Your Kidney Doctor</p>
+            <p class="member-role" data-lang="es">Su Médico de Riñón</p>
+            <h3 class="member-name">Jonathan Cheng, MD</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">What do your kidneys do?</h2>
+      <h2 class="section-title" data-lang="es">¿Qué hacen sus riñones?</h2>
+      <div class="info-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">Your kidneys work all day</h3>
+          <h3 data-lang="es">Sus riñones trabajan todo el día</h3>
+          <ul data-lang="en">
+            <li>They clean your blood</li>
+            <li>They remove extra water and salt</li>
+            <li>They help control your blood pressure</li>
+            <li>They help keep your blood and bones strong</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Limpian su sangre</li>
+            <li>Sacan el agua y la sal que sobran</li>
+            <li>Ayudan a controlar su presión</li>
+            <li>Ayudan a mantener fuerte su sangre y sus huesos</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">What is chronic kidney disease?</h3>
+          <h3 data-lang="es">¿Qué es la enfermedad renal crónica?</h3>
+          <p data-lang="en">It means your kidneys are not working at full strength. Diabetes and high blood pressure are the most common causes. Most people feel fine until the kidneys are very weak. That is why we check your blood and urine, even when you feel good.</p>
+          <p data-lang="es">Significa que sus riñones no trabajan con toda su fuerza. La diabetes y la presión alta son las causas más comunes. La mayoría de las personas se sienten bien hasta que los riñones están muy débiles. Por eso revisamos su sangre y su orina, aunque usted se sienta bien.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">How to protect your kidneys</h2>
+      <h2 class="section-title" data-lang="es">Cómo proteger sus riñones</h2>
+      <p class="section-copy" data-lang="en">These steps help your kidneys last longer.</p>
+      <p class="section-copy" data-lang="es">Estos pasos ayudan a que sus riñones duren más tiempo.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Do this every day</h3>
+          <h3 data-lang="es">Haga esto todos los días</h3>
+          <ul data-lang="en">
+            <li>Take your medicines, even when you feel fine</li>
+            <li>Keep your blood pressure under control</li>
+            <li>If you have diabetes, control your sugar</li>
+            <li>Eat less salt</li>
+            <li>Do not smoke</li>
+            <li>Come to your appointments and lab tests</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Tome sus medicinas, aunque se sienta bien</li>
+            <li>Mantenga su presión controlada</li>
+            <li>Si tiene diabetes, controle su azúcar</li>
+            <li>Coma menos sal</li>
+            <li>No fume</li>
+            <li>Venga a sus citas y a sus laboratorios</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Avoid these pain pills</h3>
+          <h3 data-lang="es">Evite estas pastillas para el dolor</h3>
+          <ul data-lang="en">
+            <li>Ibuprofen (Advil, Motrin)</li>
+            <li>Naproxen (Aleve)</li>
+            <li>These can hurt your kidneys</li>
+            <li>For pain, Tylenol (acetaminophen) is usually safer — ask us first</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Ibuprofeno (Advil, Motrin)</li>
+            <li>Naproxeno (Aleve)</li>
+            <li>Estas pueden dañar sus riñones</li>
+            <li>Para el dolor, el Tylenol (acetaminofén) suele ser más seguro — pregúntenos primero</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">Food ideas for healthy kidneys</h2>
+      <h2 class="section-title" data-lang="es">Ideas de comida para riñones sanos</h2>
+      <p class="section-copy" data-lang="en">Every patient is different. We will tell you if you also need to limit potassium or phosphorus.</p>
+      <p class="section-copy" data-lang="es">Cada paciente es diferente. Le diremos si usted también necesita limitar el potasio o el fósforo.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Choose more often</h3>
+          <h3 data-lang="es">Escoja más seguido</h3>
+          <ul data-lang="en">
+            <li>Food cooked at home with little salt</li>
+            <li>Fresh vegetables and fruits</li>
+            <li>Grilled chicken or fish</li>
+            <li>Corn tortillas, rice, beans cooked at home</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Comida hecha en casa con poca sal</li>
+            <li>Verduras y frutas frescas</li>
+            <li>Pollo a la plancha o pescado</li>
+            <li>Tortillas de maíz, arroz y frijoles de la olla</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Good meal ideas</h3>
+          <h3 data-lang="es">Buenas ideas de comida</h3>
+          <ul data-lang="en">
+            <li>Chicken with rice and vegetables</li>
+            <li>Fish tacos with cabbage on corn tortillas</li>
+            <li>Eggs with nopales and salsa made at home</li>
+            <li>Homemade chicken soup with vegetables, low in salt</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Pollo con arroz y verduras</li>
+            <li>Tacos de pescado con repollo en tortilla de maíz</li>
+            <li>Huevos con nopales y salsa hecha en casa</li>
+            <li>Caldo de pollo casero con verduras, con poca sal</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Drinks</h3>
+          <h3 data-lang="es">Bebidas</h3>
+          <ul data-lang="en">
+            <li>Water is the best drink</li>
+            <li>Limit sodas and sugary drinks</li>
+            <li>Limit beer and alcohol</li>
+          </ul>
+          <ul data-lang="es">
+            <li>El agua natural es la mejor bebida</li>
+            <li>Limite los refrescos y las bebidas azucaradas</li>
+            <li>Limite la cerveza y el alcohol</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Eat less of these — too much salt</h3>
+          <h3 data-lang="es">Coma menos de esto — mucha sal</h3>
+          <ul data-lang="en">
+            <li>Instant soups, bouillon cubes, Maggi-style seasonings</li>
+            <li>Chorizo, bacon, deli meats, hot dogs</li>
+            <li>Chips and salty snacks</li>
+            <li>Fast food and canned food with salt</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Sopas instantáneas, cubos de consomé y condimentos tipo Maggi</li>
+            <li>Chorizo, tocino, carnes frías y salchichas</li>
+            <li>Papitas y botanas saladas</li>
+            <li>Comida rápida y comida enlatada con sal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">Your kidney medicines</h2>
+      <h2 class="section-title" data-lang="es">Sus medicinas para el riñón</h2>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Pills that protect your kidneys</h3>
+          <h3 data-lang="es">Pastillas que protegen sus riñones</h3>
+          <ul data-lang="en">
+            <li>Blood pressure pills like lisinopril or losartan</li>
+            <li>Newer kidney-protecting pills like Jardiance or Farxiga</li>
+            <li>Keep taking them every day unless we tell you to stop</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Pastillas para la presión como lisinopril o losartán</li>
+            <li>Pastillas nuevas que protegen el riñón como Jardiance o Farxiga</li>
+            <li>Siga tomándolas todos los días, a menos que le digamos que pare</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">When you are sick</h3>
+          <h3 data-lang="es">Cuando esté enfermo</h3>
+          <p data-lang="en">If you are vomiting or have diarrhea and cannot drink, call us. Some medicines need a short pause when you are sick.</p>
+          <p data-lang="es">Si tiene vómito o diarrea y no puede tomar líquidos, llámenos. Algunas medicinas necesitan una pausa corta cuando está enfermo.</p>
+        </div>
+        <div class="info-box blue wide">
+          <h3 data-lang="en">Bring your pill bottles</h3>
+          <h3 data-lang="es">Traiga sus frascos de pastillas</h3>
+          <p data-lang="en">Bring all your pill bottles to every visit — including vitamins, herbs, and anything you buy at the store.</p>
+          <p data-lang="es">Traiga todos sus frascos de pastillas a cada cita — incluyendo vitaminas, hierbas y todo lo que compre en la tienda.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">If your kidneys get weaker: know your dialysis choices</h2>
+      <h2 class="section-title" data-lang="es">Si sus riñones se debilitan: conozca sus opciones de diálisis</h2>
+      <p class="section-copy" data-lang="en">Some patients need dialysis one day. It is best to learn your choices early — not in an emergency. Many patients can do their dialysis at home. We will help you choose what fits your life.</p>
+      <p class="section-copy" data-lang="es">Algunos pacientes necesitarán diálisis algún día. Es mejor conocer sus opciones temprano — no en una emergencia. Muchos pacientes pueden hacer su diálisis en casa. Le ayudaremos a escoger lo que mejor quede con su vida.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Peritoneal dialysis (PD) — at home</h3>
+          <h3 data-lang="es">Diálisis peritoneal (PD) — en casa</h3>
+          <ul data-lang="en">
+            <li>You do it at home — many people do it while they sleep</li>
+            <li>No needles — it uses a soft tube in your belly</li>
+            <li>Gentler on your body, and helps protect the kidney function you still have</li>
+            <li>Your days stay free for work and family</li>
+            <li>Most patients can learn it — we teach you step by step</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Se hace en casa — muchas personas la hacen mientras duermen</li>
+            <li>Sin agujas — usa un tubito suave en el abdomen</li>
+            <li>Es más suave para su cuerpo y ayuda a proteger la función que le queda al riñón</li>
+            <li>Sus días quedan libres para el trabajo y la familia</li>
+            <li>La mayoría puede aprenderla — le enseñamos paso a paso</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Hemodialysis (HD) — at a center</h3>
+          <h3 data-lang="es">Hemodiálisis (HD) — en un centro</h3>
+          <ul data-lang="en">
+            <li>You travel to a dialysis center 3 times every week</li>
+            <li>Each visit takes about 4 hours, plus travel time</li>
+            <li>It uses two needles in your arm each time</li>
+            <li>The center team does the treatment for you</li>
+            <li>The right choice for some patients</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Va a un centro de diálisis 3 veces por semana</li>
+            <li>Cada visita dura unas 4 horas, más el camino</li>
+            <li>Usa dos agujas en el brazo cada vez</li>
+            <li>El equipo del centro hace el tratamiento por usted</li>
+            <li>La mejor opción para algunos pacientes</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Why many patients choose PD first</h3>
+          <h3 data-lang="es">Por qué muchos pacientes escogen PD primero</h3>
+          <ul data-lang="en">
+            <li>More freedom and independence</li>
+            <li>Treatment can happen at night, while you sleep</li>
+            <li>No needles and fewer trips</li>
+            <li>Many people keep working and traveling</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Más libertad e independencia</li>
+            <li>El tratamiento puede hacerse de noche, mientras duerme</li>
+            <li>Sin agujas y menos viajes</li>
+            <li>Muchas personas siguen trabajando y viajando</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Plan early — it is safer</h3>
+          <h3 data-lang="es">Planear temprano es más seguro</h3>
+          <ul data-lang="en">
+            <li>Both choices need a small surgery first, weeks ahead</li>
+            <li>Planning early avoids an emergency and a tube in the neck</li>
+            <li>Ask Dr. Cheng: "Is PD right for me?"</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Las dos opciones necesitan una cirugía pequeña antes, con semanas de anticipación</li>
+            <li>Planear temprano evita una emergencia y un tubo en el cuello</li>
+            <li>Pregunte al Dr. Cheng: "¿La PD es buena para mí?"</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">Ask us at your visit</h2>
+      <h2 class="section-title" data-lang="es">Pregúntenos en su cita</h2>
+      <p class="section-copy" data-lang="en">These three questions help you know your own kidneys.</p>
+      <p class="section-copy" data-lang="es">Estas tres preguntas le ayudan a conocer sus propios riñones.</p>
+      <ul class="ask-list" data-lang="en">
+        <li>"How much are my kidneys working?"</li>
+        <li>"Do I have protein in my urine?"</li>
+        <li>"What should my blood pressure be?"</li>
+        <li>"Is home dialysis (PD) right for me?"</li>
+      </ul>
+      <ul class="ask-list" data-lang="es">
+        <li>"¿Cuánto están trabajando mis riñones?"</li>
+        <li>"¿Tengo proteína en la orina?"</li>
+        <li>"¿Cuál debe ser mi presión?"</li>
+        <li>"¿La diálisis en casa (PD) es buena para mí?"</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title" data-lang="en">Call our office if</h2>
+      <h2 class="section-title" data-lang="es">Llame a nuestra oficina si</h2>
+      <div class="alert-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">Call for help</h3>
+          <h3 data-lang="es">Llame para ayuda</h3>
+          <ul data-lang="en">
+            <li>New swelling in your legs or face</li>
+            <li>Your blood pressure at home is very high</li>
+            <li>You ran out of medicine or cannot afford it</li>
+            <li>Vomiting or diarrhea for more than one day</li>
+            <li>Your urine is foamy, dark, or has blood</li>
+            <li>You are not sure which medicines to take</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Hinchazón nueva en las piernas o la cara</li>
+            <li>Su presión en casa está muy alta</li>
+            <li>Se quedó sin medicina o no puede pagarla</li>
+            <li>Vómito o diarrea por más de un día</li>
+            <li>Su orina tiene espuma, está oscura o tiene sangre</li>
+            <li>No está seguro de cuáles medicinas tomar</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Go to the ER right away if</h3>
+          <h3 data-lang="es">Vaya a urgencias de inmediato si</h3>
+          <ul data-lang="en">
+            <li>Chest pain or trouble breathing</li>
+            <li>Severe weakness or confusion</li>
+            <li>You cannot keep any liquids down</li>
+            <li>You stop making urine</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Dolor de pecho o le falta el aire</li>
+            <li>Debilidad severa o confusión</li>
+            <li>No puede retener ningún líquido</li>
+            <li>Deja de orinar</li>
+          </ul>
+        </div>
+      </div>
+      <a class="call-btn" href="tel:+12137481414">
+        <span data-lang="en">Call Our Office</span>
+        <span data-lang="es">Llame a Nuestra Oficina</span>
+      </a>
+      <p class="contact-note" data-lang="en">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+      <p class="contact-note" data-lang="es">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+    </section>
+  </div>
+
+  <a class="back-top" href="#top" data-lang="en">↑ Back to top</a>
+  <a class="back-top" href="#top" data-lang="es">↑ Volver arriba</a>
+  <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+  <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de riñón. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+</main>
+<script>
+  const btnEn = document.getElementById('btn-en');
+  const btnEs = document.getElementById('btn-es');
+  function setLanguage(lang) {
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    btnEn.classList.toggle('active', lang === 'en');
+    btnEs.classList.toggle('active', lang === 'es');
+    if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
+    document.querySelectorAll('.listen-btn').forEach(function (b) {
+      b.classList.remove('playing');
+      b.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+    });
+  }
+  btnEn.addEventListener('click', function () { setLanguage('en'); });
+  btnEs.addEventListener('click', function () { setLanguage('es'); });
+  // Listen buttons: read each section out loud (text-to-speech)
+  (function () {
+    if (!('speechSynthesis' in window)) return;
+    var synth = window.speechSynthesis;
+    var playing = null;
+    function stopAll() {
+      synth.cancel();
+      document.querySelectorAll('.listen-btn.playing').forEach(function (b) { b.classList.remove('playing'); });
+      playing = null;
+    }
+    document.querySelectorAll('.card').forEach(function (card) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'listen-btn';
+      btn.textContent = '🔊 Listen';
+      btn.setAttribute('aria-label', 'Listen to this section');
+      card.insertBefore(btn, card.firstChild);
+      btn.addEventListener('click', function () {
+        if (playing === btn) { stopAll(); return; }
+        stopAll();
+        var saved = btn.textContent;
+        btn.textContent = '';
+        var text = card.innerText;
+        btn.textContent = saved;
+        var lang = document.body.dataset.lang === 'es' ? 'es-MX' : 'en-US';
+        var lines = text.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+        if (!lines.length) return;
+        playing = btn;
+        btn.classList.add('playing');
+        lines.forEach(function (line, i) {
+          var u = new SpeechSynthesisUtterance(line);
+          u.lang = lang;
+          u.rate = 0.95;
+          if (i === lines.length - 1) {
+            u.onend = function () { if (playing === btn) { btn.classList.remove('playing'); playing = null; } };
+          }
+          synth.speak(u);
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

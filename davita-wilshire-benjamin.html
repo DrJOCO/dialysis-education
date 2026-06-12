@@ -93,12 +93,6 @@
   .binder-card h3{margin:0;font-size:18px;line-height:1.2;color:var(--blue)}
   .binder-sub{margin:4px 0 0;font-size:13px;color:var(--muted)}
   .binder-note{margin:8px 0 0;font-size:14px;color:var(--text)}
-  .binder-card{cursor:pointer;transition:border-color .15s,box-shadow .15s}
-  .binder-card.selected{border:2px solid var(--teal);box-shadow:0 0 0 3px rgba(24,143,86,.15)}
-  .binder-yours{display:none;font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
-  .binder-card.selected .binder-yours{display:block}
-  .binder-card:not(.selected){opacity:.55}
-  .binder-card.no-selection{opacity:1}
   .diet-grid,.alert-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .info-box{border-radius:18px;padding:14px 15px}
   .info-box.teal{background:var(--teal-soft)}
@@ -117,6 +111,12 @@
   .footer{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
   .footer a{color:var(--blue);font-weight:700}
   .back-top{display:block;text-align:center;margin:18px 0 6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+  .listen-btn{
+    display:inline-flex;align-items:center;margin:0 0 10px;border:1px solid var(--line);
+    background:var(--blue-soft);color:var(--blue);font:inherit;font-weight:700;font-size:14px;
+    border-radius:999px;padding:7px 14px;cursor:pointer
+  }
+  .listen-btn.playing{background:var(--blue);color:#fff}
   [data-lang]:not(body){display:none}
   body[data-lang="en"] [data-lang="en"]{display:block}
   body[data-lang="es"] [data-lang="es"]{display:block}
@@ -183,53 +183,156 @@
     </section>
 
     <section class="card">
+      <h2 class="section-title" data-lang="en">Why dialysis? Your kidneys and the machine</h2>
+      <h2 class="section-title" data-lang="es">¿Por qué diálisis? Sus riñones y la máquina</h2>
+      <p class="section-copy" data-lang="en">Knowing why you come helps you stay strong and in control.</p>
+      <p class="section-copy" data-lang="es">Saber por qué viene le ayuda a mantenerse fuerte y en control.</p>
+      <div class="diet-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">What your kidneys did</h3>
+          <h3 data-lang="es">Lo que hacían sus riñones</h3>
+          <ul data-lang="en">
+            <li>Cleaned your blood</li>
+            <li>Removed extra water and salt</li>
+            <li>Helped control your blood pressure</li>
+            <li>Kept your bones and blood strong</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Limpiaban su sangre</li>
+            <li>Sacaban el agua y la sal que sobran</li>
+            <li>Ayudaban a controlar su presión</li>
+            <li>Mantenían fuertes sus huesos y su sangre</li>
+          </ul>
+        </div>
+        <div class="info-box teal">
+          <h3 data-lang="en">What dialysis does now</h3>
+          <h3 data-lang="es">Lo que hace la diálisis ahora</h3>
+          <ul data-lang="en">
+            <li>The machine cleans your blood for your kidneys</li>
+            <li>It removes the extra water</li>
+            <li>That is why you come 3 times every week, about 4 hours each time</li>
+          </ul>
+          <ul data-lang="es">
+            <li>La máquina limpia su sangre por sus riñones</li>
+            <li>Saca el agua que sobra</li>
+            <li>Por eso viene 3 veces por semana, unas 4 horas cada vez</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Never miss a treatment</h3>
+          <h3 data-lang="es">Nunca falte a su tratamiento</h3>
+          <ul data-lang="en">
+            <li>Water and potassium build up fast between treatments</li>
+            <li>Too much can hurt your heart and lungs</li>
+            <li>Missing even one treatment is dangerous</li>
+            <li>If you must miss, call your unit first</li>
+          </ul>
+          <ul data-lang="es">
+            <li>El agua y el potasio suben rápido entre tratamientos</li>
+            <li>Demasiado puede dañar su corazón y sus pulmones</li>
+            <li>Faltar aunque sea una vez es peligroso</li>
+            <li>Si tiene que faltar, llame primero a su unidad</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Fluids between treatments</h3>
+          <h3 data-lang="es">Líquidos entre tratamientos</h3>
+          <ul data-lang="en">
+            <li>Too much liquid makes treatment harder on your heart</li>
+            <li>Ask your team how much you can drink each day</li>
+            <li>Ice chips and rinsing your mouth help with thirst</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Demasiado líquido hace el tratamiento más pesado para su corazón</li>
+            <li>Pregunte a su equipo cuánto puede tomar al día</li>
+            <li>Los trocitos de hielo y enjuagarse la boca ayudan con la sed</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2 class="section-title" data-lang="en">Common phosphorus binders</h2>
       <h2 class="section-title" data-lang="es">Quelantes comunes para el fósforo</h2>
       <p class="section-copy" data-lang="en">Most binders work only if you take them with food. These pictures can help you recognize your pills.</p>
       <p class="section-copy" data-lang="es">La mayoría de los quelantes funcionan solo si los toma con comida. Estas ilustraciones ayudan a reconocer quelantes comunes.</p>
+      <div class="diet-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">How binder pills work</h3>
+          <h3 data-lang="es">Cómo funcionan los quelantes</h3>
+          <ul data-lang="en">
+            <li>They work like a sponge — they soak up the phosphorus in your food</li>
+            <li>Take them WITH your meals, every time you eat</li>
+            <li>If you forget during the meal, take it right after</li>
+            <li>Keep some with you for meals away from home</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Funcionan como una esponja — atrapan el fósforo de su comida</li>
+            <li>Tómelos CON la comida, cada vez que coma</li>
+            <li>Si se le olvida durante la comida, tómelo justo después</li>
+            <li>Cargue algunos con usted para cuando coma fuera de casa</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Why high phosphorus is dangerous</h3>
+          <h3 data-lang="es">Por qué es peligroso el fósforo alto</h3>
+          <ul data-lang="en">
+            <li>It makes your bones weak — they can break</li>
+            <li>It can make your skin very itchy</li>
+            <li>Over time it hardens your heart and blood vessels</li>
+            <li>You cannot feel high phosphorus — your lab tests show it</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Debilita sus huesos — se pueden quebrar</li>
+            <li>Puede dar mucha comezón en la piel</li>
+            <li>Con el tiempo endurece su corazón y sus venas</li>
+            <li>El fósforo alto no se siente — sus laboratorios lo muestran</li>
+          </ul>
+        </div>
+      </div>
       <div class="binder-grid">
-        <article class="binder-card no-selection" onclick="toggleBinder(this)">
+        <article class="binder-card">
           <div class="binder-pill pill-blue">PhosLo</div>
           <h3>Calcium Acetate</h3>
           <p class="binder-sub">PhosLo</p>
           <p class="binder-note" data-lang="en">Binder with meals.</p>
           <p class="binder-note" data-lang="es">Quelante con las comidas.</p>
-        <p class="binder-yours">✓ Yours</p></article>
-        <article class="binder-card no-selection" onclick="toggleBinder(this)">
+        </article>
+        <article class="binder-card">
           <div class="binder-pill pill-white">RV800</div>
           <h3>Sevelamer</h3>
           <p class="binder-sub">Renvela</p>
           <p class="binder-note" data-lang="en">Swallow whole with meals.</p>
           <p class="binder-note" data-lang="es">Se traga entero con las comidas.</p>
-        <p class="binder-yours">✓ Yours</p></article>
-        <article class="binder-card no-selection" onclick="toggleBinder(this)">
+        </article>
+        <article class="binder-card">
           <div class="binder-pill pill-beige">Fosrenol</div>
           <h3>Lanthanum</h3>
           <p class="binder-sub">Fosrenol</p>
           <p class="binder-note" data-lang="en">Chew well. Take with meals.</p>
           <p class="binder-note" data-lang="es">Mastíquelo bien. Tómelo con las comidas.</p>
-        <p class="binder-yours">✓ Yours</p></article>
-        <article class="binder-card no-selection" onclick="toggleBinder(this)">
+        </article>
+        <article class="binder-card">
           <div class="binder-pill pill-brown">Velphoro</div>
           <h3>Sucroferric</h3>
           <p class="binder-sub">Velphoro</p>
           <p class="binder-note" data-lang="en">Chewable iron-based binder.</p>
           <p class="binder-note" data-lang="es">Quelante masticable con hierro.</p>
-        <p class="binder-yours">✓ Yours</p></article>
-        <article class="binder-card no-selection" onclick="toggleBinder(this)">
+        </article>
+        <article class="binder-card">
           <div class="binder-pill pill-peach">KX52</div>
           <h3>Ferric Citrate</h3>
           <p class="binder-sub">Auryxia</p>
           <p class="binder-note" data-lang="en">May darken stools. Take with meals.</p>
           <p class="binder-note" data-lang="es">Puede oscurecer las heces. Tómelo con las comidas.</p>
-        <p class="binder-yours">✓ Yours</p></article>
-        <article class="binder-card no-selection" onclick="toggleBinder(this)">
+        </article>
+        <article class="binder-card">
           <div class="binder-pill pill-red">T30</div>
           <h3>Tenapanor</h3>
           <p class="binder-sub">Xphozah</p>
           <p class="binder-note" data-lang="en">Different type. Often taken before meals.</p>
           <p class="binder-note" data-lang="es">Tipo diferente. A menudo antes de comer.</p>
-        <p class="binder-yours">✓ Yours</p></article>
+        </article>
       </div>
     </section>
 
@@ -357,37 +460,55 @@
     document.documentElement.lang = lang;
     btnEn.classList.toggle('active', lang === 'en');
     btnEs.classList.toggle('active', lang === 'es');
+    if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
+    document.querySelectorAll('.listen-btn').forEach(function (b) {
+      b.classList.remove('playing');
+      b.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+    });
   }
   btnEn.addEventListener('click', function () { setLanguage('en'); });
   btnEs.addEventListener('click', function () { setLanguage('es'); });
-  // Binder selection
-  function toggleBinder(card) {
-    card.classList.toggle("selected");
-    var cards = document.querySelectorAll(".binder-card");
-    var anySelected = document.querySelector(".binder-card.selected");
-    cards.forEach(function(c) {
-      c.classList.toggle("no-selection", !anySelected);
+  // Listen buttons: read each section out loud (text-to-speech)
+  (function () {
+    if (!('speechSynthesis' in window)) return;
+    var synth = window.speechSynthesis;
+    var playing = null;
+    function stopAll() {
+      synth.cancel();
+      document.querySelectorAll('.listen-btn.playing').forEach(function (b) { b.classList.remove('playing'); });
+      playing = null;
+    }
+    document.querySelectorAll('.card').forEach(function (card) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'listen-btn';
+      btn.textContent = '🔊 Listen';
+      btn.setAttribute('aria-label', 'Listen to this section');
+      card.insertBefore(btn, card.firstChild);
+      btn.addEventListener('click', function () {
+        if (playing === btn) { stopAll(); return; }
+        stopAll();
+        var saved = btn.textContent;
+        btn.textContent = '';
+        var text = card.innerText;
+        btn.textContent = saved;
+        var lang = document.body.dataset.lang === 'es' ? 'es-MX' : 'en-US';
+        var lines = text.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+        if (!lines.length) return;
+        playing = btn;
+        btn.classList.add('playing');
+        lines.forEach(function (line, i) {
+          var u = new SpeechSynthesisUtterance(line);
+          u.lang = lang;
+          u.rate = 0.95;
+          if (i === lines.length - 1) {
+            u.onend = function () { if (playing === btn) { btn.classList.remove('playing'); playing = null; } };
+          }
+          synth.speak(u);
+        });
+      });
     });
-    saveBinders();
-  }
-  function saveBinders() {
-    var sel = [];
-    var all = document.querySelectorAll(".binder-card"); all.forEach(function(c, i) { if (c.classList.contains("selected"))
-      sel.push(i);
-    });
-    try { localStorage.setItem("my-binders", JSON.stringify(sel)); } catch(e) {}
-  }
-  function loadBinders() {
-    try {
-      var sel = JSON.parse(localStorage.getItem("my-binders"));
-      if (sel && sel.length) {
-        var cards = document.querySelectorAll(".binder-card");
-        sel.forEach(function(i) { if (cards[i]) cards[i].classList.add("selected"); });
-        cards.forEach(function(c) { c.classList.remove("no-selection"); });
-      }
-    } catch(e) {}
-  }
-  loadBinders();
+  })();
 </script>
 </body>
 </html>

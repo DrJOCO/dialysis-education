@@ -1,0 +1,8 @@
+# Local editor / preview config — not part of the published site
+.claude/
+
+# Stale duplicate snapshot, kept only locally
+ui-for-claude-design/
+
+# Private working notes (e.g. WordPress practice-site edits) — never publish
+premier-website-fixes.md

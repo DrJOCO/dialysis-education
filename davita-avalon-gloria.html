@@ -80,16 +80,9 @@
   .member-name{margin:4px 0 0;font-size:24px;line-height:1.15}
   .binder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .binder-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}
-  .binder-pill{
-    width:88px;height:34px;border-radius:999px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;
-    color:#fff;font-weight:700;font-size:13px;letter-spacing:.03em;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)
-  }
-  .pill-blue{background:#5f89c9}
-  .pill-white{background:#dfe6f2;color:#4c5a70}
-  .pill-beige{background:#d7c59c;color:#5d4b24}
-  .pill-peach{background:#eb9d69}
-  .pill-brown{background:#7b4a2d}
-  .pill-red{background:#c54842}
+  .binder-photo{width:100%;max-width:140px;margin:0 0 10px}
+  .binder-photo svg,.binder-photo img{width:100%;height:auto;display:block}
+  .binder-photo img{border-radius:12px}
   .binder-card h3{margin:0;font-size:18px;line-height:1.2;color:var(--blue)}
   .binder-sub{margin:4px 0 0;font-size:13px;color:var(--muted)}
   .binder-note{margin:8px 0 0;font-size:14px;color:var(--text)}
@@ -243,15 +236,15 @@
       <p class="section-copy" data-lang="es">Pregunte a su equipo cuál es SU límite diario.</p>
       <div class="diet-grid">
         <div class="info-box teal">
-          <h3 data-lang="en">Most patients: about 4 cups a day</h3>
-          <h3 data-lang="es">La mayoría: unas 4 tazas al día</h3>
+          <h3 data-lang="en">Most patients: 4 to 6 cups a day</h3>
+          <h3 data-lang="es">La mayoría: de 4 a 6 tazas al día</h3>
           <ul data-lang="en">
-            <li>That is about 1 liter (32 oz)</li>
+            <li>That is 1 to 1.5 liters</li>
             <li>All drinks together, all day</li>
             <li>Your number may be different</li>
           </ul>
           <ul data-lang="es">
-            <li>Eso es como 1 litro (32 oz)</li>
+            <li>Eso es de 1 a 1.5 litros</li>
             <li>Todas las bebidas juntas, todo el día</li>
             <li>Su número puede ser diferente</li>
           </ul>
@@ -397,42 +390,42 @@
       </div>
       <div class="binder-grid">
         <article class="binder-card">
-          <div class="binder-pill pill-blue">PhosLo</div>
+          <div class="binder-photo"><svg viewBox="0 0 140 80" role="img" aria-label="Calcium acetate capsule"><ellipse cx="70" cy="63" rx="48" ry="8" fill="#000" opacity=".07"/><rect x="22" y="28" width="96" height="32" rx="16" fill="#eef2f8" stroke="#cdd8ea" stroke-width="1.5"/><path d="M38 28 a16 16 0 0 0 0 32 H70 V28 Z" fill="#5f89c9"/><rect x="30" y="33" width="78" height="6" rx="3" fill="#fff" opacity=".4"/></svg><img src="images/binders/calcium-acetate.jpg" alt="Calcium acetate (PhosLo)" loading="lazy" style="display:none" onload="var p=this.previousElementSibling;if(p)p.style.display='none';this.style.display='block';"></div>
           <h3>Calcium Acetate</h3>
           <p class="binder-sub">PhosLo</p>
           <p class="binder-note" data-lang="en">Binder with meals.</p>
           <p class="binder-note" data-lang="es">Quelante con las comidas.</p>
         </article>
         <article class="binder-card">
-          <div class="binder-pill pill-white">RV800</div>
+          <div class="binder-photo"><svg viewBox="0 0 140 80" role="img" aria-label="Sevelamer large white oval tablet"><ellipse cx="70" cy="64" rx="52" ry="8" fill="#000" opacity=".07"/><ellipse cx="70" cy="42" rx="54" ry="26" fill="#fff" stroke="#cfd6e0" stroke-width="1.5"/><ellipse cx="54" cy="32" rx="22" ry="8" fill="#fff" opacity=".55"/><text x="70" y="48" text-anchor="middle" font-family="Verdana,sans-serif" font-size="15" font-weight="700" fill="#9aa3b2">RV800</text></svg><img src="images/binders/sevelamer.jpg" alt="Sevelamer (Renvela)" loading="lazy" style="display:none" onload="var p=this.previousElementSibling;if(p)p.style.display='none';this.style.display='block';"></div>
           <h3>Sevelamer</h3>
           <p class="binder-sub">Renvela</p>
           <p class="binder-note" data-lang="en">Swallow whole with meals.</p>
           <p class="binder-note" data-lang="es">Se traga entero con las comidas.</p>
         </article>
         <article class="binder-card">
-          <div class="binder-pill pill-beige">Fosrenol</div>
+          <div class="binder-photo"><svg viewBox="0 0 140 80" role="img" aria-label="Lanthanum round beige chewable tablet"><ellipse cx="70" cy="64" rx="33" ry="7" fill="#000" opacity=".07"/><circle cx="70" cy="40" r="30" fill="#d7c59c" stroke="#bfa978" stroke-width="1.5"/><ellipse cx="60" cy="31" rx="13" ry="6" fill="#fff" opacity=".4"/><text x="70" y="46" text-anchor="middle" font-family="Verdana,sans-serif" font-size="13" font-weight="700" fill="#6b5630">1000</text></svg><img src="images/binders/lanthanum.jpg" alt="Lanthanum (Fosrenol)" loading="lazy" style="display:none" onload="var p=this.previousElementSibling;if(p)p.style.display='none';this.style.display='block';"></div>
           <h3>Lanthanum</h3>
           <p class="binder-sub">Fosrenol</p>
           <p class="binder-note" data-lang="en">Chew well. Take with meals.</p>
           <p class="binder-note" data-lang="es">Mastíquelo bien. Tómelo con las comidas.</p>
         </article>
         <article class="binder-card">
-          <div class="binder-pill pill-brown">Velphoro</div>
+          <div class="binder-photo"><svg viewBox="0 0 140 80" role="img" aria-label="Sucroferric round brown chewable tablet"><ellipse cx="70" cy="64" rx="33" ry="7" fill="#000" opacity=".07"/><circle cx="70" cy="40" r="30" fill="#7b4a2d" stroke="#5e3720" stroke-width="1.5"/><ellipse cx="60" cy="31" rx="13" ry="6" fill="#fff" opacity=".22"/><text x="70" y="46" text-anchor="middle" font-family="Verdana,sans-serif" font-size="12" font-weight="700" fill="#f3e6da">PA700</text></svg><img src="images/binders/sucroferric.jpg" alt="Sucroferric oxyhydroxide (Velphoro)" loading="lazy" style="display:none" onload="var p=this.previousElementSibling;if(p)p.style.display='none';this.style.display='block';"></div>
           <h3>Sucroferric</h3>
           <p class="binder-sub">Velphoro</p>
           <p class="binder-note" data-lang="en">Chewable iron-based binder.</p>
           <p class="binder-note" data-lang="es">Quelante masticable con hierro.</p>
         </article>
         <article class="binder-card">
-          <div class="binder-pill pill-peach">KX52</div>
+          <div class="binder-photo"><svg viewBox="0 0 140 80" role="img" aria-label="Ferric citrate peach oval tablet"><ellipse cx="70" cy="63" rx="48" ry="8" fill="#000" opacity=".07"/><ellipse cx="70" cy="42" rx="50" ry="22" fill="#eb9d69" stroke="#cf7f49" stroke-width="1.5"/><ellipse cx="55" cy="34" rx="18" ry="7" fill="#fff" opacity=".33"/></svg><img src="images/binders/ferric-citrate.jpg" alt="Ferric citrate (Auryxia)" loading="lazy" style="display:none" onload="var p=this.previousElementSibling;if(p)p.style.display='none';this.style.display='block';"></div>
           <h3>Ferric Citrate</h3>
           <p class="binder-sub">Auryxia</p>
           <p class="binder-note" data-lang="en">May darken stools. Take with meals.</p>
           <p class="binder-note" data-lang="es">Puede oscurecer las heces. Tómelo con las comidas.</p>
         </article>
         <article class="binder-card">
-          <div class="binder-pill pill-red">T30</div>
+          <div class="binder-photo"><svg viewBox="0 0 140 80" role="img" aria-label="Tenapanor small tablet"><ellipse cx="70" cy="60" rx="27" ry="6" fill="#000" opacity=".07"/><ellipse cx="70" cy="42" rx="27" ry="16" fill="#e98b86" stroke="#c96b66" stroke-width="1.5"/><ellipse cx="62" cy="36" rx="9" ry="4" fill="#fff" opacity=".4"/><text x="70" y="47" text-anchor="middle" font-family="Verdana,sans-serif" font-size="12" font-weight="700" fill="#fff">30</text></svg><img src="images/binders/tenapanor.jpg" alt="Tenapanor (Xphozah)" loading="lazy" style="display:none" onload="var p=this.previousElementSibling;if(p)p.style.display='none';this.style.display='block';"></div>
           <h3>Tenapanor</h3>
           <p class="binder-sub">Xphozah</p>
           <p class="binder-note" data-lang="en">Different type. Often taken before meals.</p>

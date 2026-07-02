@@ -86,6 +86,9 @@
   .binder-card h3{margin:0;font-size:18px;line-height:1.2;color:var(--blue)}
   .binder-sub{margin:4px 0 0;font-size:13px;color:var(--muted)}
   .binder-note{margin:8px 0 0;font-size:14px;color:var(--text)}
+  .how-figure{margin:16px 0 0;padding:14px 14px 12px;border:1px solid var(--line);border-radius:18px;background:#fff}
+  .how-figure svg{width:100%;max-width:460px;height:auto;display:block;margin:0 auto}
+  .how-figure figcaption{margin:10px 0 0;font-size:15px;color:var(--text);text-align:center}
   .diet-grid,.alert-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .info-box{border-radius:18px;padding:14px 15px}
   .info-box.teal{background:var(--teal-soft)}
@@ -217,16 +220,53 @@
             <li>Water and potassium build up fast</li>
             <li>They can hurt your heart</li>
             <li>Missing even one day is dangerous</li>
+            <li>Stay the full time — do not end early</li>
             <li>Have to miss? Call your unit</li>
           </ul>
           <ul data-lang="es">
             <li>El agua y el potasio suben rápido</li>
             <li>Pueden dañar su corazón</li>
             <li>Faltar un solo día es peligroso</li>
+            <li>Quédese todo el tiempo — no salga temprano</li>
             <li>¿Tiene que faltar? Llame a su unidad</li>
           </ul>
         </div>
       </div>
+      <figure class="how-figure">
+        <svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="How dialysis works">
+          <!-- chair -->
+          <rect x="56" y="46" width="16" height="100" rx="8" fill="var(--blue-soft)" stroke="var(--line)"/>
+          <rect x="56" y="132" width="82" height="16" rx="8" fill="var(--blue-soft)" stroke="var(--line)"/>
+          <rect x="64" y="148" width="10" height="40" rx="5" fill="var(--line)"/>
+          <rect x="120" y="148" width="10" height="40" rx="5" fill="var(--line)"/>
+          <!-- person -->
+          <circle cx="96" cy="60" r="16" fill="var(--blue)"/>
+          <rect x="78" y="78" width="38" height="58" rx="14" fill="var(--blue)"/>
+          <rect x="96" y="90" width="54" height="13" rx="6.5" fill="var(--blue)"/>
+          <rect x="100" y="124" width="46" height="13" rx="6.5" fill="var(--blue)"/>
+          <rect x="134" y="124" width="12" height="52" rx="6" fill="var(--blue)"/>
+          <!-- access point on the arm -->
+          <circle cx="146" cy="96" r="6" fill="var(--teal)" stroke="#fff" stroke-width="2"/>
+          <!-- machine -->
+          <rect x="298" y="66" width="118" height="120" rx="14" fill="#fff" stroke="var(--line)" stroke-width="1.5"/>
+          <rect x="310" y="78" width="46" height="22" rx="6" fill="var(--blue-soft)" stroke="var(--line)"/>
+          <circle cx="318" cy="120" r="5" fill="var(--line)"/>
+          <circle cx="334" cy="120" r="5" fill="var(--line)"/>
+          <!-- filter: dirty blood on top, clean below -->
+          <rect x="366" y="92" width="30" height="80" rx="12" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.5"/>
+          <rect x="369" y="95" width="24" height="34" rx="10" fill="var(--red-soft)" stroke="var(--red)" stroke-width="1.5"/>
+          <circle cx="377" cy="105" r="2.5" fill="var(--red)"/>
+          <circle cx="386" cy="112" r="2.5" fill="var(--red)"/>
+          <circle cx="379" cy="120" r="2.5" fill="var(--red)"/>
+          <!-- tube out (blood to machine) and back (clean blood) -->
+          <path d="M150 92 C 215 40, 310 38, 381 88" fill="none" stroke="var(--red)" stroke-width="6" stroke-linecap="round"/>
+          <polygon points="256,44 272,52 256,60" fill="var(--red)"/>
+          <path d="M381 176 C 310 208, 215 176, 152 102" fill="none" stroke="var(--teal)" stroke-width="6" stroke-linecap="round"/>
+          <polygon points="270,171 254,179 270,187" fill="var(--teal)"/>
+        </svg>
+        <figcaption data-lang="en">Blood goes to the machine. The filter cleans it. Clean blood comes back to you.</figcaption>
+        <figcaption data-lang="es">La sangre va a la máquina. El filtro la limpia. La sangre limpia regresa a usted.</figcaption>
+      </figure>
     </section>
 
     <section class="card">

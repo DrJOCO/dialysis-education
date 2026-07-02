@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DaVita Wilshire | Dialysis Handout</title>
+<title>{{UNIT_NAME}} | Dialysis Handout</title>
 <style>
   :root{
     --blue:#166C71;
@@ -139,8 +139,8 @@
       <span class="brand-chip">1400 S Grand Ave #800</span>
       <a class="brand-chip" href="tel:+12137481414">(213) 748-1414</a>
     </div>
-    <p class="unit-badge" data-lang="en">Dialysis Unit: DaVita Wilshire</p>
-    <p class="unit-badge" data-lang="es">Unidad de Diálisis: DaVita Wilshire</p>
+    <p class="unit-badge" data-lang="en">Dialysis Unit: {{UNIT_NAME}}</p>
+    <p class="unit-badge" data-lang="es">Unidad de Diálisis: {{UNIT_NAME}}</p>
     <div class="lang-toggle" role="group" aria-label="Language">
       <button class="lang-btn active" id="btn-en" type="button">English</button>
       <button class="lang-btn" id="btn-es" type="button">Español</button>
@@ -165,13 +165,13 @@
         </article>
         <article class="team-member app">
           <div class="provider-photo-wrap">
-            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/Yecenia-Cueva.jpg" alt="Yecenia Cueva, FNP-BC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="provider-fallback">YC</div>
+            <img class="provider-photo" src="{{APP_PHOTO}}" alt="{{APP_NAME}}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">{{APP_INITIALS}}</div>
           </div>
           <div>
-            <p class="member-role" data-lang="en">Your Nurse Practitioner</p>
-            <p class="member-role" data-lang="es">Su Enfermera Practicante</p>
-            <h3 class="member-name">Yecenia Cueva, FNP-BC</h3>
+            <p class="member-role" data-lang="en">{{APP_ROLE_EN}}</p>
+            <p class="member-role" data-lang="es">{{APP_ROLE_ES}}</p>
+            <h3 class="member-name">{{APP_NAME}}</h3>
           </div>
         </article>
       </div>
@@ -576,12 +576,12 @@
           </ul>
         </div>
       </div>
-      <a class="call-btn" href="tel:+12134825181">
-        <span data-lang="en">Call DaVita Wilshire</span>
-        <span data-lang="es">Llame a DaVita Wilshire</span>
+      <a class="call-btn" href="tel:{{UNIT_TEL}}">
+        <span data-lang="en">Call {{UNIT_NAME}}</span>
+        <span data-lang="es">Llame a {{UNIT_NAME}}</span>
       </a>
-      <p class="contact-note" data-lang="en">1127 Wilshire Blvd Suite 120, Los Angeles, CA 90017 · (213) 482-5181</p>
-      <p class="contact-note" data-lang="es">1127 Wilshire Blvd Suite 120, Los Angeles, CA 90017 · (213) 482-5181</p>
+      <p class="contact-note" data-lang="en">{{UNIT_CONTACT}}</p>
+      <p class="contact-note" data-lang="es">{{UNIT_CONTACT}}</p>
     </section>
   </div>
 

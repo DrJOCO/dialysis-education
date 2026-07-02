@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Nephrology | Food &amp; Kidney Topics</title>
+<style>
+  :root{
+    --blue:#166C71;
+    --blue-soft:#e4f3f0;
+    --teal:#188F56;
+    --teal-soft:#e6f5ed;
+    --amber:#b66a16;
+    --amber-soft:#fff4e5;
+    --red:#b03f32;
+    --red-soft:#fce9e7;
+    --text:#243142;
+    --muted:#5d6b7b;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#d9e2ef;
+    --shadow:0 14px 36px rgba(22,108,113,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(24,143,86,.10), transparent 28%),
+      linear-gradient(180deg,#edf3fb 0%,#f8fafd 260px,var(--bg) 260px);
+    color:var(--text);
+    line-height:1.5;
+  }
+  .page{max-width:880px;margin:0 auto;padding:18px 14px 36px}
+  .hero{
+    background:linear-gradient(135deg,#166C71 0%,#1c6eb8 100%);
+    color:#fff;
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:12px 14px 14px;
+  }
+  .brand{margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .brand a{color:#fff;text-decoration:none}
+  .hero-title{margin:4px 0 0;font-size:19px;line-height:1.15}
+  .brand-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+  .brand-chip,.unit-badge{
+    display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);
+    color:#fff;text-decoration:none;font-size:11px;font-weight:600
+  }
+  .unit-badge{margin-top:6px}
+  .lang-toggle{display:flex;gap:8px;margin-top:8px}
+  .lang-btn{
+    border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.14);color:#fff;
+    font:inherit;font-weight:700;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:12px
+  }
+  .lang-btn.active{background:#fff;color:var(--blue)}
+  .topic-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .topic-nav a{
+    display:inline-flex;align-items:center;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;color:var(--blue);
+    text-decoration:none;box-shadow:var(--shadow)
+  }
+  .stack{display:grid;gap:16px;margin-top:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .section-title{margin:0 0 6px;font-size:25px;line-height:1.15;color:var(--blue)}
+  .section-copy{margin:0;color:var(--muted);font-size:16px}
+  .info-grid,.alert-grid{display:grid;gap:12px;margin-top:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .info-box{border-radius:18px;padding:14px 15px}
+  .info-box.teal{background:var(--teal-soft)}
+  .info-box.amber{background:var(--amber-soft)}
+  .info-box.blue{background:var(--blue-soft)}
+  .info-box.red{background:var(--red-soft)}
+  .info-box h3{margin:0 0 6px;font-size:18px;line-height:1.2}
+  .info-box p,.info-box ul{margin:0;font-size:15px}
+  .info-box ul{padding-left:18px}
+  .info-box li+li{margin-top:6px}
+  .info-box.wide{grid-column:1 / -1}
+  .ask-list{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+  .ask-list li{
+    background:var(--blue-soft);border-radius:14px;padding:12px 14px;
+    font-size:17px;font-weight:700;color:var(--blue)
+  }
+  .call-btn{
+    display:block;text-align:center;text-decoration:none;background:var(--blue);color:#fff;
+    padding:15px 16px;border-radius:18px;font-size:20px;font-weight:700;margin-top:14px
+  }
+  .contact-note{margin:10px 0 0;color:var(--muted);font-size:15px}
+  .footer{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+  .footer a{color:var(--blue);font-weight:700}
+  .back-top{display:block;text-align:center;margin:18px 0 6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+  .listen-btn{
+    display:inline-flex;align-items:center;margin:0 0 10px;border:1px solid var(--line);
+    background:var(--blue-soft);color:var(--blue);font:inherit;font-weight:700;font-size:14px;
+    border-radius:999px;padding:7px 14px;cursor:pointer
+  }
+  .listen-btn.playing{background:var(--blue);color:#fff}
+  [data-lang]:not(body){display:none}
+  body[data-lang="en"] [data-lang="en"]{display:block}
+  body[data-lang="es"] [data-lang="es"]{display:block}
+  body[data-lang="en"] .topic-nav[data-lang="en"],
+  body[data-lang="es"] .topic-nav[data-lang="es"]{display:flex}
+  @media (max-width:760px){
+    .info-grid,.alert-grid{grid-template-columns:1fr}
+    .info-box.wide{grid-column:auto}
+  }
+  @media (max-width:560px){
+    .hero-title{font-size:27px}
+    .call-btn{font-size:18px}
+  }
+</style>
+</head>
+<body data-lang="en">
+<script>try{var l=(navigator.language||navigator.userLanguage||"").toLowerCase();if(l.indexOf("es")===0)document.body.dataset.lang="es";}catch(e){}</script>
+<main class="page">
+  <section class="hero" id="top">
+    <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
+    <h1 class="hero-title" data-lang="en">Food &amp; Kidney Topics</h1>
+    <h1 class="hero-title" data-lang="es">Comida y Sus Riñones</h1>
+    <div class="brand-meta">
+      <a class="brand-chip" href="premier-office.html">← Kidney Health Guide</a>
+      <a class="brand-chip" href="tel:+12137481414">(213) 748-1414</a>
+    </div>
+    <p class="unit-badge" data-lang="en">For Office Patients of Dr. Cheng</p>
+    <p class="unit-badge" data-lang="es">Para Pacientes de Oficina del Dr. Cheng</p>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="btn-en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" type="button">Español</button>
+    </div>
+  </section>
+
+  <nav class="topic-nav" data-lang="en" aria-label="Topics">
+    <a href="#salt">Salt</a>
+    <a href="#potassium">Potassium</a>
+    <a href="#phosphorus">Phosphorus</a>
+    <a href="#protein">Protein</a>
+    <a href="#danger">Dangers</a>
+    <a href="#labels">Labels</a>
+    <a href="#menu">Meal Plan</a>
+  </nav>
+  <nav class="topic-nav" data-lang="es" aria-label="Temas">
+    <a href="#salt">Sal</a>
+    <a href="#potassium">Potasio</a>
+    <a href="#phosphorus">Fósforo</a>
+    <a href="#protein">Proteína</a>
+    <a href="#danger">Peligros</a>
+    <a href="#labels">Etiquetas</a>
+    <a href="#menu">Menú</a>
+  </nav>
+
+  <div class="stack">
+    <section class="card">
+      <h2 class="section-title" data-lang="en">Learn more, one topic at a time</h2>
+      <h2 class="section-title" data-lang="es">Aprenda más, un tema a la vez</h2>
+      <div class="info-grid">
+        <div class="info-box blue wide">
+          <ul data-lang="en">
+            <li>This page goes deeper than your first handout</li>
+            <li>Not every rule is for every person</li>
+            <li>Your lab tests decide what YOU need</li>
+            <li>Ask us before you make big changes</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Esta página explica más que su primera hoja</li>
+            <li>No todas las reglas son para todos</li>
+            <li>Sus laboratorios deciden lo que USTED necesita</li>
+            <li>Pregúntenos antes de hacer cambios grandes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="salt">
+      <h2 class="section-title" data-lang="en">Salt (sodium)</h2>
+      <h2 class="section-title" data-lang="es">La sal (sodio)</h2>
+      <p class="section-copy" data-lang="en">Less salt protects your kidneys, your heart, and your blood pressure.</p>
+      <p class="section-copy" data-lang="es">Menos sal protege sus riñones, su corazón y su presión.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Your goal</h3>
+          <h3 data-lang="es">Su meta</h3>
+          <ul data-lang="en">
+            <li>Less than 2,000 mg of sodium a day</li>
+            <li>That is about 1 small spoon of salt — for the WHOLE day</li>
+            <li>Most salt is already inside packaged food, not from your salt shaker</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Menos de 2,000 mg de sodio al día</li>
+            <li>Como 1 cucharadita de sal — para TODO el día</li>
+            <li>La mayoría de la sal ya viene en la comida empacada, no del salero</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Lots of hidden salt</h3>
+          <h3 data-lang="es">Mucha sal escondida</h3>
+          <ul data-lang="en">
+            <li>Consommé cubes and powders (Knorr)</li>
+            <li>Instant soups (Maruchan)</li>
+            <li>Chorizo, bacon, deli meats, hot dogs</li>
+            <li>Chips and salty snacks</li>
+            <li>Canned soups and fast food</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Cubos y polvos de consomé (Knorr)</li>
+            <li>Sopas instantáneas (Maruchan)</li>
+            <li>Chorizo, tocino, carnes frías, salchichas</li>
+            <li>Papitas y botanas saladas</li>
+            <li>Sopas de lata y comida rápida</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Flavor without salt</h3>
+          <h3 data-lang="es">Sabor sin sal</h3>
+          <ul data-lang="en">
+            <li>Lime and lemon</li>
+            <li>Cilantro, garlic, onion</li>
+            <li>Fresh chile, cumin, oregano, pepper</li>
+            <li>Salsa made fresh at home</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Limón</li>
+            <li>Cilantro, ajo, cebolla</li>
+            <li>Chile fresco, comino, orégano, pimienta</li>
+            <li>Salsa hecha fresca en casa</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Easy wins</h3>
+          <h3 data-lang="es">Trucos fáciles</h3>
+          <ul data-lang="en">
+            <li>Cook at home more</li>
+            <li>Rinse canned beans and vegetables with water</li>
+            <li>Taste first — salt last</li>
+            <li>At restaurants, ask for less salt</li>
+            <li>Keep the salt shaker off the table</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Cocine más en casa</li>
+            <li>Enjuague con agua los frijoles y verduras de lata</li>
+            <li>Pruebe primero — la sal al final</li>
+            <li>En restaurantes, pida poca sal</li>
+            <li>No ponga el salero en la mesa</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="potassium">
+      <h2 class="section-title" data-lang="en">Potassium</h2>
+      <h2 class="section-title" data-lang="es">El potasio</h2>
+      <p class="section-copy" data-lang="en">Potassium is a mineral in food. Your heart needs the right amount — not too high, not too low.</p>
+      <p class="section-copy" data-lang="es">El potasio es un mineral de la comida. Su corazón necesita la cantidad correcta — ni mucho ni poco.</p>
+      <div class="info-grid">
+        <div class="info-box blue wide">
+          <h3 data-lang="en">First, know this</h3>
+          <h3 data-lang="es">Primero, sepa esto</h3>
+          <ul data-lang="en">
+            <li>Fruits and vegetables are GOOD for your kidneys</li>
+            <li>Do NOT cut them out on your own</li>
+            <li>Only limit potassium if WE tell you it is high</li>
+            <li>We check it in your blood tests</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Las frutas y verduras son BUENAS para sus riñones</li>
+            <li>NO las deje por su cuenta</li>
+            <li>Solo limite el potasio si LE decimos que está alto</li>
+            <li>Lo revisamos en sus análisis de sangre</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">If it is high: eat less of these</h3>
+          <h3 data-lang="es">Si está alto: coma menos de esto</h3>
+          <ul data-lang="en">
+            <li>Bananas, oranges, and orange juice</li>
+            <li>Potatoes and thick tomato sauce</li>
+            <li>Avocado — only a little</li>
+            <li>Big plates of beans</li>
+            <li>Cantaloupe (melon)</li>
+            <li>Coconut water and dried fruit</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Plátanos, naranjas y jugo de naranja</li>
+            <li>Papas y salsa espesa de jitomate</li>
+            <li>Aguacate — solo un poquito</li>
+            <li>Platos grandes de frijoles</li>
+            <li>Melón</li>
+            <li>Agua de coco y fruta seca</li>
+          </ul>
+        </div>
+        <div class="info-box teal">
+          <h3 data-lang="en">Better choices if it is high</h3>
+          <h3 data-lang="es">Mejores opciones si está alto</h3>
+          <ul data-lang="en">
+            <li>Apples, grapes, berries, pineapple</li>
+            <li>Cabbage, cucumber, lettuce, green beans</li>
+            <li>Corn tortillas and rice</li>
+            <li>Small portions still matter</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Manzana, uvas, moras, piña</li>
+            <li>Repollo, pepino, lechuga, ejotes</li>
+            <li>Tortillas de maíz y arroz</li>
+            <li>Las porciones pequeñas también cuentan</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">The potato trick</h3>
+          <h3 data-lang="es">El truco de la papa</h3>
+          <ul data-lang="en">
+            <li>Peel and cut into small pieces</li>
+            <li>Soak or boil in a big pot of water</li>
+            <li>Pour that water out</li>
+            <li>This removes part of the potassium</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Pele y corte en trozos pequeños</li>
+            <li>Remoje o hierva en mucha agua</li>
+            <li>Tire esa agua</li>
+            <li>Así se quita parte del potasio</li>
+          </ul>
+        </div>
+        <div class="info-box red wide">
+          <h3 data-lang="en">⚠ Salt substitutes — be careful</h3>
+          <h3 data-lang="es">⚠ Sustitutos de sal — cuidado</h3>
+          <ul data-lang="en">
+            <li>"Lite Salt" and "No Salt" are made with potassium</li>
+            <li>They can make your potassium dangerously high</li>
+            <li>Ask us before using them</li>
+            <li>Packaged food may add potassium too — look for "potassium" in the ingredients</li>
+          </ul>
+          <ul data-lang="es">
+            <li>"Lite Salt" y "No Salt" están hechos con potasio</li>
+            <li>Pueden subir su potasio a un nivel peligroso</li>
+            <li>Pregúntenos antes de usarlos</li>
+            <li>La comida empacada también puede traer potasio — busque "potassium" en los ingredientes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="phosphorus">
+      <h2 class="section-title" data-lang="en">Phosphorus</h2>
+      <h2 class="section-title" data-lang="es">El fósforo</h2>
+      <p class="section-copy" data-lang="en">Phosphorus is another mineral. Too much weakens bones and hardens blood vessels.</p>
+      <p class="section-copy" data-lang="es">El fósforo es otro mineral. Demasiado debilita los huesos y endurece las venas.</p>
+      <div class="info-grid">
+        <div class="info-box red">
+          <h3 data-lang="en">The worst kind: ADDED phosphorus</h3>
+          <h3 data-lang="es">El peor: fósforo AÑADIDO</h3>
+          <ul data-lang="en">
+            <li>Factories add it to packaged food</li>
+            <li>Your body absorbs almost all of it</li>
+            <li>Dark sodas (colas)</li>
+            <li>Processed cheese and packaged cakes</li>
+            <li>Frozen meals and fast food</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Las fábricas lo añaden a la comida empacada</li>
+            <li>Su cuerpo absorbe casi todo</li>
+            <li>Refrescos oscuros (de cola)</li>
+            <li>Queso procesado y panecillos empacados</li>
+            <li>Comida congelada y comida rápida</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Label trick: look for "PHOS"</h3>
+          <h3 data-lang="es">Truco: busque "FOS"</h3>
+          <ul data-lang="en">
+            <li>Read the ingredient list</li>
+            <li>Words with "PHOS" = added phosphorus</li>
+            <li>Example: "sodium phosphate"</li>
+            <li>Choose the one without it</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Lea la lista de ingredientes</li>
+            <li>Palabras con "FOS" o "PHOS" = fósforo añadido</li>
+            <li>Ejemplo: "fosfato de sodio"</li>
+            <li>Escoja el que no lo tenga</li>
+          </ul>
+        </div>
+        <div class="info-box teal">
+          <h3 data-lang="en">Natural phosphorus is gentler</h3>
+          <h3 data-lang="es">El fósforo natural es más suave</h3>
+          <ul data-lang="en">
+            <li>Beans, milk, cheese, and nuts have natural phosphorus</li>
+            <li>Your body absorbs less of it</li>
+            <li>Most patients do NOT need to stop them</li>
+            <li>We will tell you if your level is high</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Frijoles, leche, queso y nueces tienen fósforo natural</li>
+            <li>Su cuerpo absorbe menos</li>
+            <li>La mayoría NO necesita dejarlos</li>
+            <li>Le diremos si su nivel está alto</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Easy swaps</h3>
+          <h3 data-lang="es">Cambios fáciles</h3>
+          <ul data-lang="en">
+            <li>Water instead of cola</li>
+            <li>Fresh meat instead of hot dogs and deli meat</li>
+            <li>Corn tortillas instead of packaged bread</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Agua en vez de refresco de cola</li>
+            <li>Carne fresca en vez de salchichas y carnes frías</li>
+            <li>Tortillas de maíz en vez de pan empacado</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="protein">
+      <h2 class="section-title" data-lang="en">Protein</h2>
+      <h2 class="section-title" data-lang="es">La proteína</h2>
+      <p class="section-copy" data-lang="en">Your body needs protein — but too much makes your kidneys work too hard.</p>
+      <p class="section-copy" data-lang="es">Su cuerpo necesita proteína — pero demasiada hace trabajar de más a sus riñones.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">The right amount</h3>
+          <h3 data-lang="es">La cantidad correcta</h3>
+          <ul data-lang="en">
+            <li>Meat portion = the palm of your hand</li>
+            <li>One portion at lunch and one at dinner is plenty for most people</li>
+            <li>More is not better for kidneys</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Porción de carne = la palma de su mano</li>
+            <li>Una porción en la comida y una en la cena basta para la mayoría</li>
+            <li>Más no es mejor para los riñones</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Plants are kidney-friendly</h3>
+          <h3 data-lang="es">Las plantas cuidan los riñones</h3>
+          <ul data-lang="en">
+            <li>Beans and lentils are good protein</li>
+            <li>Plant protein is gentler on kidneys</li>
+            <li>More vegetables, less meat is a healthy pattern</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Frijoles y lentejas son buena proteína</li>
+            <li>La proteína de plantas es más suave para el riñón</li>
+            <li>Más verduras y menos carne es un patrón sano</li>
+          </ul>
+        </div>
+        <div class="info-box red wide">
+          <h3 data-lang="en">Avoid unless we say OK</h3>
+          <h3 data-lang="es">Evite si no le decimos que sí</h3>
+          <ul data-lang="en">
+            <li>Protein powders and protein shakes</li>
+            <li>Muscle-building supplements</li>
+            <li>Very high-protein diets</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Polvos y licuados de proteína</li>
+            <li>Suplementos para músculo</li>
+            <li>Dietas muy altas en proteína</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="danger">
+      <h2 class="section-title" data-lang="en">Things that can hurt your kidneys</h2>
+      <h2 class="section-title" data-lang="es">Cosas que pueden dañar sus riñones</h2>
+      <div class="info-grid">
+        <div class="info-box red">
+          <h3 data-lang="en">Never eat star fruit</h3>
+          <h3 data-lang="es">Nunca coma carambola</h3>
+          <ul data-lang="en">
+            <li>Star fruit (carambola) is poison for weak kidneys</li>
+            <li>It can cause confusion and seizures</li>
+            <li>Even a little is not safe</li>
+          </ul>
+          <ul data-lang="es">
+            <li>La carambola (fruta estrella) es veneno para riñones débiles</li>
+            <li>Puede causar confusión y convulsiones</li>
+            <li>Ni un poquito es seguro</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Teas, herbs, and supplements</h3>
+          <h3 data-lang="es">Tés, hierbas y suplementos</h3>
+          <ul data-lang="en">
+            <li>Some herbal teas and remedies hurt kidneys</li>
+            <li>"Kidney cleanse" and "detox" products do not work</li>
+            <li>Alkaline water does not cure kidney disease</li>
+            <li>Bring everything you take to your visit</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Algunos tés e hierbas dañan los riñones</li>
+            <li>Los productos "detox" o "limpia riñones" no funcionan</li>
+            <li>El agua alcalina no cura la enfermedad del riñón</li>
+            <li>Traiga todo lo que toma a su cita</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Pain pill reminder</h3>
+          <h3 data-lang="es">Recuerde: pastillas para el dolor</h3>
+          <ul data-lang="en">
+            <li>No ibuprofen (Advil, Motrin)</li>
+            <li>No naproxen (Aleve)</li>
+            <li>Tylenol is safer — ask us</li>
+          </ul>
+          <ul data-lang="es">
+            <li>No ibuprofeno (Advil, Motrin)</li>
+            <li>No naproxeno (Aleve)</li>
+            <li>Tylenol es más seguro — pregúntenos</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Tell us before you start</h3>
+          <h3 data-lang="es">Avísenos antes de empezar</h3>
+          <ul data-lang="en">
+            <li>A new medicine from another doctor</li>
+            <li>Any vitamin or herb</li>
+            <li>A big change in your diet</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Una medicina nueva de otro doctor</li>
+            <li>Cualquier vitamina o hierba</li>
+            <li>Un cambio grande en su dieta</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="labels">
+      <h2 class="section-title" data-lang="en">How to read a food label</h2>
+      <h2 class="section-title" data-lang="es">Cómo leer la etiqueta</h2>
+      <div class="info-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">Step 1: Find the sodium</h3>
+          <h3 data-lang="es">Paso 1: Busque el sodio</h3>
+          <ul data-lang="en">
+            <li>Look for "Sodium" on the label</li>
+            <li>140 mg or less per serving = low — good</li>
+            <li>Over 400 mg per serving = a lot — leave it</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Busque "Sodium" (sodio) en la etiqueta</li>
+            <li>140 mg o menos por porción = poco — bien</li>
+            <li>Más de 400 mg por porción = mucho — déjelo</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Step 2: Check the ingredients</h3>
+          <h3 data-lang="es">Paso 2: Revise los ingredientes</h3>
+          <ul data-lang="en">
+            <li>Look for "PHOS" = added phosphorus</li>
+            <li>Look for "potassium" = added potassium</li>
+            <li>A short list is better</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Busque "PHOS" o "FOS" = fósforo añadido</li>
+            <li>Busque "potassium" = potasio añadido</li>
+            <li>Una lista corta es mejor</li>
+          </ul>
+        </div>
+        <div class="info-box teal wide">
+          <h3 data-lang="en">The best food has no label</h3>
+          <h3 data-lang="es">La mejor comida no tiene etiqueta</h3>
+          <ul data-lang="en">
+            <li>Fresh fruits and vegetables</li>
+            <li>Fresh meat, chicken, fish, eggs</li>
+            <li>Rice and corn tortillas — simple is best</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Frutas y verduras frescas</li>
+            <li>Carne, pollo, pescado y huevos frescos</li>
+            <li>Arroz y tortillas de maíz — lo simple es lo mejor</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="menu">
+      <h2 class="section-title" data-lang="en">A good day of eating</h2>
+      <h2 class="section-title" data-lang="es">Un buen día de comida</h2>
+      <p class="section-copy" data-lang="en">One example. A kidney dietitian can adjust it for YOUR labs — ask us for a referral. Insurance often pays for it.</p>
+      <p class="section-copy" data-lang="es">Un ejemplo. Un dietista de riñón lo puede ajustar según SUS laboratorios — pídanos una referencia. El seguro muchas veces lo paga.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Breakfast</h3>
+          <h3 data-lang="es">Desayuno</h3>
+          <ul data-lang="en">
+            <li>Eggs with onion and a little fresh salsa</li>
+            <li>2 corn tortillas</li>
+            <li>Small coffee</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Huevos con cebolla y un poco de salsa fresca</li>
+            <li>2 tortillas de maíz</li>
+            <li>Café chico</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Lunch</h3>
+          <h3 data-lang="es">Comida</h3>
+          <ul data-lang="en">
+            <li>Chicken soup with rice, carrot, and calabacitas</li>
+            <li>Made at home with little salt — no consommé cube</li>
+            <li>Water to drink</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Caldo de pollo con arroz, zanahoria y calabacitas</li>
+            <li>Hecho en casa con poca sal — sin cubo de consomé</li>
+            <li>Agua para tomar</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Dinner</h3>
+          <h3 data-lang="es">Cena</h3>
+          <ul data-lang="en">
+            <li>Fish tacos with cabbage and lime</li>
+            <li>Rice</li>
+            <li>Grapes or an apple after</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Tacos de pescado con repollo y limón</li>
+            <li>Arroz</li>
+            <li>Uvas o una manzana después</li>
+          </ul>
+        </div>
+        <div class="info-box teal">
+          <h3 data-lang="en">Snacks</h3>
+          <h3 data-lang="es">Botanas</h3>
+          <ul data-lang="en">
+            <li>Apple, grapes, or berries</li>
+            <li>Cucumber with lime and a little chile</li>
+            <li>Popcorn without salt</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Manzana, uvas o moras</li>
+            <li>Pepino con limón y poquito chile</li>
+            <li>Palomitas sin sal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="ask">
+      <h2 class="section-title" data-lang="en">Ask us at your visit</h2>
+      <h2 class="section-title" data-lang="es">Pregúntenos en su cita</h2>
+      <ul class="ask-list" data-lang="en">
+        <li>"Is my potassium high?"</li>
+        <li>"Is my phosphorus high?"</li>
+        <li>"How much protein is right for me?"</li>
+        <li>"Can I see a kidney dietitian?"</li>
+      </ul>
+      <ul class="ask-list" data-lang="es">
+        <li>"¿Está alto mi potasio?"</li>
+        <li>"¿Está alto mi fósforo?"</li>
+        <li>"¿Cuánta proteína es buena para mí?"</li>
+        <li>"¿Puedo ver a un dietista de riñón?"</li>
+      </ul>
+      <a class="call-btn" href="tel:+12137481414">
+        <span data-lang="en">Call Our Office</span>
+        <span data-lang="es">Llame a Nuestra Oficina</span>
+      </a>
+      <p class="contact-note" data-lang="en">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+      <p class="contact-note" data-lang="es">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+    </section>
+  </div>
+
+  <a class="back-top" href="premier-office.html" data-lang="en">← Back to Kidney Health Guide</a>
+  <a class="back-top" href="premier-office.html" data-lang="es">← Volver a la Guía de Salud del Riñón</a>
+  <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+  <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de riñón. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+</main>
+<script>
+  const btnEn = document.getElementById('btn-en');
+  const btnEs = document.getElementById('btn-es');
+  function setLanguage(lang) {
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    btnEn.classList.toggle('active', lang === 'en');
+    btnEs.classList.toggle('active', lang === 'es');
+    if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
+    document.querySelectorAll('.listen-btn').forEach(function (b) {
+      b.classList.remove('playing');
+      b.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+    });
+  }
+  btnEn.addEventListener('click', function () { setLanguage('en'); });
+  btnEs.addEventListener('click', function () { setLanguage('es'); });
+  // Listen buttons: read each section out loud (text-to-speech)
+  (function () {
+    if (!('speechSynthesis' in window)) return;
+    var synth = window.speechSynthesis;
+    var playing = null;
+    function stopAll() {
+      synth.cancel();
+      document.querySelectorAll('.listen-btn.playing').forEach(function (b) { b.classList.remove('playing'); });
+      playing = null;
+    }
+    document.querySelectorAll('.card').forEach(function (card) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'listen-btn';
+      btn.textContent = '🔊 Listen';
+      btn.setAttribute('aria-label', 'Listen to this section');
+      card.insertBefore(btn, card.firstChild);
+      btn.addEventListener('click', function () {
+        if (playing === btn) { stopAll(); return; }
+        stopAll();
+        var saved = btn.textContent;
+        btn.textContent = '';
+        var text = card.innerText;
+        btn.textContent = saved;
+        var lang = document.body.dataset.lang === 'es' ? 'es-MX' : 'en-US';
+        var lines = text.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+        if (!lines.length) return;
+        playing = btn;
+        btn.classList.add('playing');
+        lines.forEach(function (line, i) {
+          var u = new SpeechSynthesisUtterance(line);
+          u.lang = lang;
+          u.rate = 0.95;
+          if (i === lines.length - 1) {
+            u.onend = function () { if (playing === btn) { btn.classList.remove('playing'); playing = null; } };
+          }
+          synth.speak(u);
+        });
+      });
+    });
+  })();
+  setLanguage(document.body.dataset.lang || "en");
+</script>
+</body>
+</html>

@@ -101,6 +101,8 @@
   body[data-lang="es"] [data-lang="es"]{display:block}
   body[data-lang="en"] .topic-nav[data-lang="en"],
   body[data-lang="es"] .topic-nav[data-lang="es"]{display:flex}
+  body[data-lang="en"] .brand-chip[data-lang="en"],
+  body[data-lang="es"] .brand-chip[data-lang="es"]{display:inline-flex}
   @media (max-width:760px){
     .info-grid,.alert-grid{grid-template-columns:1fr}
     .info-box.wide{grid-column:auto}
@@ -119,7 +121,8 @@
     <h1 class="hero-title" data-lang="en">Food &amp; Kidney Topics</h1>
     <h1 class="hero-title" data-lang="es">Comida y Sus Riñones</h1>
     <div class="brand-meta">
-      <a class="brand-chip" href="premier-office.html">← Kidney Health Guide</a>
+      <a class="brand-chip" href="premier-office.html" data-lang="en">← Kidney Health Guide</a>
+      <a class="brand-chip" href="premier-office.html" data-lang="es">← Guía de Salud del Riñón</a>
       <a class="brand-chip" href="tel:+12137481414">(213) 748-1414</a>
     </div>
     <p class="unit-badge" data-lang="en">For Office Patients of Dr. Cheng</p>
@@ -169,6 +172,10 @@
           </ul>
         </div>
       </div>
+      <a class="call-btn" style="background:var(--teal)" href="premier-office.html">
+        <span data-lang="en">New here? Start with the first guide →</span>
+        <span data-lang="es">¿Es nuevo? Empiece con la primera guía →</span>
+      </a>
     </section>
 
     <section class="card" id="salt">

@@ -42,7 +42,7 @@
   }
   .brand{margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
   .brand a{color:#fff;text-decoration:none}
-  .hero-title{margin:4px 0 0;font-size:19px;line-height:1.15}
+  .hero-title{margin:4px 0 0;font-size:28px;line-height:1.15}
   .brand-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
   .brand-chip,.unit-badge{
     display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;
@@ -162,7 +162,7 @@
     .info-box.wide{grid-column:auto}
   }
   @media (max-width:560px){
-    .hero-title{font-size:27px}
+    .hero-title{font-size:25px}
     .member-name{font-size:22px}
     .call-btn{font-size:18px}
   }
@@ -294,16 +294,16 @@
           <h3 data-lang="en">What the number means</h3>
           <h3 data-lang="es">Qué significa el número</h3>
           <ul class="gfr-legend" data-lang="en">
-            <li><span class="dot" style="background:var(--teal)"></span>100 = full strength</li>
-            <li><span class="dot" style="background:#d8a200"></span>Under 60 = kidney disease</li>
+            <li><span class="dot" style="background:var(--teal)"></span>90 or higher = normal range, but urine protein still matters</li>
+            <li><span class="dot" style="background:#d8a200"></span>Under 60 for 3 months = kidney disease</li>
             <li><span class="dot" style="background:#c9781f"></span>Under 30 = learn about your options</li>
-            <li><span class="dot" style="background:var(--red)"></span>Under 15 = kidney failure — dialysis may start soon</li>
+            <li><span class="dot" style="background:var(--red)"></span>Under 15 = kidney failure range — plan early</li>
           </ul>
           <ul class="gfr-legend" data-lang="es">
-            <li><span class="dot" style="background:var(--teal)"></span>100 = toda la fuerza</li>
-            <li><span class="dot" style="background:#d8a200"></span>Menos de 60 = enfermedad del riñón</li>
+            <li><span class="dot" style="background:var(--teal)"></span>90 o más = rango normal, pero la proteína en orina importa</li>
+            <li><span class="dot" style="background:#d8a200"></span>Menos de 60 por 3 meses = enfermedad del riñón</li>
             <li><span class="dot" style="background:#c9781f"></span>Menos de 30 = conozca sus opciones</li>
-            <li><span class="dot" style="background:var(--red)"></span>Menos de 15 = falla del riñón — la diálisis puede empezar pronto</li>
+            <li><span class="dot" style="background:var(--red)"></span>Menos de 15 = rango de falla renal — planee temprano</li>
           </ul>
         </div>
         <div class="info-box teal">
@@ -359,13 +359,13 @@
             <li>Ibuprofen (Advil, Motrin)</li>
             <li>Naproxen (Aleve)</li>
             <li>They hurt your kidneys</li>
-            <li>For pain: Tylenol is safer — ask us</li>
+            <li>For pain: Tylenol is usually safer for kidneys — ask us</li>
           </ul>
           <ul data-lang="es">
             <li>Ibuprofeno (Advil, Motrin)</li>
             <li>Naproxeno (Aleve)</li>
             <li>Dañan sus riñones</li>
-            <li>Para dolor: Tylenol es más seguro — pregúntenos</li>
+            <li>Para dolor: Tylenol suele ser más seguro para los riñones — pregúntenos</li>
           </ul>
         </div>
       </div>
@@ -455,23 +455,23 @@
       </div>
       <div class="info-grid">
         <div class="info-box teal">
-          <h3 data-lang="en">Pills that protect your kidneys</h3>
-          <h3 data-lang="es">Pastillas que protegen sus riñones</h3>
+          <h3 data-lang="en">Pills that can protect your kidneys</h3>
+          <h3 data-lang="es">Pastillas que pueden proteger sus riñones</h3>
           <ul data-lang="en">
-            <li>They lower the protein leaking into your urine</li>
-            <li>They keep your kidneys stable and slow the disease</li>
-            <li>Lisinopril or losartan</li>
-            <li>Jardiance or Farxiga</li>
-            <li>Kerendia (finerenone)</li>
-            <li>Take them every day — only stop if we say so</li>
+            <li>For the right patient, they lower protein leaking into urine</li>
+            <li>They can slow kidney disease and protect your heart</li>
+            <li>Examples: lisinopril or losartan</li>
+            <li>Examples: Jardiance or Farxiga</li>
+            <li>Kerendia (finerenone) helps some people with diabetes and urine protein</li>
+            <li>Only take these if prescribed — call before stopping</li>
           </ul>
           <ul data-lang="es">
-            <li>Bajan la proteína que se escapa a su orina</li>
-            <li>Mantienen sus riñones estables y frenan la enfermedad</li>
-            <li>Lisinopril o losartán</li>
-            <li>Jardiance o Farxiga</li>
-            <li>Kerendia (finerenona)</li>
-            <li>Tómelas todos los días — solo pare si le decimos</li>
+            <li>Para la persona correcta, bajan la proteína en la orina</li>
+            <li>Pueden frenar la enfermedad y proteger el corazón</li>
+            <li>Ejemplos: lisinopril o losartán</li>
+            <li>Ejemplos: Jardiance o Farxiga</li>
+            <li>Kerendia (finerenona) ayuda a algunos con diabetes y proteína en la orina</li>
+            <li>Solo tómelas si se las recetamos — llame antes de parar</li>
           </ul>
         </div>
         <div class="info-box amber">
@@ -504,11 +504,11 @@
     <section class="card">
       <div class="section-head">
         <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/></svg>
-        <h2 class="section-title" data-lang="en">If your kidneys get weaker</h2>
-        <h2 class="section-title" data-lang="es">Si sus riñones se debilitan</h2>
+        <h2 class="section-title" data-lang="en">If your kidney number gets very low</h2>
+        <h2 class="section-title" data-lang="es">Si su número del riñón baja mucho</h2>
       </div>
-      <p class="section-copy" data-lang="en">Learn your dialysis choices early — not in an emergency. Many patients do dialysis at home.</p>
-      <p class="section-copy" data-lang="es">Conozca sus opciones temprano — no en una emergencia. Muchos hacen la diálisis en casa.</p>
+      <p class="section-copy" data-lang="en">Learn your choices early — not in an emergency. Dialysis starts because of symptoms, labs, and your overall health, not just one GFR number.</p>
+      <p class="section-copy" data-lang="es">Conozca sus opciones temprano — no en una emergencia. La diálisis empieza por síntomas, laboratorios y su salud completa, no solo por un número de GFR.</p>
       <div class="info-grid">
         <div class="info-box teal">
           <h3 data-lang="en">Peritoneal dialysis (PD) — at home</h3>

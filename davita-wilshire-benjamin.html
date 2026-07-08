@@ -42,7 +42,7 @@
   }
   .brand{margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
   .brand a{color:#fff;text-decoration:none}
-  .hero-title{margin:4px 0 0;font-size:19px;line-height:1.15}
+  .hero-title{margin:4px 0 0;font-size:28px;line-height:1.15}
   .hero-copy{display:none}
   .brand-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
   .brand-chip,.unit-badge{
@@ -113,6 +113,20 @@
     border-radius:999px;padding:7px 14px;cursor:pointer
   }
   .listen-btn.playing{background:var(--blue);color:#fff}
+  .page-listen{
+    display:flex;align-items:center;gap:14px;width:100%;margin-top:16px;
+    background:var(--teal);color:#fff;border:none;border-radius:var(--radius);
+    padding:14px 16px;font:inherit;cursor:pointer;text-align:left;box-shadow:var(--shadow)
+  }
+  .page-listen:active{transform:scale(.995)}
+  .pl-icon{
+    flex-shrink:0;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.22);
+    display:flex;align-items:center;justify-content:center
+  }
+  .pl-icon svg{width:24px;height:24px}
+  .pl-title{display:block;font-size:19px;font-weight:700}
+  .pl-sub{display:block;font-size:14px;opacity:.92;margin-top:2px}
+  .page-listen.playing{background:var(--blue)}
   [data-lang]:not(body){display:none}
   body[data-lang="en"] [data-lang="en"]{display:block}
   body[data-lang="es"] [data-lang="es"]{display:block}
@@ -120,7 +134,7 @@
     .team-grid,.binder-grid,.diet-grid,.alert-grid{grid-template-columns:1fr}
   }
   @media (max-width:560px){
-    .hero-title{font-size:27px}
+    .hero-title{font-size:25px}
     .hero-copy{font-size:17px}
     .member-name{font-size:22px}
     .call-btn{font-size:18px}
@@ -146,6 +160,14 @@
       <button class="lang-btn" id="btn-es" type="button">Español</button>
     </div>
   </section>
+
+  <button class="page-listen" id="page-listen" type="button" aria-label="Listen to this page">
+    <span class="pl-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+    <span class="pl-text">
+      <span class="pl-title">Listen to this page</span>
+      <span class="pl-sub">Tap to hear it read out loud</span>
+    </span>
+  </button>
 
   <div class="stack">
     <section class="card">
@@ -597,29 +619,128 @@
 <script>
   const btnEn = document.getElementById('btn-en');
   const btnEs = document.getElementById('btn-es');
+  const pageBtn = document.getElementById('page-listen');
+  const synthOK = ('speechSynthesis' in window);
+  var playing = null;
+  var pageMinutes = 0;
+
+  var voicesCache = [];
+  function loadVoices() { try { voicesCache = window.speechSynthesis.getVoices() || []; } catch (e) { voicesCache = []; } }
+  if (synthOK) {
+    loadVoices();
+    try { window.speechSynthesis.addEventListener('voiceschanged', loadVoices); } catch (e) {}
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  function pickVoice(lang) {
+    var want = lang === 'es' ? 'es' : 'en';
+    var cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) === 0; });
+    if (!cands.length) cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) !== -1; });
+    if (!cands.length) return null;
+    var prefer = lang === 'es'
+      ? ['Google español de Estados Unidos', 'Google español', 'Paulina', 'Mónica', 'Microsoft Dalia', 'Microsoft Sabina', 'Angelica', 'Juan']
+      : ['Google US English', 'Samantha', 'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Ava', 'Karen', 'Alex', 'Daniel'];
+    var target = lang === 'es' ? 'es-mx' : 'en-us';
+    function score(v) {
+      var n = v.name || '', s = 0, i;
+      for (i = 0; i < prefer.length; i++) { if (n.indexOf(prefer[i]) !== -1) { s += 100 - i; break; } }
+      if (/natural|neural|enhanced|premium/i.test(n)) s += 40;
+      if (/google/i.test(n)) s += 20;
+      if (v.localService === false) s += 10;
+      if ((v.lang || '').toLowerCase() === target) s += 15;
+      if (v.default) s += 2;
+      return s;
+    }
+    cands.sort(function (a, b) { return score(b) - score(a); });
+    return cands[0] || null;
+  }
+
+  var keepAlive = null;
+  function startKeepAlive() {
+    stopKeepAlive();
+    keepAlive = setInterval(function () {
+      if (synthOK && window.speechSynthesis.speaking) window.speechSynthesis.resume();
+    }, 9000);
+  }
+  function stopKeepAlive() {
+    if (keepAlive) {
+      clearInterval(keepAlive);
+      keepAlive = null;
+    }
+  }
+  function readableLines(root) {
+    return Array.prototype.slice.call(root.querySelectorAll('h2,h3,p,li'))
+      .filter(function (el) { return el.offsetParent !== null; })
+      .map(function (el) { return el.textContent.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean);
+  }
+  function speakLines(lines, lang, onEnd) {
+    var voice = pickVoice(lang);
+    var langTag = lang === 'es' ? 'es-MX' : 'en-US';
+    startKeepAlive();
+    lines.forEach(function (line, i) {
+      var text = /[.!?:;]$/.test(line) ? line : line + '.';
+      var u = new SpeechSynthesisUtterance(text);
+      if (voice) u.voice = voice;
+      u.lang = (voice && voice.lang) ? voice.lang : langTag;
+      u.rate = 0.9;
+      u.pitch = 1;
+      if (i === lines.length - 1) {
+        u.onend = function () { stopKeepAlive(); if (onEnd) onEnd(); };
+      }
+      window.speechSynthesis.speak(u);
+    });
+  }
+  function setPageLabel(isPlaying, lang) {
+    if (!pageBtn) return;
+    var es = lang === 'es';
+    var title = pageBtn.querySelector('.pl-title');
+    var sub = pageBtn.querySelector('.pl-sub');
+    var icon = pageBtn.querySelector('.pl-icon');
+    if (isPlaying) {
+      title.textContent = es ? 'Detener' : 'Stop';
+      sub.textContent = es ? 'Tocando...' : 'Playing...';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="#fff"/></svg>';
+    } else {
+      title.textContent = (es ? 'Escuchar esta página' : 'Listen to this page') + (pageMinutes ? ' · ' + pageMinutes + ' min' : '');
+      sub.textContent = es ? 'Toque para escucharlo en voz alta' : 'Tap to hear it read out loud';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
+    }
+  }
+  function resetButtons(lang) {
+    document.querySelectorAll('.listen-btn').forEach(function (b) {
+      b.classList.remove('playing');
+      b.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+    });
+    if (pageBtn) {
+      pageBtn.classList.remove('playing');
+      setPageLabel(false, lang);
+    }
+  }
+  function stopAll() {
+    stopKeepAlive();
+    if (synthOK) window.speechSynthesis.cancel();
+    resetButtons(document.body.dataset.lang || 'en');
+    playing = null;
+  }
+  function recomputeMinutes() {
+    var lang = document.body.dataset.lang || 'en';
+    var stack = document.querySelector('.stack');
+    var words = readableLines(stack).join(' ').split(/\s+/).filter(Boolean).length;
+    pageMinutes = Math.max(1, Math.round(words / 160));
+    if (playing !== pageBtn) setPageLabel(false, lang);
+  }
   function setLanguage(lang) {
     document.body.dataset.lang = lang;
     document.documentElement.lang = lang;
     btnEn.classList.toggle('active', lang === 'en');
     btnEs.classList.toggle('active', lang === 'es');
-    if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
-    document.querySelectorAll('.listen-btn').forEach(function (b) {
-      b.classList.remove('playing');
-      b.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
-    });
+    stopAll();
+    recomputeMinutes();
   }
   btnEn.addEventListener('click', function () { setLanguage('en'); });
   btnEs.addEventListener('click', function () { setLanguage('es'); });
-  // Listen buttons: read each section out loud (text-to-speech)
-  (function () {
-    if (!('speechSynthesis' in window)) return;
-    var synth = window.speechSynthesis;
-    var playing = null;
-    function stopAll() {
-      synth.cancel();
-      document.querySelectorAll('.listen-btn.playing').forEach(function (b) { b.classList.remove('playing'); });
-      playing = null;
-    }
+
+  if (synthOK) {
     document.querySelectorAll('.card').forEach(function (card) {
       var btn = document.createElement('button');
       btn.type = 'button';
@@ -630,27 +751,44 @@
       btn.addEventListener('click', function () {
         if (playing === btn) { stopAll(); return; }
         stopAll();
-        var saved = btn.textContent;
-        btn.textContent = '';
-        var text = card.innerText;
-        btn.textContent = saved;
-        var lang = document.body.dataset.lang === 'es' ? 'es-MX' : 'en-US';
-        var lines = text.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+        var lang = document.body.dataset.lang || 'en';
+        var lines = readableLines(card);
         if (!lines.length) return;
         playing = btn;
         btn.classList.add('playing');
-        lines.forEach(function (line, i) {
-          var u = new SpeechSynthesisUtterance(line);
-          u.lang = lang;
-          u.rate = 0.95;
-          if (i === lines.length - 1) {
-            u.onend = function () { if (playing === btn) { btn.classList.remove('playing'); playing = null; } };
+        btn.textContent = '⏹ ' + (lang === 'es' ? 'Detener' : 'Stop');
+        speakLines(lines, lang, function () {
+          if (playing === btn) {
+            btn.classList.remove('playing');
+            btn.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+            playing = null;
           }
-          synth.speak(u);
         });
       });
     });
-  })();
+    if (pageBtn) {
+      pageBtn.addEventListener('click', function () {
+        if (playing === pageBtn) { stopAll(); return; }
+        stopAll();
+        var lang = document.body.dataset.lang || 'en';
+        var lines = readableLines(document.querySelector('.stack'));
+        if (!lines.length) return;
+        playing = pageBtn;
+        pageBtn.classList.add('playing');
+        setPageLabel(true, lang);
+        speakLines(lines, lang, function () {
+          if (playing === pageBtn) {
+            pageBtn.classList.remove('playing');
+            setPageLabel(false, lang);
+            playing = null;
+          }
+        });
+      });
+    }
+  } else if (pageBtn) {
+    pageBtn.style.display = 'none';
+  }
+
   setLanguage(document.body.dataset.lang || "en");
 </script>
 <script>

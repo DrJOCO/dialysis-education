@@ -138,6 +138,12 @@
   .pl-title{display:block;font-size:19px;font-weight:700}
   .pl-sub{display:block;font-size:14px;opacity:.92;margin-top:2px}
   .page-listen.playing{background:var(--blue)}
+  .quick-links{display:grid;gap:10px;margin-top:12px}
+  .detail-link{
+    display:block;text-align:center;text-decoration:none;background:#fff;color:var(--blue);
+    border:1px solid var(--line);border-radius:16px;padding:13px 15px;font-size:17px;font-weight:700;
+    box-shadow:var(--shadow)
+  }
   /* GFR scale */
   .gfr-scale{margin:16px 0 4px}
   .gfr-bar{display:flex;height:22px;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
@@ -206,6 +212,11 @@
       <span class="pl-sub">Tap to hear it read out loud</span>
     </span>
   </button>
+
+  <div class="quick-links">
+    <a class="detail-link" href="premier-office-topics.html" data-lang="en">More details: food, salt, potassium, protein in urine, and medicines</a>
+    <a class="detail-link" href="premier-office-topics.html" data-lang="es">Más detalles: comida, sal, potasio, proteína en la orina y medicinas</a>
+  </div>
 
   <div class="stack">
     <section class="card">
@@ -341,13 +352,15 @@
           <span style="width:15%;background:var(--red)"></span>
           <span style="width:15%;background:#c9781f"></span>
           <span style="width:30%;background:#d8a200"></span>
-          <span style="width:40%;background:var(--teal)"></span>
+          <span style="width:30%;background:#8bc9a6"></span>
+          <span style="width:10%;background:var(--teal)"></span>
         </div>
         <div class="gfr-ticks">
           <span style="left:0">0</span>
           <span style="left:15%;transform:translateX(-50%)">15</span>
           <span style="left:30%;transform:translateX(-50%)">30</span>
           <span style="left:60%;transform:translateX(-50%)">60</span>
+          <span style="left:90%;transform:translateX(-50%)">90</span>
           <span style="left:100%;transform:translateX(-100%)">100</span>
         </div>
       </div>
@@ -356,13 +369,15 @@
           <h3 data-lang="en">What the number means</h3>
           <h3 data-lang="es">Qué significa el número</h3>
           <ul class="gfr-legend" data-lang="en">
-            <li><span class="dot" style="background:var(--teal)"></span>90 or higher = normal range, but urine protein still matters</li>
+            <li><span class="dot" style="background:var(--teal)"></span>90 or higher = usually okay, but protein in urine still matters</li>
+            <li><span class="dot" style="background:#8bc9a6"></span>60 to 89 = watch it, especially if there is protein in your urine</li>
             <li><span class="dot" style="background:#d8a200"></span>Under 60 for 3 months = kidney disease</li>
             <li><span class="dot" style="background:#c9781f"></span>Under 30 = learn about your options</li>
             <li><span class="dot" style="background:var(--red)"></span>Under 15 = kidney failure range — plan early</li>
           </ul>
           <ul class="gfr-legend" data-lang="es">
-            <li><span class="dot" style="background:var(--teal)"></span>90 o más = rango normal, pero la proteína en orina importa</li>
+            <li><span class="dot" style="background:var(--teal)"></span>90 o más = usualmente está bien, pero la proteína en la orina importa</li>
+            <li><span class="dot" style="background:#8bc9a6"></span>60 a 89 = vigílelo, sobre todo si hay proteína en la orina</li>
             <li><span class="dot" style="background:#d8a200"></span>Menos de 60 por 3 meses = enfermedad del riñón</li>
             <li><span class="dot" style="background:#c9781f"></span>Menos de 30 = conozca sus opciones</li>
             <li><span class="dot" style="background:var(--red)"></span>Menos de 15 = rango de falla renal — planee temprano</li>
@@ -374,12 +389,14 @@
           <ul data-lang="en">
             <li>Ask at every visit: "What is my kidney number?"</li>
             <li>Write it down each time</li>
+            <li>If your number is 60 to 89, ask about protein in urine</li>
             <li>The goal: keep it from falling fast</li>
             <li>Your medicines help protect it</li>
           </ul>
           <ul data-lang="es">
             <li>Pregunte en cada cita: "¿Cuál es mi número del riñón?"</li>
             <li>Apúntelo cada vez</li>
+            <li>Si su número está entre 60 y 89, pregunte sobre proteína en la orina</li>
             <li>La meta: que no baje rápido</li>
             <li>Sus medicinas ayudan a protegerlo</li>
           </ul>

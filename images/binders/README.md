@@ -1,8 +1,11 @@
 # Binder pill photos
 
-The dialysis pages show an accurate **illustration** of each binder by default.
-If you add a real photo here with the matching filename, it will **automatically
-replace the illustration** on every dialysis page — no code change needed.
+The dialysis pages show an accurate **inline illustration** of each binder.
+This avoids broken image requests on the live site and keeps the handouts
+usable even without real pill photos.
+
+If real photos are added later, update `templates/dialysis-unit.html`, then run
+`python3 generate_units.py` so every dialysis unit page is regenerated.
 
 ## Filenames (must match exactly)
 
@@ -20,7 +23,7 @@ replace the illustration** on every dialysis page — no code change needed.
 - Shoot the pill on a plain white background, lit evenly, filling most of the frame.
 - Square-ish crop works best (the card area is roughly square).
 - Keep files small (under ~300 KB each) so the page loads fast on phones.
-- `.jpg` is expected. If you use `.png`, also update the `src` in the HTML.
+- `.jpg` is suggested. If you use `.png`, make sure the template uses the same extension.
 
 Note: generics vary by manufacturer, so a photo may not match every patient's
 exact pill. The shape, color, and how-to-take instructions are what matter most.

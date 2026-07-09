@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Nephrology | Protect Your Kidneys</title>
+<style>
+  :root{
+    --blue:#166C71;
+    --blue-soft:#e4f3f0;
+    --teal:#188F56;
+    --teal-soft:#e6f5ed;
+    --amber:#b66a16;
+    --amber-soft:#fff4e5;
+    --red:#b03f32;
+    --red-soft:#fce9e7;
+    --text:#243142;
+    --muted:#5d6b7b;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#d9e2ef;
+    --shadow:0 14px 36px rgba(22,108,113,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(24,143,86,.10), transparent 28%),
+      linear-gradient(180deg,#edf3fb 0%,#f8fafd 260px,var(--bg) 260px);
+    color:var(--text);
+    line-height:1.5;
+  }
+  .page{max-width:880px;margin:0 auto;padding:18px 14px 36px}
+  .hero{
+    background:linear-gradient(135deg,#166C71 0%,#1c6eb8 100%);
+    color:#fff;
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:16px;
+  }
+  .brand{margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .brand a{color:#fff;text-decoration:none}
+  .hero-title{margin:6px 0 0;font-size:29px;line-height:1.15}
+  .hero-copy{margin:8px 0 0;font-size:17px;color:rgba(255,255,255,.92)}
+  .brand-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .brand-chip,.unit-badge{
+    display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);
+    color:#fff;text-decoration:none;font-size:12px;font-weight:700;
+  }
+  .lang-toggle{display:flex;gap:8px;margin-top:12px}
+  .lang-btn{
+    border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.14);color:#fff;
+    font:inherit;font-weight:700;border-radius:999px;padding:7px 13px;cursor:pointer;font-size:12px;
+  }
+  .lang-btn.active{background:#fff;color:var(--blue)}
+  .page-listen{
+    display:flex;align-items:center;gap:12px;width:100%;margin-top:16px;
+    background:var(--teal);color:#fff;border:none;border-radius:var(--radius);
+    padding:14px 16px;font:inherit;cursor:pointer;text-align:left;box-shadow:var(--shadow);
+  }
+  .pl-icon{
+    flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.22);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pl-icon svg{width:23px;height:23px}
+  .pl-title{display:block;font-size:18px;font-weight:700}
+  .pl-sub{display:block;font-size:14px;opacity:.92;margin-top:2px}
+  .page-listen.playing{background:var(--blue)}
+  .quick-links{display:grid;gap:10px;margin-top:12px}
+  .detail-link{
+    display:block;text-align:center;text-decoration:none;background:#fff;color:var(--blue);
+    border:1px solid var(--line);border-radius:16px;padding:13px 15px;font-size:17px;font-weight:700;
+    box-shadow:var(--shadow);
+  }
+  .stack{display:grid;gap:16px;margin-top:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .listen-btn{
+    display:inline-flex;align-items:center;margin:0 0 10px;border:1px solid var(--line);
+    background:var(--blue-soft);color:var(--blue);font:inherit;font-weight:700;font-size:14px;
+    border-radius:999px;padding:7px 14px;cursor:pointer;
+  }
+  .listen-btn.playing{background:var(--blue);color:#fff}
+  .section-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .sec-icon{
+    flex-shrink:0;width:28px;height:28px;margin-top:3px;color:var(--blue);
+    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .section-title{margin:0;font-size:25px;line-height:1.15;color:var(--blue)}
+  .section-copy{margin:0;color:var(--muted);font-size:16px}
+  .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+  .info-box{border-radius:18px;padding:14px 15px}
+  .info-box.teal{background:var(--teal-soft)}
+  .info-box.amber{background:var(--amber-soft)}
+  .info-box.blue{background:var(--blue-soft)}
+  .info-box.red{background:var(--red-soft)}
+  .info-box h3{margin:0 0 6px;font-size:18px;line-height:1.2}
+  .info-box p,.info-box ul{margin:0;font-size:15px}
+  .info-box ul{padding-left:18px}
+  .info-box li+li{margin-top:6px}
+  .info-box.wide{grid-column:1 / -1}
+  .gfr-scale{margin:16px 0 4px}
+  .gfr-bar{display:flex;height:22px;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .gfr-bar span{display:block;height:100%}
+  .gfr-ticks{position:relative;height:20px;margin-top:5px;font-size:13px;font-weight:700;color:var(--muted)}
+  .gfr-ticks span{position:absolute;top:0}
+  .gfr-legend{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .gfr-legend li{display:flex;align-items:center;gap:10px;font-size:15px}
+  .gfr-legend .dot{flex-shrink:0;width:16px;height:16px;border-radius:5px}
+  .ask-list{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+  .ask-list li{
+    background:var(--blue-soft);border-radius:14px;padding:12px 14px;
+    font-size:17px;font-weight:700;color:var(--blue);
+  }
+  .call-btn{
+    display:block;text-align:center;text-decoration:none;background:var(--blue);color:#fff;
+    padding:15px 16px;border-radius:18px;font-size:19px;font-weight:700;margin-top:14px;
+  }
+  .contact-note{margin:10px 0 0;color:var(--muted);font-size:15px}
+  .footer{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+  .footer a{color:var(--blue);font-weight:700}
+  .back-top{display:block;text-align:center;margin:18px 0 6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+  [data-lang]:not(body){display:none}
+  body[data-lang="en"] [data-lang="en"]{display:block}
+  body[data-lang="es"] [data-lang="es"]{display:block}
+  @media (max-width:760px){
+    .info-grid{grid-template-columns:1fr}
+    .info-box.wide{grid-column:auto}
+  }
+  @media (max-width:560px){
+    .hero-title{font-size:25px}
+    .call-btn{font-size:18px}
+  }
+</style>
+</head>
+<body data-lang="en">
+<script>try{var l=(navigator.language||navigator.userLanguage||"").toLowerCase();if(l.indexOf("es")===0)document.body.dataset.lang="es";}catch(e){}</script>
+<main class="page">
+  <section class="hero" id="top">
+    <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
+    <h1 class="hero-title" data-lang="en">Protect Your Kidneys</h1>
+    <h1 class="hero-title" data-lang="es">Proteja Sus Riñones</h1>
+    <p class="hero-copy" data-lang="en">For people with kidney disease who are not on dialysis.</p>
+    <p class="hero-copy" data-lang="es">Para personas con enfermedad del riñón que no están en diálisis.</p>
+    <div class="brand-meta">
+      <a class="brand-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
+      <span class="brand-chip">1400 S Grand Ave #800 · (213) 748-1414</span>
+    </div>
+    <p class="unit-badge" data-lang="en">General Kidney Care</p>
+    <p class="unit-badge" data-lang="es">Cuidado general del riñón</p>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="btn-en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" type="button">Español</button>
+    </div>
+  </section>
+
+  <button class="page-listen" id="page-listen" type="button" aria-label="Listen to this page">
+    <span class="pl-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+    <span class="pl-text">
+      <span class="pl-title">Listen to this page</span>
+      <span class="pl-sub">Tap to hear it read out loud</span>
+    </span>
+  </button>
+
+  <div class="quick-links">
+    <a class="detail-link" href="premier-office-topics.html" data-lang="en">More details: food, salt, potassium, urine protein, and medicines</a>
+    <a class="detail-link" href="premier-office-topics.html" data-lang="es">Más detalles: comida, sal, potasio, proteína en orina y medicinas</a>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg>
+        <h2 class="section-title" data-lang="en">What do your kidneys do?</h2>
+        <h2 class="section-title" data-lang="es">¿Qué hacen sus riñones?</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">Your kidneys work all day</h3>
+          <h3 data-lang="es">Sus riñones trabajan todo el día</h3>
+          <ul data-lang="en">
+            <li>They clean your blood</li>
+            <li>They remove extra water</li>
+            <li>They control blood pressure</li>
+            <li>They keep bones and blood strong</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Limpian su sangre</li>
+            <li>Sacan el agua que sobra</li>
+            <li>Controlan su presión</li>
+            <li>Mantienen fuertes huesos y sangre</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">What is kidney disease?</h3>
+          <h3 data-lang="es">¿Qué es la enfermedad renal crónica?</h3>
+          <ul data-lang="en">
+            <li>Your kidneys are not at full strength</li>
+            <li>Common causes: diabetes and high blood pressure</li>
+            <li>Most people feel fine until very late</li>
+            <li>Labs help us protect you early</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Sus riñones no están a toda su fuerza</li>
+            <li>Causas: diabetes y presión alta</li>
+            <li>Muchos se sienten bien hasta muy tarde</li>
+            <li>Los laboratorios ayudan a protegerlo temprano</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M12 15l4.5-3.5"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <h2 class="section-title" data-lang="en">Know your kidney number</h2>
+        <h2 class="section-title" data-lang="es">Conozca su número del riñón</h2>
+      </div>
+      <p class="section-copy" data-lang="en">Your blood test has a kidney number called GFR. It tells us how strong your kidneys are.</p>
+      <p class="section-copy" data-lang="es">Su análisis de sangre tiene un número del riñón llamado GFR. Nos dice qué tan fuertes están sus riñones.</p>
+      <div class="gfr-scale" aria-hidden="true">
+        <div class="gfr-bar">
+          <span style="width:15%;background:var(--red)"></span>
+          <span style="width:15%;background:#c9781f"></span>
+          <span style="width:30%;background:#d8a200"></span>
+          <span style="width:40%;background:var(--teal)"></span>
+        </div>
+        <div class="gfr-ticks">
+          <span style="left:0">0</span>
+          <span style="left:15%;transform:translateX(-50%)">15</span>
+          <span style="left:30%;transform:translateX(-50%)">30</span>
+          <span style="left:60%;transform:translateX(-50%)">60</span>
+          <span style="left:100%;transform:translateX(-100%)">100</span>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">What the number means</h3>
+          <h3 data-lang="es">Qué significa el número</h3>
+          <ul class="gfr-legend" data-lang="en">
+            <li><span class="dot" style="background:var(--teal)"></span>90 or higher = often normal, but urine protein still matters</li>
+            <li><span class="dot" style="background:#d8a200"></span>Under 60 for 3 months = kidney disease</li>
+            <li><span class="dot" style="background:#c9781f"></span>Under 30 = low kidney function - ask about planning</li>
+            <li><span class="dot" style="background:var(--red)"></span>Under 15 = very low kidney function</li>
+          </ul>
+          <ul class="gfr-legend" data-lang="es">
+            <li><span class="dot" style="background:var(--teal)"></span>90 o más = muchas veces normal, pero la proteína en orina importa</li>
+            <li><span class="dot" style="background:#d8a200"></span>Menos de 60 por 3 meses = enfermedad del riñón</li>
+            <li><span class="dot" style="background:#c9781f"></span>Menos de 30 = función baja del riñón - pregunte sobre planear</li>
+            <li><span class="dot" style="background:var(--red)"></span>Menos de 15 = función muy baja del riñón</li>
+          </ul>
+        </div>
+        <div class="info-box teal">
+          <h3 data-lang="en">Two numbers matter</h3>
+          <h3 data-lang="es">Dos números importan</h3>
+          <ul data-lang="en">
+            <li>GFR: kidney strength</li>
+            <li>Urine protein: kidney leak</li>
+            <li>Less protein in urine is better</li>
+            <li>Ask: "Do I have protein in my urine?"</li>
+          </ul>
+          <ul data-lang="es">
+            <li>GFR: fuerza del riñón</li>
+            <li>Proteína en orina: fuga del riñón</li>
+            <li>Menos proteína en la orina es mejor</li>
+            <li>Pregunte: "¿Tengo proteína en la orina?"</li>
+          </ul>
+        </div>
+      </div>
+      <a class="call-btn" style="background:var(--teal)" href="premier-advanced-ckd.html">
+        <span data-lang="en">Kidney number under 30? Learn about planning</span>
+        <span data-lang="es">¿Número del riñón menor de 30? Aprenda sobre planear</span>
+      </a>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h2 class="section-title" data-lang="en">How to protect your kidneys</h2>
+        <h2 class="section-title" data-lang="es">Cómo proteger sus riñones</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Do this every day</h3>
+          <h3 data-lang="es">Haga esto todos los días</h3>
+          <ul data-lang="en">
+            <li>Take your medicines - even if you feel fine</li>
+            <li>Control your blood pressure</li>
+            <li>Control your sugar if you have diabetes</li>
+            <li>Eat less salt</li>
+            <li>Do not smoke</li>
+            <li>Come to visits and labs</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Tome sus medicinas - aunque se sienta bien</li>
+            <li>Controle su presión</li>
+            <li>Controle su azúcar si tiene diabetes</li>
+            <li>Coma menos sal</li>
+            <li>No fume</li>
+            <li>Venga a sus citas y laboratorios</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Avoid these pain pills</h3>
+          <h3 data-lang="es">Evite estas pastillas para el dolor</h3>
+          <ul data-lang="en">
+            <li>Ibuprofen (Advil, Motrin)</li>
+            <li>Naproxen (Aleve)</li>
+            <li>They can hurt your kidneys</li>
+            <li>For pain: Tylenol is usually safer - ask us</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Ibuprofeno (Advil, Motrin)</li>
+            <li>Naproxeno (Aleve)</li>
+            <li>Pueden dañar sus riñones</li>
+            <li>Para dolor: Tylenol suele ser más seguro - pregúntenos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5C10.5 6.5 7.8 6.6 6.3 8.4c-1.4 1.8-1.2 4.9.2 7.4C7.5 17.6 8.9 19 10.2 19c.8 0 1.2-.4 1.8-.4s1 .4 1.8.4c1.3 0 2.7-1.4 3.7-3.2 1.4-2.5 1.6-5.6.2-7.4-1.5-1.8-4.2-1.9-5.7.1"/><path d="M12 8.5V5.2"/><path d="M12 6.4c1.1-1.5 2.9-1.3 3.9-.7-.2 1.5-1.7 2.5-3.3 2.1"/></svg>
+        <h2 class="section-title" data-lang="en">Food and medicine basics</h2>
+        <h2 class="section-title" data-lang="es">Comida y medicinas básicas</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Choose more often</h3>
+          <h3 data-lang="es">Escoja más seguido</h3>
+          <ul data-lang="en">
+            <li>Home-cooked food with little salt</li>
+            <li>Fresh fruits and vegetables</li>
+            <li>Chicken or fish</li>
+            <li>Corn tortillas, rice, beans</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Comida casera con poca sal</li>
+            <li>Frutas y verduras frescas</li>
+            <li>Pollo o pescado</li>
+            <li>Tortillas de maíz, arroz, frijoles</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Bring your pill bottles</h3>
+          <h3 data-lang="es">Traiga sus frascos de pastillas</h3>
+          <ul data-lang="en">
+            <li>Bring ALL pill bottles to every visit</li>
+            <li>Also vitamins and herbs</li>
+            <li>Call us if vomiting, diarrhea, or not drinking</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Traiga TODOS sus frascos a cada cita</li>
+            <li>También vitaminas y hierbas</li>
+            <li>Llámenos si vomita, tiene diarrea, o no puede tomar líquidos</li>
+          </ul>
+        </div>
+      </div>
+      <a class="call-btn" href="premier-office-topics.html">
+        <span data-lang="en">Learn more: salt, potassium and more</span>
+        <span data-lang="es">Aprenda más: sal, potasio y más</span>
+      </a>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18"/><path d="M7 8c0-2.5 2-4 5-4s5 1.5 5 4c0 4-5 4-5 8"/><path d="M8 16c1.2-1.2 2.5-1.8 4-1.8s2.8.6 4 1.8"/></svg>
+        <h2 class="section-title" data-lang="en">Ask us about genetic testing if...</h2>
+        <h2 class="section-title" data-lang="es">Pregunte sobre pruebas genéticas si...</h2>
+      </div>
+      <div class="info-box blue">
+        <ul data-lang="en">
+          <li>Kidney disease runs in your family</li>
+          <li>Kidney disease started at a young age</li>
+          <li>The cause of kidney disease is not clear</li>
+          <li>You have kidney cysts, blood in urine, or protein in urine</li>
+        </ul>
+        <ul data-lang="es">
+          <li>Hay enfermedad del riñón en su familia</li>
+          <li>Empezó a una edad joven</li>
+          <li>La causa no está clara</li>
+          <li>Tiene quistes en los riñones, sangre en la orina, o proteína en la orina</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-4 3v-3H4z"/><path d="M9.7 9a2.3 2.3 0 1 1 3 2.2c-.7.3-1.2.8-1.2 1.6"/><circle cx="11.5" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>
+        <h2 class="section-title" data-lang="en">Ask us at your visit</h2>
+        <h2 class="section-title" data-lang="es">Pregúntenos en su cita</h2>
+      </div>
+      <ul class="ask-list" data-lang="en">
+        <li>"What is my kidney number (GFR)?"</li>
+        <li>"Do I have protein in my urine?"</li>
+        <li>"What should my blood pressure be?"</li>
+        <li>"Should I ask about genetic testing?"</li>
+      </ul>
+      <ul class="ask-list" data-lang="es">
+        <li>"¿Cuál es mi número del riñón (GFR)?"</li>
+        <li>"¿Tengo proteína en la orina?"</li>
+        <li>"¿Cuál debe ser mi presión?"</li>
+        <li>"¿Debo preguntar sobre pruebas genéticas?"</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.2c.5 0 .9.3 1.1.8l1.2 3c.2.5.1 1-.3 1.4l-1.3 1.1c.9 1.9 2.5 3.5 4.4 4.4l1.1-1.3c.4-.4.9-.5 1.4-.3l3 1.2c.5.2.8.6.8 1.1v3c0 .8-.6 1.4-1.4 1.4C10.5 22.6 1.4 13.5 1.4 5.8c0-.8.6-1.4 1.4-1.4h3.8z"/></svg>
+        <h2 class="section-title" data-lang="en">Call our office if</h2>
+        <h2 class="section-title" data-lang="es">Llame a nuestra oficina si</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">Call for help</h3>
+          <h3 data-lang="es">Llame para ayuda</h3>
+          <ul data-lang="en">
+            <li>New swelling in legs or face</li>
+            <li>Blood pressure very high at home</li>
+            <li>You ran out of medicine</li>
+            <li>Vomiting or diarrhea over one day</li>
+            <li>Foamy, dark, or bloody urine</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Hinchazón nueva en piernas o cara</li>
+            <li>Presión muy alta en casa</li>
+            <li>Se quedó sin medicina</li>
+            <li>Vómito o diarrea más de un día</li>
+            <li>Orina con espuma, oscura o con sangre</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Go to the ER right away if</h3>
+          <h3 data-lang="es">Vaya a urgencias de inmediato si</h3>
+          <ul data-lang="en">
+            <li>Chest pain or trouble breathing</li>
+            <li>Very weak or confused</li>
+            <li>Cannot keep liquids down</li>
+            <li>You stop making urine</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Dolor de pecho o falta de aire</li>
+            <li>Muy débil o confundido</li>
+            <li>No retiene líquidos</li>
+            <li>Deja de orinar</li>
+          </ul>
+        </div>
+      </div>
+      <a class="call-btn" href="tel:+12137481414">
+        <span data-lang="en">Call Our Office</span>
+        <span data-lang="es">Llame a Nuestra Oficina</span>
+      </a>
+      <p class="contact-note" data-lang="en">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+      <p class="contact-note" data-lang="es">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+    </section>
+  </div>
+
+  <a class="back-top" href="#top" data-lang="en">Back to top</a>
+  <a class="back-top" href="#top" data-lang="es">Volver arriba</a>
+  <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+  <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de riñón. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+</main>
+<script>
+  var btnEn = document.getElementById('btn-en');
+  var btnEs = document.getElementById('btn-es');
+  var pageBtn = document.getElementById('page-listen');
+  var synthOK = ('speechSynthesis' in window);
+  var playing = false;
+  var activeListenButton = null;
+  var voicesCache = [];
+
+  function loadVoices() { try { voicesCache = window.speechSynthesis.getVoices() || []; } catch (e) { voicesCache = []; } }
+  if (synthOK) {
+    loadVoices();
+    try { window.speechSynthesis.addEventListener('voiceschanged', loadVoices); } catch (e) {}
+  }
+  function pickVoice(lang) {
+    var want = lang === 'es' ? 'es' : 'en';
+    var cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) === 0; });
+    return cands[0] || null;
+  }
+  function visibleLines(root) {
+    root = root || document;
+    return Array.prototype.slice.call(root.querySelectorAll('h2,h3,p,li'))
+      .filter(function (el) { return el.offsetParent !== null; })
+      .map(function (el) { return el.textContent.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean);
+  }
+  function setListenLabel(isPlaying) {
+    var lang = document.body.dataset.lang || 'en';
+    var title = pageBtn.querySelector('.pl-title');
+    var sub = pageBtn.querySelector('.pl-sub');
+    var icon = pageBtn.querySelector('.pl-icon');
+    if (isPlaying) {
+      title.textContent = lang === 'es' ? 'Detener' : 'Stop';
+      sub.textContent = lang === 'es' ? 'Tocando...' : 'Playing...';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="#fff"/></svg>';
+    } else {
+      title.textContent = lang === 'es' ? 'Escuchar esta página' : 'Listen to this page';
+      sub.textContent = lang === 'es' ? 'Toque para escucharlo en voz alta' : 'Tap to hear it read out loud';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
+    }
+  }
+  function stopSpeech() {
+    if (synthOK) window.speechSynthesis.cancel();
+    playing = false;
+    if (activeListenButton) activeListenButton.classList.remove('playing');
+    activeListenButton = null;
+    pageBtn.classList.remove('playing');
+    document.querySelectorAll('.listen-btn').forEach(function (b) { setSectionListenLabel(b, false); });
+    setListenLabel(false);
+  }
+  function setSectionListenLabel(btn, isPlaying) {
+    var lang = document.body.dataset.lang || 'en';
+    btn.textContent = isPlaying ? (lang === 'es' ? 'Detener' : 'Stop') : (lang === 'es' ? 'Escuchar esta sección' : 'Listen to this section');
+  }
+  function speakLines(lines, button) {
+    if (!lines.length) return;
+    stopSpeech();
+    var lang = document.body.dataset.lang || 'en';
+    var voice = pickVoice(lang);
+    playing = true;
+    activeListenButton = button || null;
+    if (button) {
+      button.classList.add('playing');
+      setSectionListenLabel(button, true);
+    } else {
+      pageBtn.classList.add('playing');
+      setListenLabel(true);
+    }
+    lines.forEach(function (line, i) {
+      var u = new SpeechSynthesisUtterance(/[.!?:;]$/.test(line) ? line : line + '.');
+      if (voice) u.voice = voice;
+      u.lang = (voice && voice.lang) ? voice.lang : (lang === 'es' ? 'es-MX' : 'en-US');
+      u.rate = 0.9;
+      if (i === lines.length - 1) u.onend = stopSpeech;
+      window.speechSynthesis.speak(u);
+    });
+  }
+  function setLanguage(lang) {
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    btnEn.classList.toggle('active', lang === 'en');
+    btnEs.classList.toggle('active', lang === 'es');
+    stopSpeech();
+    document.querySelectorAll('.listen-btn').forEach(function (b) { setSectionListenLabel(b, false); });
+  }
+  btnEn.addEventListener('click', function () { setLanguage('en'); });
+  btnEs.addEventListener('click', function () { setLanguage('es'); });
+
+  if (synthOK) {
+    document.querySelectorAll('.stack .card').forEach(function (card) {
+      var btn = document.createElement('button');
+      btn.className = 'listen-btn';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Listen to this section');
+      setSectionListenLabel(btn, false);
+      card.insertBefore(btn, card.firstElementChild);
+      btn.addEventListener('click', function () {
+        if (playing && activeListenButton === btn) { stopSpeech(); return; }
+        speakLines(visibleLines(card), btn);
+      });
+    });
+    pageBtn.addEventListener('click', function () {
+      if (playing) { stopSpeech(); return; }
+      speakLines(visibleLines(document.querySelector('.stack')), null);
+    });
+  } else if (pageBtn) {
+    pageBtn.style.display = 'none';
+  }
+  setLanguage(document.body.dataset.lang || 'en');
+</script>
+<script>
+  if (location.hostname === 'drjoco.github.io' || location.hostname === 'patients.premiernephrologyla.com') {
+    var gc = document.createElement('script');
+    gc.async = true;
+    gc.src = 'https://gc.zgo.at/count.js';
+    gc.setAttribute('data-goatcounter', 'https://drjoco.goatcounter.com/count');
+    document.body.appendChild(gc);
+  }
+</script>
+</body>
+</html>

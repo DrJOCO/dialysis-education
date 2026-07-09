@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Nephrology | Low Kidney Function Planning</title>
+<style>
+  :root{
+    --blue:#166C71;
+    --blue-soft:#e4f3f0;
+    --teal:#188F56;
+    --teal-soft:#e6f5ed;
+    --amber:#b66a16;
+    --amber-soft:#fff4e5;
+    --red:#b03f32;
+    --red-soft:#fce9e7;
+    --text:#243142;
+    --muted:#5d6b7b;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#d9e2ef;
+    --shadow:0 14px 36px rgba(22,108,113,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(24,143,86,.10), transparent 28%),
+      linear-gradient(180deg,#edf3fb 0%,#f8fafd 260px,var(--bg) 260px);
+    color:var(--text);
+    line-height:1.5;
+  }
+  .page{max-width:880px;margin:0 auto;padding:18px 14px 36px}
+  .hero{
+    background:linear-gradient(135deg,#166C71 0%,#1c6eb8 100%);
+    color:#fff;
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    padding:16px;
+  }
+  .brand{margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .brand a{color:#fff;text-decoration:none}
+  .hero-title{margin:6px 0 0;font-size:29px;line-height:1.15}
+  .hero-copy{margin:8px 0 0;font-size:17px;color:rgba(255,255,255,.92)}
+  .brand-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .brand-chip,.unit-badge{
+    display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);
+    color:#fff;text-decoration:none;font-size:12px;font-weight:700;
+  }
+  .lang-toggle{display:flex;gap:8px;margin-top:12px}
+  .lang-btn{
+    border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.14);color:#fff;
+    font:inherit;font-weight:700;border-radius:999px;padding:7px 13px;cursor:pointer;font-size:12px;
+  }
+  .lang-btn.active{background:#fff;color:var(--blue)}
+  .page-listen{
+    display:flex;align-items:center;gap:12px;width:100%;margin-top:16px;
+    background:var(--teal);color:#fff;border:none;border-radius:var(--radius);
+    padding:14px 16px;font:inherit;cursor:pointer;text-align:left;box-shadow:var(--shadow);
+  }
+  .pl-icon{
+    flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.22);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pl-icon svg{width:23px;height:23px}
+  .pl-title{display:block;font-size:18px;font-weight:700}
+  .pl-sub{display:block;font-size:14px;opacity:.92;margin-top:2px}
+  .page-listen.playing{background:var(--blue)}
+  .quick-links{display:grid;gap:10px;margin-top:12px}
+  .detail-link{
+    display:block;text-align:center;text-decoration:none;background:#fff;color:var(--blue);
+    border:1px solid var(--line);border-radius:16px;padding:13px 15px;font-size:17px;font-weight:700;
+    box-shadow:var(--shadow);
+  }
+  .stack{display:grid;gap:16px;margin-top:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  .listen-btn{
+    display:inline-flex;align-items:center;margin:0 0 10px;border:1px solid var(--line);
+    background:var(--blue-soft);color:var(--blue);font:inherit;font-weight:700;font-size:14px;
+    border-radius:999px;padding:7px 14px;cursor:pointer;
+  }
+  .listen-btn.playing{background:var(--blue);color:#fff}
+  .section-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .sec-icon{
+    flex-shrink:0;width:28px;height:28px;margin-top:3px;color:var(--blue);
+    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .section-title{margin:0;font-size:25px;line-height:1.15;color:var(--blue)}
+  .section-copy{margin:0;color:var(--muted);font-size:16px}
+  .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+  .info-box{border-radius:18px;padding:14px 15px}
+  .info-box.teal{background:var(--teal-soft)}
+  .info-box.amber{background:var(--amber-soft)}
+  .info-box.blue{background:var(--blue-soft)}
+  .info-box.red{background:var(--red-soft)}
+  .info-box h3{margin:0 0 6px;font-size:18px;line-height:1.2}
+  .info-box p,.info-box ul{margin:0;font-size:15px}
+  .info-box ul{padding-left:18px}
+  .info-box li+li{margin-top:6px}
+  .info-box.wide{grid-column:1 / -1}
+  .ask-list{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+  .ask-list li{
+    background:var(--blue-soft);border-radius:14px;padding:12px 14px;
+    font-size:17px;font-weight:700;color:var(--blue);
+  }
+  .call-btn{
+    display:block;text-align:center;text-decoration:none;background:var(--blue);color:#fff;
+    padding:15px 16px;border-radius:18px;font-size:19px;font-weight:700;margin-top:14px;
+  }
+  .contact-note{margin:10px 0 0;color:var(--muted);font-size:15px}
+  .footer{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+  .footer a{color:var(--blue);font-weight:700}
+  .back-top{display:block;text-align:center;margin:18px 0 6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+  [data-lang]:not(body){display:none}
+  body[data-lang="en"] [data-lang="en"]{display:block}
+  body[data-lang="es"] [data-lang="es"]{display:block}
+  @media (max-width:760px){
+    .info-grid{grid-template-columns:1fr}
+    .info-box.wide{grid-column:auto}
+  }
+  @media (max-width:560px){
+    .hero-title{font-size:25px}
+    .call-btn{font-size:18px}
+  }
+</style>
+</head>
+<body data-lang="en">
+<script>try{var l=(navigator.language||navigator.userLanguage||"").toLowerCase();if(l.indexOf("es")===0)document.body.dataset.lang="es";}catch(e){}</script>
+<main class="page">
+  <section class="hero" id="top">
+    <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
+    <h1 class="hero-title" data-lang="en">Low Kidney Function: Plan Early</h1>
+    <h1 class="hero-title" data-lang="es">Función Baja del Riñón: Planee Temprano</h1>
+    <p class="hero-copy" data-lang="en">For people with low kidney function who need to learn their choices early.</p>
+    <p class="hero-copy" data-lang="es">Para personas con función baja del riñón que necesitan planear temprano.</p>
+    <div class="brand-meta">
+      <a class="brand-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
+      <span class="brand-chip">1400 S Grand Ave #800 · (213) 748-1414</span>
+    </div>
+    <p class="unit-badge" data-lang="en">Learn Your Kidney Choices</p>
+    <p class="unit-badge" data-lang="es">Aprenda sus opciones del riñón</p>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="btn-en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" type="button">Español</button>
+    </div>
+  </section>
+
+  <button class="page-listen" id="page-listen" type="button" aria-label="Listen to this page">
+    <span class="pl-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+    <span class="pl-text">
+      <span class="pl-title">Listen to this page</span>
+      <span class="pl-sub">Tap to hear it read out loud</span>
+    </span>
+  </button>
+
+  <div class="quick-links">
+    <a class="detail-link" href="premier-office-topics.html" data-lang="en">More details: food, salt, potassium, urine protein, and medicines</a>
+    <a class="detail-link" href="premier-office-topics.html" data-lang="es">Más detalles: comida, sal, potasio, proteína en orina y medicinas</a>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M12 15l4.5-3.5"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <h2 class="section-title" data-lang="en">When is kidney function very low?</h2>
+        <h2 class="section-title" data-lang="es">¿Cuándo está muy baja la función del riñón?</h2>
+      </div>
+      <p class="section-copy" data-lang="en">GFR is your kidney number. If it is under 30, kidney function is very low. This does not mean dialysis starts now. It means planning should start.</p>
+      <p class="section-copy" data-lang="es">GFR es su número del riñón. Si está bajo de 30, la función del riñón está muy baja. No significa que la diálisis empieza ahora. Significa que debe empezar el plan.</p>
+      <div class="info-grid">
+        <div class="info-box amber">
+          <h3 data-lang="en">Kidney number under 30</h3>
+          <h3 data-lang="es">Número del riñón menor de 30</h3>
+          <ul data-lang="en">
+            <li>Learn your options</li>
+            <li>Keep protecting your kidneys</li>
+            <li>Talk about transplant early</li>
+            <li>Ask what symptoms to watch for</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Conozca sus opciones</li>
+            <li>Siga protegiendo sus riñones</li>
+            <li>Hable temprano sobre trasplante</li>
+            <li>Pregunte qué síntomas vigilar</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Kidney number under 20 or 15</h3>
+          <h3 data-lang="es">Número del riñón menor de 20 o 15</h3>
+          <ul data-lang="en">
+            <li>Planning becomes more urgent</li>
+            <li>You may be able to get on the transplant list before dialysis</li>
+            <li>You may need a plan for a tube or arm surgery</li>
+            <li>Dialysis depends on symptoms, labs, and your health</li>
+          </ul>
+          <ul data-lang="es">
+            <li>El plan se vuelve más urgente</li>
+            <li>Puede entrar a la lista de trasplante antes de diálisis</li>
+            <li>Puede necesitar un plan para un tubo o cirugía del brazo</li>
+            <li>La diálisis depende de síntomas, laboratorios y su salud</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/></svg>
+        <h2 class="section-title" data-lang="en">Why plan early?</h2>
+        <h2 class="section-title" data-lang="es">¿Por qué planear temprano?</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Planning gives you choices</h3>
+          <h3 data-lang="es">Planear le da opciones</h3>
+          <ul data-lang="en">
+            <li>Time to learn at home, not in an emergency</li>
+            <li>Time to ask family for support</li>
+            <li>Time to choose home dialysis, center dialysis, transplant, or care without dialysis</li>
+            <li>Time to avoid a rushed hospital start</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Tiempo para aprender, no en una emergencia</li>
+            <li>Tiempo para pedir apoyo a su familia</li>
+            <li>Tiempo para escoger diálisis en casa, diálisis en centro, trasplante, o cuidado sin diálisis</li>
+            <li>Tiempo para evitar empezar con prisa en el hospital</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Ask about learning your choices</h3>
+          <h3 data-lang="es">Pregunte sobre aprender sus opciones</h3>
+          <ul data-lang="en">
+            <li>We can refer you when it is time</li>
+            <li>You do not need to call another office yourself</li>
+            <li>Bring a family member if you want</li>
+            <li>Write down your questions before the visit</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Podemos referirlo cuando sea tiempo</li>
+            <li>No necesita llamar a otra oficina usted mismo</li>
+            <li>Traiga a un familiar si quiere</li>
+            <li>Escriba sus preguntas antes de la cita</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8"/><path d="M10 3v6l-4.5 8A3 3 0 0 0 8.1 21h7.8a3 3 0 0 0 2.6-4L14 9V3"/><path d="M8 15h8"/></svg>
+        <h2 class="section-title" data-lang="en">Problems we can treat before dialysis</h2>
+        <h2 class="section-title" data-lang="es">Problemas que podemos tratar antes de diálisis</h2>
+      </div>
+      <p class="section-copy" data-lang="en">When kidneys are very weak, acid, low blood, potassium, and swelling can become problems. Treating these can help you feel better and stay safer.</p>
+      <p class="section-copy" data-lang="es">Cuando los riñones están muy débiles, el ácido, la sangre baja, el potasio y la hinchazón pueden ser problemas. Tratarlos puede ayudarle a sentirse mejor y estar más seguro.</p>
+      <div class="info-grid">
+        <div class="info-box amber">
+          <h3 data-lang="en">Acid number</h3>
+          <h3 data-lang="es">Número del ácido</h3>
+          <ul data-lang="en">
+            <li>We check the acid number, called bicarbonate or CO2</li>
+            <li>If it is low, acid can build up in your body</li>
+            <li>Sodium bicarbonate can help if we prescribe it</li>
+            <li>Do not start it on your own - it has sodium</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Revisamos el número del ácido, llamado bicarbonato o CO2</li>
+            <li>Si está bajo, puede acumularse ácido en el cuerpo</li>
+            <li>El bicarbonato de sodio puede ayudar si lo recetamos</li>
+            <li>No lo empiece por su cuenta - tiene sodio</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Low blood count (anemia)</h3>
+          <h3 data-lang="es">Sangre baja (anemia)</h3>
+          <ul data-lang="en">
+            <li>Kidney disease can make your blood count low</li>
+            <li>We check hemoglobin and iron levels</li>
+            <li>You may need iron pills or iron by vein</li>
+            <li>Some people need shots called ESA to help make blood</li>
+          </ul>
+          <ul data-lang="es">
+            <li>La enfermedad renal puede bajar la sangre</li>
+            <li>Revisamos hemoglobina y niveles de hierro</li>
+            <li>Puede necesitar hierro en pastillas o por vena</li>
+            <li>Algunas personas necesitan inyecciones llamadas ESA para hacer sangre</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">High potassium</h3>
+          <h3 data-lang="es">Potasio alto</h3>
+          <ul data-lang="en">
+            <li>High potassium can affect your heart</li>
+            <li>We check potassium on blood tests</li>
+            <li>You may need food changes or medicine to lower potassium</li>
+            <li>Call us before stopping heart or blood pressure medicines</li>
+          </ul>
+          <ul data-lang="es">
+            <li>El potasio alto puede afectar el corazón</li>
+            <li>Revisamos el potasio en análisis de sangre</li>
+            <li>Puede necesitar cambios en la comida o medicina para bajar potasio</li>
+            <li>Llámenos antes de parar medicinas del corazón o la presión</li>
+          </ul>
+        </div>
+        <div class="info-box teal">
+          <h3 data-lang="en">Swelling and fluid</h3>
+          <h3 data-lang="es">Hinchazón y líquido</h3>
+          <ul data-lang="en">
+            <li>Kidney disease can cause leg, belly, or face swelling</li>
+            <li>Less salt helps your body hold less water</li>
+            <li>Some people need water pills to help remove extra water</li>
+            <li>Call right away for swelling with trouble breathing</li>
+          </ul>
+          <ul data-lang="es">
+            <li>La enfermedad renal puede causar hinchazón en piernas, abdomen o cara</li>
+            <li>Menos sal ayuda a retener menos agua</li>
+            <li>Algunas personas necesitan pastillas de agua para sacar líquido de más</li>
+            <li>Llame de inmediato si tiene hinchazón con falta de aire</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 5v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V8z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h2 class="section-title" data-lang="en">Kidney transplant</h2>
+        <h2 class="section-title" data-lang="es">Trasplante de riñón</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Best option for many people</h3>
+          <h3 data-lang="es">La mejor opción para muchas personas</h3>
+          <ul data-lang="en">
+            <li>A new kidney from a donor</li>
+            <li>No dialysis while it works</li>
+            <li>You may get on the list before dialysis starts</li>
+            <li>A family member or friend may be able to donate</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Un riñón nuevo de un donante</li>
+            <li>Sin diálisis mientras funciona</li>
+            <li>Puede entrar a la lista antes de empezar diálisis</li>
+            <li>Un familiar o amigo puede donar</li>
+          </ul>
+        </div>
+        <div class="info-box amber">
+          <h3 data-lang="en">Ask early</h3>
+          <h3 data-lang="es">Pregunte temprano</h3>
+          <ul data-lang="en">
+            <li>"Can I get a kidney transplant?"</li>
+            <li>"Can I be referred before dialysis?"</li>
+            <li>"Can someone in my family donate?"</li>
+          </ul>
+          <ul data-lang="es">
+            <li>"¿Puedo recibir un trasplante de riñón?"</li>
+            <li>"¿Me pueden referir antes de diálisis?"</li>
+            <li>"¿Alguien de mi familia puede donar?"</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/><circle cx="12" cy="12" r="8"/></svg>
+        <h2 class="section-title" data-lang="en">Dialysis choices if you need them</h2>
+        <h2 class="section-title" data-lang="es">Opciones de diálisis si las necesita</h2>
+      </div>
+      <p class="section-copy" data-lang="en">Not everyone starts dialysis at the same kidney number. If dialysis becomes needed, these are common choices.</p>
+      <p class="section-copy" data-lang="es">No todos empiezan diálisis con el mismo número del riñón. Si la necesita, estas son opciones comunes.</p>
+      <div class="info-grid">
+        <div class="info-box teal">
+          <h3 data-lang="en">Peritoneal dialysis (PD) - at home</h3>
+          <h3 data-lang="es">Diálisis peritoneal (PD) - en casa</h3>
+          <ul data-lang="en">
+            <li>At home, often while you sleep</li>
+            <li>No needles for the treatment</li>
+            <li>A soft tube is placed in your belly</li>
+            <li>More flexible for work and family</li>
+          </ul>
+          <ul data-lang="es">
+            <li>En casa, muchas veces mientras duerme</li>
+            <li>Sin agujas para el tratamiento</li>
+            <li>Un tubito suave se coloca en el abdomen</li>
+            <li>Más flexible para trabajo y familia</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Hemodialysis (HD) - at a center</h3>
+          <h3 data-lang="es">Hemodiálisis (HD) - en un centro</h3>
+          <ul data-lang="en">
+            <li>At a center, usually 3 times a week</li>
+            <li>About 4 hours each visit</li>
+            <li>Usually uses needles in your arm</li>
+            <li>The dialysis team does the treatment</li>
+          </ul>
+          <ul data-lang="es">
+            <li>En un centro, usualmente 3 veces por semana</li>
+            <li>Unas 4 horas cada visita</li>
+            <li>Usualmente usa agujas en el brazo</li>
+            <li>El equipo de diálisis hace el tratamiento</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12h10"/><path d="M12 7v10"/><path d="M5 5h14v14H5z"/></svg>
+        <h2 class="section-title" data-lang="en">Plan for a dialysis tube or arm surgery</h2>
+        <h2 class="section-title" data-lang="es">Plan para un tubo o cirugía del brazo</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box amber">
+          <h3 data-lang="en">Belly tube for home dialysis</h3>
+          <h3 data-lang="es">Tubo en el abdomen para diálisis en casa</h3>
+          <ul data-lang="en">
+            <li>A soft tube in the belly</li>
+            <li>Placed before PD starts</li>
+            <li>Needs healing and training time</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Un tubito suave en el abdomen</li>
+            <li>Se coloca antes de empezar PD</li>
+            <li>Necesita tiempo para sanar y aprender</li>
+          </ul>
+        </div>
+        <div class="info-box blue">
+          <h3 data-lang="en">Arm surgery for center dialysis</h3>
+          <h3 data-lang="es">Cirugía del brazo para diálisis en centro</h3>
+          <ul data-lang="en">
+            <li>Surgery in the arm</li>
+            <li>Usually safer than an emergency tube in the neck</li>
+            <li>Needs time to be ready</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Cirugía en el brazo</li>
+            <li>Usualmente más seguro que un tubo de emergencia en el cuello</li>
+            <li>Necesita tiempo para estar listo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-4 3v-3H4z"/><path d="M9.7 9a2.3 2.3 0 1 1 3 2.2c-.7.3-1.2.8-1.2 1.6"/><circle cx="11.5" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>
+        <h2 class="section-title" data-lang="en">Ask us at your visit</h2>
+        <h2 class="section-title" data-lang="es">Pregúntenos en su cita</h2>
+      </div>
+      <ul class="ask-list" data-lang="en">
+        <li>"Is it time to learn kidney options?"</li>
+        <li>"Is my bicarbonate or CO2 level low?"</li>
+        <li>"Am I anemic? Do I need iron or ESA?"</li>
+        <li>"Is my potassium too high?"</li>
+        <li>"Is my swelling from extra fluid?"</li>
+        <li>"Can I get a kidney transplant?"</li>
+        <li>"Is home dialysis (PD) right for me?"</li>
+        <li>"Do I need a plan for a tube or arm surgery?"</li>
+        <li>"What symptoms should make me call?"</li>
+      </ul>
+      <ul class="ask-list" data-lang="es">
+        <li>"¿Es tiempo de aprender mis opciones?"</li>
+        <li>"¿Está bajo mi bicarbonato o CO2?"</li>
+        <li>"¿Tengo anemia? ¿Necesito hierro o ESA?"</li>
+        <li>"¿Está muy alto mi potasio?"</li>
+        <li>"¿Mi hinchazón es por líquido de más?"</li>
+        <li>"¿Puedo recibir un trasplante de riñón?"</li>
+        <li>"¿La diálisis en casa (PD) es buena para mí?"</li>
+        <li>"¿Necesito un plan para un tubo o cirugía del brazo?"</li>
+        <li>"¿Qué síntomas deben hacerme llamar?"</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.2c.5 0 .9.3 1.1.8l1.2 3c.2.5.1 1-.3 1.4l-1.3 1.1c.9 1.9 2.5 3.5 4.4 4.4l1.1-1.3c.4-.4.9-.5 1.4-.3l3 1.2c.5.2.8.6.8 1.1v3c0 .8-.6 1.4-1.4 1.4C10.5 22.6 1.4 13.5 1.4 5.8c0-.8.6-1.4 1.4-1.4h3.8z"/></svg>
+        <h2 class="section-title" data-lang="en">Call our office if</h2>
+        <h2 class="section-title" data-lang="es">Llame a nuestra oficina si</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-box blue">
+          <h3 data-lang="en">Call for help</h3>
+          <h3 data-lang="es">Llame para ayuda</h3>
+          <ul data-lang="en">
+            <li>New swelling in legs or face</li>
+            <li>Blood pressure very high at home</li>
+            <li>You ran out of medicine</li>
+            <li>Vomiting or diarrhea over one day</li>
+            <li>Food tastes very bad or you cannot eat</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Hinchazón nueva en piernas o cara</li>
+            <li>Presión muy alta en casa</li>
+            <li>Se quedó sin medicina</li>
+            <li>Vómito o diarrea más de un día</li>
+            <li>La comida sabe muy mal o no puede comer</li>
+          </ul>
+        </div>
+        <div class="info-box red">
+          <h3 data-lang="en">Go to the ER right away if</h3>
+          <h3 data-lang="es">Vaya a urgencias de inmediato si</h3>
+          <ul data-lang="en">
+            <li>Chest pain or trouble breathing</li>
+            <li>Very weak or confused</li>
+            <li>Cannot keep liquids down</li>
+            <li>You stop making urine</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Dolor de pecho o falta de aire</li>
+            <li>Muy débil o confundido</li>
+            <li>No retiene líquidos</li>
+            <li>Deja de orinar</li>
+          </ul>
+        </div>
+      </div>
+      <a class="call-btn" href="tel:+12137481414">
+        <span data-lang="en">Call Our Office</span>
+        <span data-lang="es">Llame a Nuestra Oficina</span>
+      </a>
+      <p class="contact-note" data-lang="en">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+      <p class="contact-note" data-lang="es">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
+    </section>
+  </div>
+
+  <a class="back-top" href="#top" data-lang="en">Back to top</a>
+  <a class="back-top" href="#top" data-lang="es">Volver arriba</a>
+  <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+  <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de riñón. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
+</main>
+<script>
+  var btnEn = document.getElementById('btn-en');
+  var btnEs = document.getElementById('btn-es');
+  var pageBtn = document.getElementById('page-listen');
+  var synthOK = ('speechSynthesis' in window);
+  var playing = false;
+  var activeListenButton = null;
+  var voicesCache = [];
+
+  function loadVoices() { try { voicesCache = window.speechSynthesis.getVoices() || []; } catch (e) { voicesCache = []; } }
+  if (synthOK) {
+    loadVoices();
+    try { window.speechSynthesis.addEventListener('voiceschanged', loadVoices); } catch (e) {}
+  }
+  function pickVoice(lang) {
+    var want = lang === 'es' ? 'es' : 'en';
+    var cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) === 0; });
+    return cands[0] || null;
+  }
+  function visibleLines(root) {
+    root = root || document;
+    return Array.prototype.slice.call(root.querySelectorAll('h2,h3,p,li'))
+      .filter(function (el) { return el.offsetParent !== null; })
+      .map(function (el) { return el.textContent.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean);
+  }
+  function setListenLabel(isPlaying) {
+    var lang = document.body.dataset.lang || 'en';
+    var title = pageBtn.querySelector('.pl-title');
+    var sub = pageBtn.querySelector('.pl-sub');
+    var icon = pageBtn.querySelector('.pl-icon');
+    if (isPlaying) {
+      title.textContent = lang === 'es' ? 'Detener' : 'Stop';
+      sub.textContent = lang === 'es' ? 'Tocando...' : 'Playing...';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="#fff"/></svg>';
+    } else {
+      title.textContent = lang === 'es' ? 'Escuchar esta página' : 'Listen to this page';
+      sub.textContent = lang === 'es' ? 'Toque para escucharlo en voz alta' : 'Tap to hear it read out loud';
+      icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
+    }
+  }
+  function stopSpeech() {
+    if (synthOK) window.speechSynthesis.cancel();
+    playing = false;
+    if (activeListenButton) activeListenButton.classList.remove('playing');
+    activeListenButton = null;
+    pageBtn.classList.remove('playing');
+    document.querySelectorAll('.listen-btn').forEach(function (b) { setSectionListenLabel(b, false); });
+    setListenLabel(false);
+  }
+  function setSectionListenLabel(btn, isPlaying) {
+    var lang = document.body.dataset.lang || 'en';
+    btn.textContent = isPlaying ? (lang === 'es' ? 'Detener' : 'Stop') : (lang === 'es' ? 'Escuchar esta sección' : 'Listen to this section');
+  }
+  function speakLines(lines, button) {
+    if (!lines.length) return;
+    stopSpeech();
+    var lang = document.body.dataset.lang || 'en';
+    var voice = pickVoice(lang);
+    playing = true;
+    activeListenButton = button || null;
+    if (button) {
+      button.classList.add('playing');
+      setSectionListenLabel(button, true);
+    } else {
+      pageBtn.classList.add('playing');
+      setListenLabel(true);
+    }
+    lines.forEach(function (line, i) {
+      var u = new SpeechSynthesisUtterance(/[.!?:;]$/.test(line) ? line : line + '.');
+      if (voice) u.voice = voice;
+      u.lang = (voice && voice.lang) ? voice.lang : (lang === 'es' ? 'es-MX' : 'en-US');
+      u.rate = 0.9;
+      if (i === lines.length - 1) u.onend = stopSpeech;
+      window.speechSynthesis.speak(u);
+    });
+  }
+  function setLanguage(lang) {
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    btnEn.classList.toggle('active', lang === 'en');
+    btnEs.classList.toggle('active', lang === 'es');
+    stopSpeech();
+    document.querySelectorAll('.listen-btn').forEach(function (b) { setSectionListenLabel(b, false); });
+  }
+  btnEn.addEventListener('click', function () { setLanguage('en'); });
+  btnEs.addEventListener('click', function () { setLanguage('es'); });
+
+  if (synthOK) {
+    document.querySelectorAll('.stack .card').forEach(function (card) {
+      var btn = document.createElement('button');
+      btn.className = 'listen-btn';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Listen to this section');
+      setSectionListenLabel(btn, false);
+      card.insertBefore(btn, card.firstElementChild);
+      btn.addEventListener('click', function () {
+        if (playing && activeListenButton === btn) { stopSpeech(); return; }
+        speakLines(visibleLines(card), btn);
+      });
+    });
+    pageBtn.addEventListener('click', function () {
+      if (playing) { stopSpeech(); return; }
+      speakLines(visibleLines(document.querySelector('.stack')), null);
+    });
+  } else if (pageBtn) {
+    pageBtn.style.display = 'none';
+  }
+  setLanguage(document.body.dataset.lang || 'en');
+</script>
+<script>
+  if (location.hostname === 'drjoco.github.io' || location.hostname === 'patients.premiernephrologyla.com') {
+    var gc = document.createElement('script');
+    gc.async = true;
+    gc.src = 'https://gc.zgo.at/count.js';
+    gc.setAttribute('data-goatcounter', 'https://drjoco.goatcounter.com/count');
+    document.body.appendChild(gc);
+  }
+</script>
+</body>
+</html>

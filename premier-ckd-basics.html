@@ -90,6 +90,23 @@
   }
   .section-title{margin:0;font-size:25px;line-height:1.15;color:var(--blue)}
   .section-copy{margin:0;color:var(--muted);font-size:16px}
+  .team-grid{display:grid;gap:12px;margin-top:16px}
+  .provider-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .team-member{display:flex;align-items:flex-start;gap:14px;border-radius:18px;padding:14px;min-height:112px}
+  .team-member.doctor{background:var(--blue-soft)}
+  .team-member.np{background:var(--teal-soft)}
+  .provider-photo-wrap{position:relative;flex-shrink:0}
+  .provider-photo,.provider-fallback{
+    width:78px;height:78px;border-radius:50%;border:3px solid #fff;box-shadow:0 8px 18px rgba(22,108,113,.12)
+  }
+  .provider-photo{object-fit:cover;display:block}
+  .provider-fallback{
+    display:none;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:24px
+  }
+  .team-member.doctor .provider-fallback{background:var(--blue)}
+  .team-member.np .provider-fallback{background:var(--teal)}
+  .member-role{margin:0;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .member-name{margin:4px 0 0;font-size:20px;line-height:1.15}
   .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
   .info-box{border-radius:18px;padding:14px 15px}
   .info-box.teal{background:var(--teal-soft)}
@@ -126,7 +143,7 @@
   body[data-lang="en"] [data-lang="en"]{display:block}
   body[data-lang="es"] [data-lang="es"]{display:block}
   @media (max-width:760px){
-    .info-grid{grid-template-columns:1fr}
+    .info-grid,.provider-grid{grid-template-columns:1fr}
     .info-box.wide{grid-column:auto}
   }
   @media (max-width:560px){
@@ -170,6 +187,84 @@
   </div>
 
   <div class="stack">
+    <section class="card">
+      <div class="section-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+        <h2 class="section-title" data-lang="en">Your Premier Nephrology kidney team</h2>
+        <h2 class="section-title" data-lang="es">Su equipo de riñón de Premier Nephrology</h2>
+      </div>
+      <p class="section-copy" data-lang="en">You may see different members of this team in the office, hospital, or dialysis unit.</p>
+      <p class="section-copy" data-lang="es">Puede ver a diferentes miembros de este equipo en la oficina, el hospital o la unidad de diálisis.</p>
+      <div class="team-grid provider-grid">
+        <article class="team-member doctor">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/bruce-greenfield.jpg" alt="Bruce Greenfield, MD" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">BG</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Kidney Doctor</p>
+            <p class="member-role" data-lang="es">Médico de Riñón</p>
+            <h3 class="member-name">Bruce Greenfield, MD</h3>
+          </div>
+        </article>
+        <article class="team-member doctor">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/leon-rovner.jpg" alt="Leon Rovner, MD" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">LR</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Kidney Doctor</p>
+            <p class="member-role" data-lang="es">Médico de Riñón</p>
+            <h3 class="member-name">Leon Rovner, MD</h3>
+          </div>
+        </article>
+        <article class="team-member doctor">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/luani-lee.jpg" alt="Luani Lee, MD" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">LL</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Kidney Doctor</p>
+            <p class="member-role" data-lang="es">Médico de Riñón</p>
+            <h3 class="member-name">Luani Lee, MD</h3>
+          </div>
+        </article>
+        <article class="team-member doctor">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/lin-wang.jpg" alt="Lin Wang, D.O." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">LW</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Kidney Doctor</p>
+            <p class="member-role" data-lang="es">Médico de Riñón</p>
+            <h3 class="member-name">Lin Wang, D.O.</h3>
+          </div>
+        </article>
+        <article class="team-member doctor">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/dr-cheng.jpg" alt="Jonathan Cheng, MD, MPH" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">JC</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Kidney Doctor</p>
+            <p class="member-role" data-lang="es">Médico de Riñón</p>
+            <h3 class="member-name">Jonathan Cheng, MD, MPH</h3>
+          </div>
+        </article>
+        <article class="team-member np">
+          <div class="provider-photo-wrap">
+            <img class="provider-photo" src="https://www.premiernephrologyla.com/wp-content/uploads/Yecenia-Cueva.jpg" alt="Yecenia Cueva, FNP-BC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="provider-fallback">YC</div>
+          </div>
+          <div>
+            <p class="member-role" data-lang="en">Nurse Practitioner</p>
+            <p class="member-role" data-lang="es">Enfermera Practicante</p>
+            <h3 class="member-name">Yecenia Cueva, FNP-BC</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="card">
       <div class="section-head">
         <svg class="sec-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg>

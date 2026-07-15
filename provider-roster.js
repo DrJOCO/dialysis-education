@@ -6,37 +6,37 @@
     {
       name: 'Bruce Greenfield, MD',
       initials: 'BG',
-      photo: 'https://www.premiernephrologyla.com/wp-content/uploads/bruce-greenfield.jpg',
+      photo: 'Headshots/ProfilePhoto_Greenfield.jpeg',
       type: 'doctor'
     },
     {
       name: 'Leon Rovner, MD',
       initials: 'LR',
-      photo: 'https://www.premiernephrologyla.com/wp-content/uploads/leon-rovner.jpg',
+      photo: 'Headshots/ProfilePhoto_Rovner.jpeg',
       type: 'doctor'
     },
     {
       name: 'Luani Lee, MD',
       initials: 'LL',
-      photo: 'https://www.premiernephrologyla.com/wp-content/uploads/luani-lee.jpg',
+      photo: 'Headshots/ProfilePhoto_Lee.jpeg',
       type: 'doctor'
     },
     {
       name: 'Lin Wang, D.O.',
       initials: 'LW',
-      photo: 'https://www.premiernephrologyla.com/wp-content/uploads/lin-wang.jpg',
+      photo: 'Headshots/ProfilePhoto_Wang.jpeg',
       type: 'doctor'
     },
     {
       name: 'Jonathan Cheng, MD, MPH',
       initials: 'JC',
-      photo: 'https://www.premiernephrologyla.com/wp-content/uploads/dr-cheng.jpg',
+      photo: 'Headshots/ProfilePhoto_Cheng.jpeg',
       type: 'doctor'
     },
     {
       name: 'Yecenia Cueva, FNP-BC',
       initials: 'YC',
-      photo: 'https://www.premiernephrologyla.com/wp-content/uploads/Yecenia-Cueva.jpg',
+      photo: 'Headshots/ProfilePhoto_Yecenia.jpeg',
       type: 'np'
     }
   ];

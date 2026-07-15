@@ -7,6 +7,8 @@
 
 .provider-roster .team-member {
   align-items: flex-start;
+  background: #fff8f3;
+  border: 1px solid #efcfbd;
   border-radius: 18px;
   display: flex;
   gap: 14px;
@@ -14,15 +16,14 @@
   padding: 14px;
 }
 
-.provider-roster .team-member.doctor { background: var(--blue-soft); }
-.provider-roster .team-member.np { background: var(--teal-soft); }
+.provider-roster .sec-icon { color: #c65f32; }
 .provider-roster .provider-photo-wrap { flex-shrink: 0; position: relative; }
 
 .provider-roster .provider-photo,
 .provider-roster .provider-fallback {
-  border: 3px solid #fff;
+  border: 3px solid #fff4ec;
   border-radius: 50%;
-  box-shadow: 0 8px 18px rgba(22, 108, 113, .12);
+  box-shadow: 0 8px 18px rgba(198, 95, 50, .20);
   height: 78px;
   width: 78px;
 }
@@ -42,7 +43,7 @@
 .provider-roster .team-member.np .provider-fallback { background: var(--teal); }
 
 .provider-roster .member-role {
-  color: var(--muted);
+  color: #a84f2f;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: .04em;

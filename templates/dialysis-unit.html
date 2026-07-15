@@ -64,11 +64,10 @@
   .team-grid,.binder-grid,.diet-grid,.alert-grid{display:grid;gap:12px;margin-top:16px}
   .team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .team-member{display:flex;align-items:center;gap:14px;border-radius:18px;padding:14px}
-  .team-member.doctor{background:var(--blue-soft)}
-  .team-member.app{background:var(--teal-soft)}
+  .team-member.doctor,.team-member.app{background:#fff8f3;border:1px solid #efcfbd}
   .provider-photo-wrap{position:relative;flex-shrink:0}
   .provider-photo,.provider-fallback{
-    width:78px;height:78px;border-radius:50%;border:3px solid #fff;box-shadow:0 8px 18px rgba(22,108,113,.12)
+    width:78px;height:78px;border-radius:50%;border:3px solid #fff4ec;box-shadow:0 8px 18px rgba(198,95,50,.20)
   }
   .provider-photo{object-fit:cover;display:block}
   .provider-fallback{
@@ -76,7 +75,7 @@
   }
   .team-member.doctor .provider-fallback{background:var(--blue)}
   .team-member.app .provider-fallback{background:var(--teal)}
-  .member-role{margin:0;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .member-role{margin:0;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a84f2f}
   .member-name{margin:4px 0 0;font-size:24px;line-height:1.15}
   .binder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .binder-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}

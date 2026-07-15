@@ -1,0 +1,61 @@
+.provider-roster .team-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+.provider-roster .team-member {
+  align-items: flex-start;
+  border-radius: 18px;
+  display: flex;
+  gap: 14px;
+  min-height: 112px;
+  padding: 14px;
+}
+
+.provider-roster .team-member.doctor { background: var(--blue-soft); }
+.provider-roster .team-member.np { background: var(--teal-soft); }
+.provider-roster .provider-photo-wrap { flex-shrink: 0; position: relative; }
+
+.provider-roster .provider-photo,
+.provider-roster .provider-fallback {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 8px 18px rgba(22, 108, 113, .12);
+  height: 78px;
+  width: 78px;
+}
+
+.provider-roster .provider-photo { display: block; object-fit: cover; }
+
+.provider-roster .provider-fallback {
+  align-items: center;
+  color: #fff;
+  display: none;
+  font-size: 24px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.provider-roster .team-member.doctor .provider-fallback { background: var(--blue); }
+.provider-roster .team-member.np .provider-fallback { background: var(--teal); }
+
+.provider-roster .member-role {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.provider-roster .member-name {
+  font-size: 20px;
+  line-height: 1.15;
+  margin: 4px 0 0;
+}
+
+@media (max-width: 760px) {
+  .provider-roster .team-grid { grid-template-columns: 1fr; }
+}

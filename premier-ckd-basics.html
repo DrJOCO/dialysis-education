@@ -70,6 +70,12 @@
   .pl-title{display:block;font-size:18px;font-weight:700}
   .pl-sub{display:block;font-size:14px;opacity:.92;margin-top:2px}
   .page-listen.playing{background:var(--blue)}
+  .visit-note{
+    margin-top:12px;padding:12px 15px;background:var(--blue-soft);border:1px solid #c9e3df;
+    border-radius:16px;color:var(--text);box-shadow:var(--shadow)
+  }
+  .visit-note strong{display:block;color:var(--blue);font-size:17px}
+  .visit-note span{display:block;margin-top:3px;font-size:14px}
   .quick-links{display:grid;gap:10px;margin-top:12px}
   .detail-link{
     display:block;text-align:center;text-decoration:none;background:#fff;color:var(--blue);
@@ -146,6 +152,7 @@
     <p class="hero-copy" data-lang="en">For people with kidney disease who are not on dialysis.</p>
     <p class="hero-copy" data-lang="es">Para personas con enfermedad del riñón que no están en diálisis.</p>
     <div class="brand-meta">
+      <a class="brand-chip" href="index.html">Patient Education · Educación</a>
       <a class="brand-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
       <span class="brand-chip">1400 S Grand Ave #800 · (213) 748-1414</span>
     </div>
@@ -156,6 +163,15 @@
       <button class="lang-btn" id="btn-es" type="button">Español</button>
     </div>
   </section>
+
+  <div class="visit-note" data-lang="en">
+    <strong>Your take-home kidney guide</strong>
+    <span>Review what you learned today and bring your questions to your next kidney visit.</span>
+  </div>
+  <div class="visit-note" data-lang="es">
+    <strong>Su guía del riñón para llevar a casa</strong>
+    <span>Repase lo que aprendió hoy y lleve sus preguntas a su próxima cita del riñón.</span>
+  </div>
 
   <button class="page-listen" id="page-listen" type="button" aria-label="Listen to this page">
     <span class="pl-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
@@ -200,20 +216,18 @@
           <ul data-lang="en">
             <li>Your kidneys are not at full strength</li>
             <li>Common causes: diabetes and high blood pressure</li>
-            <li>Most people feel fine until very late</li>
+            <li>Many people have no symptoms until kidney disease is advanced</li>
             <li>Labs help us protect you early</li>
           </ul>
           <ul data-lang="es">
             <li>Sus riñones no están a toda su fuerza</li>
             <li>Causas: diabetes y presión alta</li>
-            <li>Muchos se sienten bien hasta muy tarde</li>
+            <li>Muchas personas no tienen síntomas hasta que la enfermedad está avanzada</li>
             <li>Los laboratorios ayudan a protegerlo temprano</li>
           </ul>
         </div>
       </div>
     </section>
-
-    <div data-provider-roster></div>
 
     <section class="card">
       <div class="section-head">
@@ -244,16 +258,16 @@
           <h3 data-lang="en">What the number means</h3>
           <h3 data-lang="es">Qué significa el número</h3>
           <ul class="gfr-legend" data-lang="en">
-            <li><span class="dot" style="background:var(--teal)"></span>90 or higher = usually okay, but protein in urine still matters</li>
-            <li><span class="dot" style="background:#8bc9a6"></span>60 to 89 = watch it, especially if there is protein in your urine</li>
-            <li><span class="dot" style="background:#d8a200"></span>Under 60 for 3 months = kidney disease</li>
+            <li><span class="dot" style="background:var(--teal)"></span>90 or higher = may be normal, but urine protein and other signs still matter</li>
+            <li><span class="dot" style="background:#8bc9a6"></span>60 to 89 = mildly low; urine protein and other signs help tell us if there is kidney disease</li>
+            <li><span class="dot" style="background:#d8a200"></span>Under 60 for 3 months = usually means chronic kidney disease</li>
             <li><span class="dot" style="background:#c9781f"></span>Under 30 = low kidney function - ask about planning</li>
             <li><span class="dot" style="background:var(--red)"></span>Under 15 = very low kidney function</li>
           </ul>
           <ul class="gfr-legend" data-lang="es">
-            <li><span class="dot" style="background:var(--teal)"></span>90 o más = usualmente está bien, pero la proteína en la orina importa</li>
-            <li><span class="dot" style="background:#8bc9a6"></span>60 a 89 = vigílelo, sobre todo si hay proteína en la orina</li>
-            <li><span class="dot" style="background:#d8a200"></span>Menos de 60 por 3 meses = enfermedad del riñón</li>
+            <li><span class="dot" style="background:var(--teal)"></span>90 o más = puede ser normal, pero la proteína en la orina y otras señales todavía importan</li>
+            <li><span class="dot" style="background:#8bc9a6"></span>60 a 89 = un poco bajo; la proteína en la orina y otras señales ayudan a saber si hay enfermedad renal</li>
+            <li><span class="dot" style="background:#d8a200"></span>Menos de 60 por 3 meses = usualmente significa enfermedad renal crónica</li>
             <li><span class="dot" style="background:#c9781f"></span>Menos de 30 = función baja del riñón - pregunte sobre planear</li>
             <li><span class="dot" style="background:var(--red)"></span>Menos de 15 = función muy baja del riñón</li>
           </ul>
@@ -384,13 +398,13 @@
           <li>Kidney disease runs in your family</li>
           <li>Kidney disease started at a young age</li>
           <li>The cause of kidney disease is not clear</li>
-          <li>You have kidney cysts, blood in urine, or protein in urine</li>
+          <li>You have unusual kidney cysts or blood in your urine that does not go away</li>
         </ul>
         <ul data-lang="es">
           <li>Hay enfermedad del riñón en su familia</li>
           <li>Empezó a una edad joven</li>
           <li>La causa no está clara</li>
-          <li>Tiene quistes en los riñones, sangre en la orina, o proteína en la orina</li>
+          <li>Tiene quistes inusuales en los riñones o sangre en la orina que no desaparece</li>
         </ul>
       </div>
     </section>
@@ -464,8 +478,12 @@
       <p class="contact-note" data-lang="en">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
       <p class="contact-note" data-lang="es">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
     </section>
+
+    <div data-provider-roster></div>
   </div>
 
+  <a class="back-top" href="index.html" data-lang="en">← Patient Education</a>
+  <a class="back-top" href="index.html" data-lang="es">← Educación para Pacientes</a>
   <a class="back-top" href="#top" data-lang="en">Back to top</a>
   <a class="back-top" href="#top" data-lang="es">Volver arriba</a>
   <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>

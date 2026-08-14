@@ -71,6 +71,12 @@
   .pl-title{display:block;font-size:18px;font-weight:700}
   .pl-sub{display:block;font-size:14px;opacity:.92;margin-top:2px}
   .page-listen.playing{background:var(--blue)}
+  .visit-note{
+    margin-top:12px;padding:12px 15px;background:var(--blue-soft);border:1px solid #c9e3df;
+    border-radius:16px;color:var(--text);box-shadow:var(--shadow)
+  }
+  .visit-note strong{display:block;color:var(--blue);font-size:17px}
+  .visit-note span{display:block;margin-top:3px;font-size:14px}
   .quick-links{display:grid;gap:10px;margin-top:12px}
   .detail-link{
     display:block;text-align:center;text-decoration:none;background:#fff;color:var(--blue);
@@ -139,6 +145,7 @@
     <p class="hero-copy" data-lang="en">For people with low kidney function who need to learn their choices early.</p>
     <p class="hero-copy" data-lang="es">Para personas con función baja del riñón que necesitan planear temprano.</p>
     <div class="brand-meta">
+      <a class="brand-chip" href="index.html">Patient Education · Educación</a>
       <a class="brand-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
       <span class="brand-chip">1400 S Grand Ave #800 · (213) 748-1414</span>
     </div>
@@ -147,9 +154,17 @@
     <div class="lang-toggle" role="group" aria-label="Language">
       <button class="lang-btn active" id="btn-en" type="button">English</button>
       <button class="lang-btn" id="btn-es" type="button">Español</button>
-      <a class="lang-btn" href="premier-korean-review.html" lang="ko">한국어</a>
     </div>
   </section>
+
+  <div class="visit-note" data-lang="en">
+    <strong>Your take-home planning guide</strong>
+    <span>Review your kidney choices at home, share this page with family, and bring your questions to your next visit.</span>
+  </div>
+  <div class="visit-note" data-lang="es">
+    <strong>Su guía de planificación para llevar a casa</strong>
+    <span>Repase sus opciones del riñón en casa, comparta esta página con su familia y lleve sus preguntas a su próxima cita.</span>
+  </div>
 
   <button class="page-listen" id="page-listen" type="button" aria-label="Listen to this page">
     <span class="pl-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
@@ -208,8 +223,6 @@
         </div>
       </div>
     </section>
-
-    <div data-provider-roster></div>
 
     <section class="card">
       <div class="section-head">
@@ -385,13 +398,13 @@
             <li>At home, often while you sleep</li>
             <li>No needles for the treatment</li>
             <li>A soft tube is placed in your belly</li>
-            <li>More flexible for work and family</li>
+            <li>May be more flexible for work and family</li>
           </ul>
           <ul data-lang="es">
             <li>En casa, muchas veces mientras duerme</li>
             <li>Sin agujas para el tratamiento</li>
             <li>Un tubito suave se coloca en el abdomen</li>
-            <li>Más flexible para trabajo y familia</li>
+            <li>Puede ser más flexible para el trabajo y la familia</li>
           </ul>
         </div>
         <div class="info-box blue">
@@ -457,12 +470,12 @@
           <h3 data-lang="es">Cirugía del brazo para diálisis en centro</h3>
           <ul data-lang="en">
             <li>Surgery in the arm</li>
-            <li>Usually safer than an emergency tube in the neck</li>
+            <li>A planned access can help avoid an emergency tube in the neck</li>
             <li>Needs time to be ready</li>
           </ul>
           <ul data-lang="es">
             <li>Cirugía en el brazo</li>
-            <li>Usualmente más seguro que un tubo de emergencia en el cuello</li>
+            <li>Un acceso planeado puede ayudar a evitar un tubo de emergencia en el cuello</li>
             <li>Necesita tiempo para estar listo</li>
           </ul>
         </div>
@@ -548,8 +561,12 @@
       <p class="contact-note" data-lang="en">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
       <p class="contact-note" data-lang="es">1400 S Grand Ave #800, Los Angeles, CA 90015 · (213) 748-1414</p>
     </section>
+
+    <div data-provider-roster></div>
   </div>
 
+  <a class="back-top" href="index.html" data-lang="en">← Patient Education</a>
+  <a class="back-top" href="index.html" data-lang="es">← Educación para Pacientes</a>
   <a class="back-top" href="#top" data-lang="en">Back to top</a>
   <a class="back-top" href="#top" data-lang="es">Volver arriba</a>
   <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>

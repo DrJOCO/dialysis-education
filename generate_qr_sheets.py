@@ -14,73 +14,16 @@ POSTERS = [
     {
         "title_en": "Protect Your Kidneys",
         "title_es": "Proteja Sus Riñones",
-        "team": "General kidney care",
-        "tag": "Kidney number, urine protein, BP, medicines, food, genetic testing · Número del riñón, proteína en orina, presión, medicinas, comida, pruebas genéticas",
+        "team": "For patients learning about kidney disease",
+        "tag": "Kidney number, urine protein, blood pressure, medicines, and food · Número del riñón, proteína en orina, presión, medicinas y comida",
         "path": "premier-ckd-basics.html",
     },
     {
         "title_en": "Low Kidney Function: Plan Early",
         "title_es": "Función Baja del Riñón: Planee Temprano",
-        "team": "Kidney choices planning",
-        "tag": "Transplant, home dialysis, center dialysis, and access planning · Trasplante, diálisis en casa, diálisis en centro, y acceso",
+        "team": "For patients planning ahead for very low kidney function",
+        "tag": "Transplant, home dialysis, center dialysis, and planning early · Trasplante, diálisis en casa, diálisis en un centro y planificación temprana",
         "path": "premier-advanced-ckd.html",
-    },
-    {
-        "title_en": "Korean Review Draft",
-        "title_es": "한국어 신장 교육 검토용",
-        "team": "Review before patient use",
-        "tag": "Standalone Korean draft · 한국어 검토용 초안",
-        "path": "premier-korean-review.html",
-        "scan_ko": "휴대폰 카메라로 스캔하세요",
-    },
-    {
-        "title_en": "Premier Nephrology Group",
-        "title_es": "Grupo Premier Nephrology",
-        "team": "Physicians + Yecenia Cueva, FNP-BC",
-        "tag": "Learn how to protect your kidneys · Aprenda a proteger sus riñones",
-        "path": "premier-group.html",
-    },
-    {
-        "title_en": "Premier Nephrology Office",
-        "title_es": "Oficina de Premier Nephrology",
-        "team": "Jonathan Cheng, MD, MPH",
-        "tag": "Learn how to protect your kidneys · Aprenda a proteger sus riñones",
-        "path": "premier-office.html",
-    },
-    {
-        "title_en": "DaVita Hollywood",
-        "title_es": "DaVita Hollywood",
-        "team": "Dr. Cheng + Yecenia Cueva, FNP-BC",
-        "tag": "Learn about your dialysis, pills, and food · Aprenda sobre su diálisis, sus pastillas y su comida",
-        "path": "davita-hollywood.html",
-    },
-    {
-        "title_en": "DaVita Wilshire - Team Yecenia",
-        "title_es": "DaVita Wilshire - Equipo Yecenia",
-        "team": "Dr. Cheng + Yecenia Cueva, FNP-BC",
-        "tag": "Learn about your dialysis, pills, and food · Aprenda sobre su diálisis, sus pastillas y su comida",
-        "path": "davita-wilshire-yecenia.html",
-    },
-    {
-        "title_en": "DaVita Wilshire - Team Benjamin",
-        "title_es": "DaVita Wilshire - Equipo Benjamin",
-        "team": "Dr. Cheng + Benjamin Chow, PA-C",
-        "tag": "Learn about your dialysis, pills, and food · Aprenda sobre su diálisis, sus pastillas y su comida",
-        "path": "davita-wilshire-benjamin.html",
-    },
-    {
-        "title_en": "DaVita Avalon - Team Sonya",
-        "title_es": "DaVita Avalon - Equipo Sonya",
-        "team": "Dr. Cheng + Sonya Ambriz, FNP",
-        "tag": "Learn about your dialysis, pills, and food · Aprenda sobre su diálisis, sus pastillas y su comida",
-        "path": "davita-avalon-sonya.html",
-    },
-    {
-        "title_en": "DaVita Avalon - Team Gloria",
-        "title_es": "DaVita Avalon - Equipo Gloria",
-        "team": "Dr. Cheng + Gloria Parra, FNP",
-        "tag": "Learn about your dialysis, pills, and food · Aprenda sobre su diálisis, sus pastillas y su comida",
-        "path": "davita-avalon-gloria.html",
     },
 ]
 
@@ -128,7 +71,11 @@ STYLE = """<style>
 
 
 def qr_svg(url: str) -> str:
-    return segno.make(url, error="m").svg_inline(scale=1)
+    return segno.make(url, error="m").svg_inline(
+        svgclass="segno",
+        lineclass="qrline",
+        omitsize=True,
+    )
 
 
 def render_poster(poster: dict[str, str]) -> str:
@@ -143,8 +90,8 @@ def render_poster(poster: dict[str, str]) -> str:
     <p class="team">{escape(poster["team"])}</p>
     <div class="qr">{qr_svg(url)}
 </div>
-    <p class="scan-en">Scan me with your phone camera</p>
-    <p class="scan-es">Escanee con la cámara de su teléfono</p>{scan_ko}
+    <p class="scan-en">Scan to review after your visit</p>
+    <p class="scan-es">Escanee para repasar después de su cita</p>{scan_ko}
     <ol class="steps">
       <li><span>1</span> Open your phone camera · Abra la cámara de su teléfono</li>
       <li><span>2</span> Point it at this code · Apunte al código</li>
@@ -167,9 +114,9 @@ def main() -> None:
 </head>
 <body>
 <div class="no-print">
-  <strong>Staff instructions:</strong> Print this file (File -> Print). It makes {len(POSTERS)} posters, one per page -
-  the new QR 1 and QR 2 office pages first, the Korean review draft, then the original office pages and each dialysis unit.
-  Post each QR poster at the matching clinic, at chairs, check-in, and the lobby. Patients scan with their phone camera; no app needed.
+  <strong>End-of-visit instructions:</strong> Print both pages. Give or show the first QR to patients learning about kidney disease.
+  Use the second QR for patients with very low kidney function who need to learn about transplant and dialysis planning.
+  Patients scan with their phone camera and review the guide at home; no app is needed.
 </div>
 {posters}
 </body>

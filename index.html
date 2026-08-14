@@ -10,6 +10,8 @@
     --blue-soft:#e4f3f0;
     --teal:#188F56;
     --teal-soft:#e6f5ed;
+    --amber:#b66a16;
+    --amber-soft:#fff4e5;
     --text:#243142;
     --muted:#5d6b7b;
     --bg:#f5f7fb;
@@ -25,7 +27,7 @@
     color:var(--text);
     line-height:1.5;
   }
-  .page{max-width:680px;margin:0 auto;padding:18px 14px 36px}
+  .page{max-width:720px;margin:0 auto;padding:18px 14px 36px}
   .hero{
     background:linear-gradient(135deg,#166C71 0%,#1c6eb8 100%);
     color:#fff;
@@ -36,18 +38,29 @@
   }
   .brand{margin:0;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
   .hero h1{margin:6px 0 0;font-size:26px;line-height:1.2}
-  .hero p{margin:8px 0 0;font-size:17px;color:rgba(255,255,255,.92)}
+  .hero p{margin:8px 0 0;font-size:16px;color:rgba(255,255,255,.92)}
   .list{display:grid;gap:12px;margin-top:18px}
   .choice{
-    display:block;text-decoration:none;color:inherit;background:var(--card);
+    display:block;position:relative;text-decoration:none;color:inherit;background:var(--card);
     border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
-    padding:16px 18px;
+    padding:17px 52px 17px 18px;
   }
+  .choice::after{content:'\2192';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:28px;color:var(--blue)}
   .choice:active{transform:scale(.99)}
+  .choice:focus-visible{outline:3px solid rgba(28,110,184,.28);outline-offset:3px}
+  .choice .eyebrow{margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
   .choice .en{margin:0;font-size:20px;font-weight:700;color:var(--blue);line-height:1.25}
   .choice .es{margin:4px 0 0;font-size:15px;color:var(--muted)}
   .choice .who{margin:6px 0 0;font-size:14px;color:var(--text)}
+  .choice .who-es{margin:3px 0 0;font-size:14px;color:var(--muted)}
   .group-label{margin:22px 0 0;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .help{
+    margin-top:18px;padding:16px 18px;background:var(--amber-soft);border:1px solid #ead5b6;
+    border-radius:18px;color:var(--text);font-size:14px
+  }
+  .help p{margin:0}
+  .help p+p{margin-top:6px}
+  .help a{color:var(--blue);font-weight:700}
   .footer{margin-top:22px;text-align:center;font-size:13px;color:var(--muted)}
   .footer a{color:var(--blue);font-weight:700}
 </style>
@@ -57,75 +70,43 @@
   <section class="hero">
     <p class="brand">Premier Nephrology Medical Group</p>
     <h1>Patient Education<br>Educación para Pacientes</h1>
-    <p>Tap where you get your care.<br>Toque donde recibe su atención.</p>
+    <p>Review what you learned after your kidney visit.<br>Repase lo que aprendió después de su cita del riñón.</p>
   </section>
 
-  <p class="group-label">Office · Oficina</p>
+  <p class="group-label">Kidney Education · Educación del Riñón</p>
   <div class="list">
     <a class="choice" href="premier-ckd-basics.html">
+      <p class="eyebrow">Start here · Empiece aquí</p>
       <p class="en">Protect Your Kidneys</p>
       <p class="es">Proteja Sus Riñones</p>
-      <p class="who">Kidney number · Urine protein · BP · Medicines · Food · Genetic testing questions</p>
+      <p class="who">Understand your kidney number, urine protein, blood pressure, medicines, and everyday kidney protection.</p>
+      <p class="who-es">Entienda su número del riñón, la proteína en la orina, la presión, las medicinas y cómo proteger sus riñones.</p>
     </a>
     <a class="choice" href="premier-advanced-ckd.html">
+      <p class="eyebrow">Plan early · Planee temprano</p>
       <p class="en">Low Kidney Function: Plan Early</p>
       <p class="es">Función Baja del Riñón: Planee Temprano</p>
-      <p class="who">Kidney number under 30 · Transplant · Home dialysis · Center dialysis</p>
-    </a>
-    <a class="choice" href="premier-korean-review.html">
-      <p class="en">Korean Review Draft — Kidney Education</p>
-      <p class="es">한국어 검토용 — 신장 교육</p>
-      <p class="who">Standalone Korean draft · Review before patient use</p>
-    </a>
-    <a class="choice" href="premier-group.html">
-      <p class="en">Premier Nephrology Group — Kidney Health</p>
-      <p class="es">Grupo Premier Nephrology — Salud del Riñón</p>
-      <p class="who">Physicians + Yecenia Cueva, FNP-BC · 1400 S Grand Ave, Los Angeles</p>
-    </a>
-    <a class="choice" href="premier-office.html">
-      <p class="en">Dr. Cheng Office Patients — Kidney Health</p>
-      <p class="es">Pacientes de Oficina del Dr. Cheng — Salud del Riñón</p>
-      <p class="who">Jonathan Cheng, MD, MPH · 1400 S Grand Ave, Los Angeles</p>
+      <p class="who">Learn about transplant, home dialysis, center dialysis, and planning before an emergency.</p>
+      <p class="who-es">Aprenda sobre trasplante, diálisis en casa, diálisis en un centro y cómo planear antes de una emergencia.</p>
     </a>
     <a class="choice" href="premier-office-topics.html">
+      <p class="eyebrow">Learn more · Aprenda más</p>
       <p class="en">Food &amp; Kidney Topics — Learn More</p>
       <p class="es">Comida y Sus Riñones — Aprenda Más</p>
-      <p class="who">Salt · Potassium · Phosphorus · Protein — Sal · Potasio · Fósforo · Proteína</p>
+      <p class="who">Go deeper on salt, potassium, phosphorus, protein, drinks, food labels, and meal ideas.</p>
+      <p class="who-es">Aprenda más sobre la sal, el potasio, el fósforo, la proteína, las bebidas, las etiquetas y las comidas.</p>
     </a>
   </div>
 
-  <p class="group-label">Dialysis Units · Unidades de Diálisis</p>
-  <div class="list">
-    <a class="choice" href="davita-hollywood.html">
-      <p class="en">DaVita Hollywood</p>
-      <p class="es">Unidad de Diálisis DaVita Hollywood</p>
-      <p class="who">Dr. Cheng + Yecenia Cueva, FNP-BC</p>
-    </a>
-    <a class="choice" href="davita-wilshire-yecenia.html">
-      <p class="en">DaVita Wilshire — Team Yecenia</p>
-      <p class="es">DaVita Wilshire — Equipo Yecenia</p>
-      <p class="who">Dr. Cheng + Yecenia Cueva, FNP-BC</p>
-    </a>
-    <a class="choice" href="davita-wilshire-benjamin.html">
-      <p class="en">DaVita Wilshire — Team Benjamin</p>
-      <p class="es">DaVita Wilshire — Equipo Benjamin</p>
-      <p class="who">Dr. Cheng + Benjamin Chow, PA-C</p>
-    </a>
-    <a class="choice" href="davita-avalon-sonya.html">
-      <p class="en">DaVita Avalon — Team Sonya</p>
-      <p class="es">DaVita Avalon — Equipo Sonya</p>
-      <p class="who">Dr. Cheng + Sonya Ambriz, FNP</p>
-    </a>
-    <a class="choice" href="davita-avalon-gloria.html">
-      <p class="en">DaVita Avalon — Team Gloria</p>
-      <p class="es">DaVita Avalon — Equipo Gloria</p>
-      <p class="who">Dr. Cheng + Gloria Parra, FNP</p>
-    </a>
-  </div>
+  <section class="help">
+    <p><strong>Not sure where to start?</strong> Begin with “Protect Your Kidneys.”</p>
+    <p><strong>¿No sabe por dónde empezar?</strong> Comience con “Proteja Sus Riñones.”</p>
+  </section>
 
   <p class="footer">
-    Premier Nephrology Medical Group · <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a> · (213) 748-1414<br>
-    For staff: <a href="dialysis-patient-education.html">all handouts</a> · <a href="qr-sheets.html">printable QR posters</a>
+    Premier Nephrology Medical Group<br>
+    1400 S Grand Ave #800, Los Angeles, CA 90015<br>
+    <a href="tel:+12137481414">(213) 748-1414</a> · <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
   </p>
 </main>
 <script>

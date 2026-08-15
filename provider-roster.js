@@ -50,7 +50,8 @@
 
     if (type === 'np') {
       return '<p class="member-role" data-lang="en">Nurse Practitioner</p>' +
-        '<p class="member-role" data-lang="es">Enfermera Practicante</p>';
+        '<p class="member-role" data-lang="es">Enfermera Practicante</p>' +
+        '<p class="member-role" data-lang="ko" lang="ko">전문간호사</p>';
     }
 
     return '';
@@ -62,7 +63,8 @@
       heading = '<h2 class="section-title">Premier Nephrology 신장 진료팀</h2>';
     } else {
       heading = '<h2 class="section-title" data-lang="en">Your Premier Nephrology kidney team</h2>' +
-        '<h2 class="section-title" data-lang="es">Su equipo de riñón de Premier Nephrology</h2>';
+        '<h2 class="section-title" data-lang="es">Su equipo de riñón de Premier Nephrology</h2>' +
+        '<h2 class="section-title" data-lang="ko" lang="ko">Premier Nephrology 콩팥 진료팀</h2>';
     }
 
     return showIcon ? '<div class="section-head">' + personIcon + heading + '</div>' : heading;
@@ -74,7 +76,8 @@
     }
 
     return '<p class="section-copy" data-lang="en">You may see different members of this team in the office, hospital, or dialysis unit.</p>' +
-      '<p class="section-copy" data-lang="es">Puede ver a diferentes miembros de este equipo en la oficina, el hospital o la unidad de diálisis.</p>';
+      '<p class="section-copy" data-lang="es">Puede ver a diferentes miembros de este equipo en la oficina, el hospital o la unidad de diálisis.</p>' +
+      '<p class="section-copy" data-lang="ko" lang="ko">진료실, 병원 또는 투석실에서 이 팀의 여러 의료진을 만날 수 있습니다.</p>';
   }
 
   function providerMarkup(provider, locale) {

@@ -39,6 +39,12 @@
   .brand{margin:0;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.82)}
   .hero h1{margin:6px 0 0;font-size:26px;line-height:1.2}
   .hero p{margin:8px 0 0;font-size:16px;color:rgba(255,255,255,.92)}
+  .lang-toggle{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .lang-btn{
+    border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.14);color:#fff;
+    font:inherit;font-weight:700;border-radius:999px;padding:7px 13px;cursor:pointer;font-size:12px
+  }
+  .lang-btn.active{background:#fff;color:var(--blue)}
   .list{display:grid;gap:12px;margin-top:18px}
   .choice{
     display:block;position:relative;text-decoration:none;color:inherit;background:var(--card);
@@ -51,6 +57,7 @@
   .choice .eyebrow{margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
   .choice .en{margin:0;font-size:20px;font-weight:700;color:var(--blue);line-height:1.25}
   .choice .es{margin:4px 0 0;font-size:15px;color:var(--muted)}
+  .choice .ko{margin:0;font-size:20px;font-weight:700;color:var(--blue);line-height:1.35}
   .choice .who{margin:6px 0 0;font-size:14px;color:var(--text)}
   .choice .who-es{margin:3px 0 0;font-size:14px;color:var(--muted)}
   .group-label{margin:22px 0 0;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
@@ -63,44 +70,88 @@
   .help a{color:var(--blue);font-weight:700}
   .footer{margin-top:22px;text-align:center;font-size:13px;color:var(--muted)}
   .footer a{color:var(--blue);font-weight:700}
+  [data-lang]:not(body){display:none}
+  body[data-lang="en"] [data-lang="en"],
+  body[data-lang="es"] [data-lang="es"],
+  body[data-lang="ko"] [data-lang="ko"]{display:block}
+  body[data-lang="ko"]{font-family:Verdana, "Noto Sans KR", "Malgun Gothic", sans-serif;word-break:keep-all;overflow-wrap:anywhere}
 </style>
 </head>
-<body>
+<body data-lang="en">
+<script>
+  (function () {
+    try {
+      var supported = { en: true, es: true, ko: true };
+      var requested = (new URLSearchParams(location.search).get('lang') || '').toLowerCase().split('-')[0];
+      var saved = (localStorage.getItem('premier-education-language') || '').toLowerCase().split('-')[0];
+      var preferred = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || 'en'];
+      var browser = 'en';
+      preferred.some(function (item) { var code = String(item).toLowerCase().split('-')[0]; if (supported[code]) { browser = code; return true; } return false; });
+      var lang = supported[requested] ? requested : (supported[saved] ? saved : browser);
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang;
+    } catch (e) {}
+  })();
+</script>
 <main class="page">
   <section class="hero">
     <p class="brand">Premier Nephrology Medical Group</p>
-    <h1>Patient Education<br>Educación para Pacientes</h1>
-    <p>Review what you learned after your kidney visit.<br>Repase lo que aprendió después de su cita del riñón.</p>
+    <h1 data-lang="en">Patient Education</h1>
+    <h1 data-lang="es">Educación para Pacientes</h1>
+    <h1 data-lang="ko" lang="ko">환자 교육</h1>
+    <p data-lang="en">Review what you learned after your kidney visit.</p>
+    <p data-lang="es">Repase lo que aprendió después de su cita del riñón.</p>
+    <p data-lang="ko" lang="ko">콩팥 진료 후 배운 내용을 집에서 다시 확인하세요.</p>
+    <div class="lang-toggle" role="group" aria-label="Language · Idioma · 언어">
+      <button class="lang-btn active" id="btn-en" lang="en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" lang="es" type="button">Español</button>
+      <button class="lang-btn" id="btn-ko" lang="ko" type="button">한국어</button>
+    </div>
   </section>
 
-  <p class="group-label">Kidney Education · Educación del Riñón</p>
+  <p class="group-label" data-lang="en">Kidney Education</p>
+  <p class="group-label" data-lang="es">Educación del Riñón</p>
+  <p class="group-label" data-lang="ko" lang="ko">콩팥 건강 교육</p>
   <div class="list">
-    <a class="choice" href="premier-ckd-basics.html">
-      <p class="eyebrow">Start here · Empiece aquí</p>
-      <p class="en">Protect Your Kidneys</p>
-      <p class="es">Proteja Sus Riñones</p>
-      <p class="who">Understand your kidney number, urine protein, blood pressure, medicines, and everyday kidney protection.</p>
-      <p class="who-es">Entienda su número del riñón, la proteína en la orina, la presión, las medicinas y cómo proteger sus riñones.</p>
+    <a class="choice" href="premier-ckd-basics.html" data-base-href="premier-ckd-basics.html">
+      <p class="eyebrow" data-lang="en">Start here</p>
+      <p class="eyebrow" data-lang="es">Empiece aquí</p>
+      <p class="eyebrow" data-lang="ko" lang="ko">여기서 시작하세요</p>
+      <p class="en" data-lang="en">Protect Your Kidneys</p>
+      <p class="es" data-lang="es">Proteja Sus Riñones</p>
+      <p class="ko" data-lang="ko" lang="ko">콩팥을 보호하세요</p>
+      <p class="who" data-lang="en">Understand your kidney number, urine protein, blood pressure, medicines, and everyday kidney protection.</p>
+      <p class="who-es" data-lang="es">Entienda su número del riñón, la proteína en la orina, la presión, las medicinas y cómo proteger sus riñones.</p>
+      <p class="who" data-lang="ko" lang="ko">GFR, 소변 단백질, 혈압, 약과 생활 속 콩팥 보호 방법을 알아보세요.</p>
     </a>
-    <a class="choice" href="premier-advanced-ckd.html">
-      <p class="eyebrow">Plan early · Planee temprano</p>
-      <p class="en">Low Kidney Function: Plan Early</p>
-      <p class="es">Función Baja del Riñón: Planee Temprano</p>
-      <p class="who">Learn about transplant, home dialysis, center dialysis, and planning before an emergency.</p>
-      <p class="who-es">Aprenda sobre trasplante, diálisis en casa, diálisis en un centro y cómo planear antes de una emergencia.</p>
+    <a class="choice" href="premier-advanced-ckd.html" data-base-href="premier-advanced-ckd.html">
+      <p class="eyebrow" data-lang="en">Plan early</p>
+      <p class="eyebrow" data-lang="es">Planee temprano</p>
+      <p class="eyebrow" data-lang="ko" lang="ko">미리 준비하세요</p>
+      <p class="en" data-lang="en">Low Kidney Function: Plan Early</p>
+      <p class="es" data-lang="es">Función Baja del Riñón: Planee Temprano</p>
+      <p class="ko" data-lang="ko" lang="ko">콩팥 기능이 낮다면: 미리 준비하세요</p>
+      <p class="who" data-lang="en">Learn about transplant, home dialysis, center dialysis, and planning before an emergency.</p>
+      <p class="who-es" data-lang="es">Aprenda sobre trasplante, diálisis en casa, diálisis en un centro y cómo planear antes de una emergencia.</p>
+      <p class="who" data-lang="ko" lang="ko">콩팥이식, 재택투석, 센터투석과 응급상황 전 준비 방법을 알아보세요.</p>
     </a>
-    <a class="choice" href="premier-office-topics.html">
-      <p class="eyebrow">Learn more · Aprenda más</p>
-      <p class="en">Food &amp; Kidney Topics — Learn More</p>
-      <p class="es">Comida y Sus Riñones — Aprenda Más</p>
-      <p class="who">Go deeper on salt, potassium, phosphorus, protein, drinks, food labels, and meal ideas.</p>
-      <p class="who-es">Aprenda más sobre la sal, el potasio, el fósforo, la proteína, las bebidas, las etiquetas y las comidas.</p>
+    <a class="choice" href="premier-office-topics.html" data-base-href="premier-office-topics.html">
+      <p class="eyebrow" data-lang="en">Learn more</p>
+      <p class="eyebrow" data-lang="es">Aprenda más</p>
+      <p class="eyebrow" data-lang="ko" lang="ko">더 알아보기</p>
+      <p class="en" data-lang="en">Food &amp; Kidney Topics — Learn More</p>
+      <p class="es" data-lang="es">Comida y Sus Riñones — Aprenda Más</p>
+      <p class="ko" data-lang="ko" lang="ko">음식과 콩팥 — 더 알아보기</p>
+      <p class="who" data-lang="en">Go deeper on salt, potassium, phosphorus, protein, drinks, food labels, and meal ideas.</p>
+      <p class="who-es" data-lang="es">Aprenda más sobre la sal, el potasio, el fósforo, la proteína, las bebidas, las etiquetas y las comidas.</p>
+      <p class="who" data-lang="ko" lang="ko">소금, 칼륨, 인, 단백질, 음료, 식품표시와 한국식 식사 예를 알아보세요.</p>
     </a>
   </div>
 
   <section class="help">
-    <p><strong>Not sure where to start?</strong> Begin with “Protect Your Kidneys.”</p>
-    <p><strong>¿No sabe por dónde empezar?</strong> Comience con “Proteja Sus Riñones.”</p>
+    <p data-lang="en"><strong>Not sure where to start?</strong> Begin with “Protect Your Kidneys.”</p>
+    <p data-lang="es"><strong>¿No sabe por dónde empezar?</strong> Comience con “Proteja Sus Riñones.”</p>
+    <p data-lang="ko" lang="ko"><strong>어디서 시작할지 모르시나요?</strong> “콩팥을 보호하세요”부터 보세요.</p>
   </section>
 
   <p class="footer">
@@ -110,6 +161,33 @@
   </p>
 </main>
 <script>
+  var btnEn = document.getElementById('btn-en');
+  var btnEs = document.getElementById('btn-es');
+  var btnKo = document.getElementById('btn-ko');
+
+  function setLanguage(lang, remember) {
+    if (['en', 'es', 'ko'].indexOf(lang) === -1) lang = 'en';
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    btnEn.classList.toggle('active', lang === 'en');
+    btnEs.classList.toggle('active', lang === 'es');
+    btnKo.classList.toggle('active', lang === 'ko');
+    btnEn.setAttribute('aria-pressed', lang === 'en');
+    btnEs.setAttribute('aria-pressed', lang === 'es');
+    btnKo.setAttribute('aria-pressed', lang === 'ko');
+    document.querySelectorAll('[data-base-href]').forEach(function (link) {
+      link.href = link.getAttribute('data-base-href') + '?lang=' + lang;
+    });
+    if (remember) {
+      try { localStorage.setItem('premier-education-language', lang); } catch (e) {}
+      try { var url = new URL(location.href); url.searchParams.set('lang', lang); history.replaceState(null, '', url.pathname + url.search + url.hash); } catch (e) {}
+    }
+  }
+  btnEn.addEventListener('click', function () { setLanguage('en', true); });
+  btnEs.addEventListener('click', function () { setLanguage('es', true); });
+  btnKo.addEventListener('click', function () { setLanguage('ko', true); });
+  setLanguage(document.body.dataset.lang || 'en', false);
+
   // Usage counts (GoatCounter, no cookies). Only counts on the live site.
   if (location.hostname === 'drjoco.github.io' || location.hostname === 'patients.premiernephrologyla.com') {
     var gc = document.createElement('script');

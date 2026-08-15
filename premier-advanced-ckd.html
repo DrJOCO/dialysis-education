@@ -125,6 +125,8 @@
   [data-lang]:not(body){display:none}
   body[data-lang="en"] [data-lang="en"]{display:block}
   body[data-lang="es"] [data-lang="es"]{display:block}
+  body[data-lang="ko"] [data-lang="ko"]{display:block}
+  body[data-lang="ko"]{font-family:Verdana, "Noto Sans KR", "Malgun Gothic", sans-serif;word-break:keep-all;overflow-wrap:anywhere}
   @media (max-width:760px){
     .info-grid{grid-template-columns:1fr}
     .info-box.wide{grid-column:auto}
@@ -136,7 +138,21 @@
 </style>
 </head>
 <body data-lang="en">
-<script>try{var l=(navigator.language||navigator.userLanguage||"").toLowerCase();if(l.indexOf("es")===0)document.body.dataset.lang="es";}catch(e){}</script>
+<script>
+  (function () {
+    try {
+      var supported = { en: true, es: true, ko: true };
+      var requested = (new URLSearchParams(location.search).get('lang') || '').toLowerCase().split('-')[0];
+      var saved = (localStorage.getItem('premier-education-language') || '').toLowerCase().split('-')[0];
+      var preferred = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || 'en'];
+      var browser = 'en';
+      preferred.some(function (item) { var code = String(item).toLowerCase().split('-')[0]; if (supported[code]) { browser = code; return true; } return false; });
+      var lang = supported[requested] ? requested : (supported[saved] ? saved : browser);
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang;
+    } catch (e) {}
+  })();
+</script>
 <main class="page">
   <section class="hero" id="top">
     <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
@@ -145,15 +161,16 @@
     <p class="hero-copy" data-lang="en">For people with low kidney function who need to learn their choices early.</p>
     <p class="hero-copy" data-lang="es">Para personas con función baja del riñón que necesitan planear temprano.</p>
     <div class="brand-meta">
-      <a class="brand-chip" href="index.html">Patient Education · Educación</a>
+      <a class="brand-chip" href="index.html">Patient Education · Educación · 환자 교육</a>
       <a class="brand-chip" href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>
       <span class="brand-chip">1400 S Grand Ave #800 · (213) 748-1414</span>
     </div>
     <p class="unit-badge" data-lang="en">Learn Your Kidney Choices</p>
     <p class="unit-badge" data-lang="es">Aprenda sus opciones del riñón</p>
-    <div class="lang-toggle" role="group" aria-label="Language">
-      <button class="lang-btn active" id="btn-en" type="button">English</button>
-      <button class="lang-btn" id="btn-es" type="button">Español</button>
+    <div class="lang-toggle" role="group" aria-label="Language · Idioma · 언어">
+      <button class="lang-btn active" id="btn-en" lang="en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" lang="es" type="button">Español</button>
+      <button class="lang-btn" id="btn-ko" lang="ko" type="button">한국어</button>
     </div>
   </section>
 
@@ -572,10 +589,12 @@
   <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
   <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de riñón. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
 </main>
+<script src="korean-content.js" onerror="document.body.dataset.lang='en';document.documentElement.lang='en'"></script>
 <script src="provider-roster.js"></script>
 <script>
   var btnEn = document.getElementById('btn-en');
   var btnEs = document.getElementById('btn-es');
+  var btnKo = document.getElementById('btn-ko');
   var pageBtn = document.getElementById('page-listen');
   var synthOK = ('speechSynthesis' in window);
   var playing = false;
@@ -588,7 +607,7 @@
     try { window.speechSynthesis.addEventListener('voiceschanged', loadVoices); } catch (e) {}
   }
   function pickVoice(lang) {
-    var want = lang === 'es' ? 'es' : 'en';
+    var want = lang === 'es' ? 'es' : (lang === 'ko' ? 'ko' : 'en');
     var cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) === 0; });
     return cands[0] || null;
   }
@@ -601,16 +620,23 @@
   }
   function setListenLabel(isPlaying) {
     var lang = document.body.dataset.lang || 'en';
+    var labels = {
+      en: { stop: 'Stop', playing: 'Playing...', listen: 'Listen to this page', sub: 'Tap to hear it read out loud' },
+      es: { stop: 'Detener', playing: 'Tocando...', listen: 'Escuchar esta página', sub: 'Toque para escucharlo en voz alta' },
+      ko: { stop: '중지', playing: '재생 중...', listen: '이 페이지 듣기', sub: '누르면 내용을 소리 내어 읽어 드립니다' }
+    };
+    var copy = labels[lang] || labels.en;
     var title = pageBtn.querySelector('.pl-title');
     var sub = pageBtn.querySelector('.pl-sub');
     var icon = pageBtn.querySelector('.pl-icon');
+    pageBtn.setAttribute('aria-label', copy.listen);
     if (isPlaying) {
-      title.textContent = lang === 'es' ? 'Detener' : 'Stop';
-      sub.textContent = lang === 'es' ? 'Tocando...' : 'Playing...';
+      title.textContent = copy.stop;
+      sub.textContent = copy.playing;
       icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="#fff"/></svg>';
     } else {
-      title.textContent = lang === 'es' ? 'Escuchar esta página' : 'Listen to this page';
-      sub.textContent = lang === 'es' ? 'Toque para escucharlo en voz alta' : 'Tap to hear it read out loud';
+      title.textContent = copy.listen;
+      sub.textContent = copy.sub;
       icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
     }
   }
@@ -625,7 +651,14 @@
   }
   function setSectionListenLabel(btn, isPlaying) {
     var lang = document.body.dataset.lang || 'en';
-    btn.textContent = isPlaying ? (lang === 'es' ? 'Detener' : 'Stop') : (lang === 'es' ? 'Escuchar esta sección' : 'Listen to this section');
+    var labels = {
+      en: { stop: 'Stop', listen: 'Listen to this section' },
+      es: { stop: 'Detener', listen: 'Escuchar esta sección' },
+      ko: { stop: '중지', listen: '이 부분 듣기' }
+    };
+    var copy = labels[lang] || labels.en;
+    btn.textContent = isPlaying ? copy.stop : copy.listen;
+    btn.setAttribute('aria-label', copy.listen);
   }
   function speakLines(lines, button) {
     if (!lines.length) return;
@@ -644,22 +677,37 @@
     lines.forEach(function (line, i) {
       var u = new SpeechSynthesisUtterance(/[.!?:;]$/.test(line) ? line : line + '.');
       if (voice) u.voice = voice;
-      u.lang = (voice && voice.lang) ? voice.lang : (lang === 'es' ? 'es-MX' : 'en-US');
+      u.lang = (voice && voice.lang) ? voice.lang : (lang === 'es' ? 'es-MX' : (lang === 'ko' ? 'ko-KR' : 'en-US'));
       u.rate = 0.9;
       if (i === lines.length - 1) u.onend = stopSpeech;
       window.speechSynthesis.speak(u);
     });
   }
-  function setLanguage(lang) {
+  function setLanguage(lang, remember) {
+    if (['en', 'es', 'ko'].indexOf(lang) === -1) lang = 'en';
     document.body.dataset.lang = lang;
     document.documentElement.lang = lang;
     btnEn.classList.toggle('active', lang === 'en');
     btnEs.classList.toggle('active', lang === 'es');
+    btnKo.classList.toggle('active', lang === 'ko');
+    btnEn.setAttribute('aria-pressed', lang === 'en');
+    btnEs.setAttribute('aria-pressed', lang === 'es');
+    btnKo.setAttribute('aria-pressed', lang === 'ko');
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || /^(?:https?:|tel:|mailto:)/i.test(href)) return;
+      try { var target = new URL(href, location.href); target.searchParams.set('lang', lang); link.setAttribute('href', target.pathname.split('/').pop() + target.search + target.hash); } catch (e) {}
+    });
+    if (remember) {
+      try { localStorage.setItem('premier-education-language', lang); } catch (e) {}
+      try { var url = new URL(location.href); url.searchParams.set('lang', lang); history.replaceState(null, '', url.pathname + url.search + url.hash); } catch (e) {}
+    }
     stopSpeech();
     document.querySelectorAll('.listen-btn').forEach(function (b) { setSectionListenLabel(b, false); });
   }
-  btnEn.addEventListener('click', function () { setLanguage('en'); });
-  btnEs.addEventListener('click', function () { setLanguage('es'); });
+  btnEn.addEventListener('click', function () { setLanguage('en', true); });
+  btnEs.addEventListener('click', function () { setLanguage('es', true); });
+  btnKo.addEventListener('click', function () { setLanguage('ko', true); });
 
   if (synthOK) {
     document.querySelectorAll('.stack .card').forEach(function (card) {
@@ -681,7 +729,7 @@
   } else if (pageBtn) {
     pageBtn.style.display = 'none';
   }
-  setLanguage(document.body.dataset.lang || 'en');
+  setLanguage(document.body.dataset.lang || 'en', false);
 </script>
 <script>
   if (location.hostname === 'drjoco.github.io' || location.hostname === 'patients.premiernephrologyla.com') {

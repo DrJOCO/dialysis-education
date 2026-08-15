@@ -128,10 +128,14 @@
   [data-lang]:not(body){display:none}
   body[data-lang="en"] [data-lang="en"]{display:block}
   body[data-lang="es"] [data-lang="es"]{display:block}
+  body[data-lang="ko"] [data-lang="ko"]{display:block}
+  body[data-lang="ko"]{font-family:Verdana, "Noto Sans KR", "Malgun Gothic", sans-serif;word-break:keep-all;overflow-wrap:anywhere}
   body[data-lang="en"] .topic-nav[data-lang="en"],
-  body[data-lang="es"] .topic-nav[data-lang="es"]{display:flex}
+  body[data-lang="es"] .topic-nav[data-lang="es"],
+  body[data-lang="ko"] .topic-nav[data-lang="ko"]{display:flex}
   body[data-lang="en"] .brand-chip[data-lang="en"],
-  body[data-lang="es"] .brand-chip[data-lang="es"]{display:inline-flex}
+  body[data-lang="es"] .brand-chip[data-lang="es"],
+  body[data-lang="ko"] .brand-chip[data-lang="ko"]{display:inline-flex}
   @media (max-width:760px){
     .info-grid,.alert-grid{grid-template-columns:1fr}
     .info-box.wide{grid-column:auto}
@@ -143,7 +147,21 @@
 </style>
 </head>
 <body data-lang="en">
-<script>try{var l=(navigator.language||navigator.userLanguage||"").toLowerCase();if(l.indexOf("es")===0)document.body.dataset.lang="es";}catch(e){}</script>
+<script>
+  (function () {
+    try {
+      var supported = { en: true, es: true, ko: true };
+      var requested = (new URLSearchParams(location.search).get('lang') || '').toLowerCase().split('-')[0];
+      var saved = (localStorage.getItem('premier-education-language') || '').toLowerCase().split('-')[0];
+      var preferred = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || 'en'];
+      var browser = 'en';
+      preferred.some(function (item) { var code = String(item).toLowerCase().split('-')[0]; if (supported[code]) { browser = code; return true; } return false; });
+      var lang = supported[requested] ? requested : (supported[saved] ? saved : browser);
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang;
+    } catch (e) {}
+  })();
+</script>
 <main class="page">
   <section class="hero" id="top">
     <p class="brand"><a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">Premier Nephrology Medical Group</a></p>
@@ -162,9 +180,10 @@
     </div>
     <p class="unit-badge" data-lang="en">Premier Nephrology Patient Education</p>
     <p class="unit-badge" data-lang="es">Educación para Pacientes de Premier Nephrology</p>
-    <div class="lang-toggle" role="group" aria-label="Language">
-      <button class="lang-btn active" id="btn-en" type="button">English</button>
-      <button class="lang-btn" id="btn-es" type="button">Español</button>
+    <div class="lang-toggle" role="group" aria-label="Language · Idioma · 언어">
+      <button class="lang-btn active" id="btn-en" lang="en" type="button">English</button>
+      <button class="lang-btn" id="btn-es" lang="es" type="button">Español</button>
+      <button class="lang-btn" id="btn-ko" lang="ko" type="button">한국어</button>
     </div>
   </section>
 
@@ -863,10 +882,12 @@
   <p class="footer" data-lang="en">Part of Premier Nephrology Medical Group. This page is for education only and does not replace medical advice from your kidney team. Visit <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
   <p class="footer" data-lang="es">Parte de Premier Nephrology Medical Group. Esta página es solo para educación y no reemplaza el consejo médico de su equipo de riñón. Visite <a href="https://www.premiernephrologyla.com/" target="_blank" rel="noopener noreferrer">PremierNephrologyLA.com</a>.</p>
 </main>
+<script src="korean-content.js" onerror="document.body.dataset.lang='en';document.documentElement.lang='en'"></script>
 <script src="provider-roster.js"></script>
 <script>
   const btnEn = document.getElementById('btn-en');
   const btnEs = document.getElementById('btn-es');
+  const btnKo = document.getElementById('btn-ko');
   const pageBtn = document.getElementById('page-listen');
   const synthOK = ('speechSynthesis' in window);
   var playing = null;      // the button currently reading, or null
@@ -881,14 +902,16 @@
     window.speechSynthesis.onvoiceschanged = loadVoices;
   }
   function pickVoice(lang) {
-    var want = lang === 'es' ? 'es' : 'en';
+    var want = lang === 'es' ? 'es' : (lang === 'ko' ? 'ko' : 'en');
     var cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) === 0; });
     if (!cands.length) cands = voicesCache.filter(function (v) { return (v.lang || '').toLowerCase().indexOf(want) !== -1; });
     if (!cands.length) return null;
     var prefer = lang === 'es'
       ? ['Google español de Estados Unidos', 'Google español', 'Paulina', 'Mónica', 'Microsoft Dalia', 'Microsoft Sabina', 'Angelica', 'Juan']
-      : ['Google US English', 'Samantha', 'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Ava', 'Karen', 'Alex', 'Daniel'];
-    var target = lang === 'es' ? 'es-mx' : 'en-us';
+      : (lang === 'ko'
+        ? ['Yuna', '유나', 'Google 한국의', 'Microsoft SunHi', 'Microsoft InJoon']
+        : ['Google US English', 'Samantha', 'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Ava', 'Karen', 'Alex', 'Daniel']);
+    var target = lang === 'es' ? 'es-mx' : (lang === 'ko' ? 'ko-kr' : 'en-us');
     function score(v) {
       var n = v.name || '', s = 0, i;
       for (i = 0; i < prefer.length; i++) { if (n.indexOf(prefer[i]) !== -1) { s += 100 - i; break; } }
@@ -917,7 +940,7 @@
   }
   function speakLines(lines, lang, onEnd) {
     var voice = pickVoice(lang);
-    var langTag = lang === 'es' ? 'es-MX' : 'en-US';
+    var langTag = lang === 'es' ? 'es-MX' : (lang === 'ko' ? 'ko-KR' : 'en-US');
     startKeepAlive();
     lines.forEach(function (line, i) {
       var text = /[.!?:;]$/.test(line) ? line : line + '.'; // falling cadence, less clipped
@@ -934,24 +957,33 @@
   }
   function setPageLabel(isPlaying, lang) {
     if (!pageBtn) return;
-    var es = lang === 'es';
+    var labels = {
+      en: { stop: 'Stop', playing: 'Playing…', listen: 'Listen to this page', sub: 'Tap to hear it read out loud', minute: 'min' },
+      es: { stop: 'Detener', playing: 'Tocando…', listen: 'Escuchar esta página', sub: 'Toque para escucharlo en voz alta', minute: 'min' },
+      ko: { stop: '중지', playing: '재생 중…', listen: '이 페이지 듣기', sub: '누르면 내용을 소리 내어 읽어 드립니다', minute: '' }
+    };
+    var copy = labels[lang] || labels.en;
     var title = pageBtn.querySelector('.pl-title');
     var sub = pageBtn.querySelector('.pl-sub');
     var icon = pageBtn.querySelector('.pl-icon');
+    pageBtn.setAttribute('aria-label', copy.listen);
     if (isPlaying) {
-      title.textContent = es ? 'Detener' : 'Stop';
-      sub.textContent = es ? 'Tocando…' : 'Playing…';
+      title.textContent = copy.stop;
+      sub.textContent = copy.playing;
       icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="#fff"/></svg>';
     } else {
-      title.textContent = (es ? 'Escuchar esta página' : 'Listen to this page') + (pageMinutes ? ' · ' + pageMinutes + ' min' : '');
-      sub.textContent = es ? 'Toque para escucharlo en voz alta' : 'Tap to hear it read out loud';
+      title.textContent = copy.listen + (pageMinutes && copy.minute ? ' · ' + pageMinutes + ' ' + copy.minute : '');
+      sub.textContent = copy.sub;
       icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
     }
   }
   function resetButtons(lang) {
+    var listenLabels = { en: 'Listen', es: 'Escuchar', ko: '듣기' };
+    var listen = listenLabels[lang] || listenLabels.en;
     document.querySelectorAll('.listen-btn').forEach(function (b) {
       b.classList.remove('playing');
-      b.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+      b.textContent = '🔊 ' + listen;
+      b.setAttribute('aria-label', lang === 'ko' ? '이 부분 듣기' : (lang === 'es' ? 'Escuchar esta sección' : 'Listen to this section'));
     });
     if (pageBtn) { pageBtn.classList.remove('playing'); setPageLabel(false, lang); }
   }
@@ -968,16 +1000,31 @@
     pageMinutes = Math.max(1, Math.round(words / 160));
     if (playing !== pageBtn) setPageLabel(false, lang);
   }
-  function setLanguage(lang) {
+  function setLanguage(lang, remember) {
+    if (['en', 'es', 'ko'].indexOf(lang) === -1) lang = 'en';
     document.body.dataset.lang = lang;
     document.documentElement.lang = lang;
     btnEn.classList.toggle('active', lang === 'en');
     btnEs.classList.toggle('active', lang === 'es');
+    btnKo.classList.toggle('active', lang === 'ko');
+    btnEn.setAttribute('aria-pressed', lang === 'en');
+    btnEs.setAttribute('aria-pressed', lang === 'es');
+    btnKo.setAttribute('aria-pressed', lang === 'ko');
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || /^(?:https?:|tel:|mailto:)/i.test(href)) return;
+      try { var target = new URL(href, location.href); target.searchParams.set('lang', lang); link.setAttribute('href', target.pathname.split('/').pop() + target.search + target.hash); } catch (e) {}
+    });
+    if (remember) {
+      try { localStorage.setItem('premier-education-language', lang); } catch (e) {}
+      try { var url = new URL(location.href); url.searchParams.set('lang', lang); history.replaceState(null, '', url.pathname + url.search + url.hash); } catch (e) {}
+    }
     stopAll();
     recomputeMinutes();
   }
-  btnEn.addEventListener('click', function () { setLanguage('en'); });
-  btnEs.addEventListener('click', function () { setLanguage('es'); });
+  btnEn.addEventListener('click', function () { setLanguage('en', true); });
+  btnEs.addEventListener('click', function () { setLanguage('es', true); });
+  btnKo.addEventListener('click', function () { setLanguage('ko', true); });
 
   if (synthOK) {
     // Per-section Listen buttons
@@ -996,11 +1043,11 @@
         if (!lines.length) return;
         playing = btn;
         btn.classList.add('playing');
-        btn.textContent = '⏹ ' + (lang === 'es' ? 'Detener' : 'Stop');
+        btn.textContent = '⏹ ' + (lang === 'es' ? 'Detener' : (lang === 'ko' ? '중지' : 'Stop'));
         speakLines(lines, lang, function () {
           if (playing === btn) {
             btn.classList.remove('playing');
-            btn.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : 'Listen');
+            btn.textContent = '🔊 ' + (lang === 'es' ? 'Escuchar' : (lang === 'ko' ? '듣기' : 'Listen'));
             playing = null;
           }
         });
@@ -1026,7 +1073,7 @@
     pageBtn.style.display = 'none';
   }
 
-  setLanguage(document.body.dataset.lang || "en");
+  setLanguage(document.body.dataset.lang || "en", false);
 </script>
 <script>
   // Usage counts (GoatCounter, no cookies). Only counts on the live site.
